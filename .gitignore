@@ -1,0 +1,19 @@
+# Python temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Local Python scripts (optional: if you only want the web files on GitHub)
+# fetch_oracles.py
+# fetch_oracles_v2.py
+# get_yuelao.py
