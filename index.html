@@ -497,16 +497,17 @@
             const btnText = document.getElementById('btn-text');
             const resultBox = document.getElementById('result-content');
             const placeholderBox = document.getElementById('result-placeholder');
-            const question = document.getElementById('question-input').value.trim() || '未填寫具體問題。';
+            const questionInput = document.getElementById('question-input').value.trim();
+            const question = questionInput || `關於您的「${selectedCategory}」運勢`;
 
             btn.disabled = true;
-            btnText.innerHTML = '<div class="loader"></div> 大師正在感應神諭...';
+            btnText.innerHTML = '<div class="loader"></div> 大師正在為您解惑...';
             placeholderBox.classList.add('hidden');
             resultBox.classList.remove('hidden');
             resultBox.innerHTML = `
                 <div class="flex flex-col items-center justify-center h-full text-yellow-500 opacity-70">
                     <div class="loader mb-4" style="width:40px;height:40px;border-width:4px;"></div>
-                    <p class="animate-pulse">正在為您鏈結能量，檢索資料庫 / 呼叫 AI 指引...</p>
+                    <p class="animate-pulse">大師正在冥想，請靜候機緣...</p>
                 </div>
             `;
 
@@ -519,20 +520,17 @@
                 const data = (loadedOracleData[typeVal] || []).find(i => i.id === id);
 
                 // Check if data is missing or placeholder
-                const isDataMissing = !data || data.poem === "資料準備中..." || data.poem === "系統資料更新中...";
+                const isDataMissing = !data || data.poem === "資料準備中..." || data.poem === "系統資料更新中..." || data.poem.includes("擴充中") || (data.interpretation && data.interpretation.includes("AI"));
 
+                await new Promise(r => setTimeout(r, 1500));
                 if (isDataMissing) {
-                    // Trigger AI Fallback (In a real app, this would be a real API call)
-                    // For now, we simulate the AI "Searching and Interpreting"
-                    await new Promise(r => setTimeout(r, 3000));
-                    htmlContent = generateAIFallbackContent(config.name, id, question);
+                    htmlContent = generateFallbackContent(config.name, id, question, selectedCategory);
                 } else {
-                    await new Promise(r => setTimeout(r, 1500));
-                    htmlContent = generateStructuredContent(config.name, data, question);
+                    htmlContent = generateStructuredContent(config.name, data, question, selectedCategory);
                 }
             } else {
                 await new Promise(r => setTimeout(r, 2000));
-                htmlContent = generateTarotContent(question);
+                htmlContent = generateTarotContent(question, selectedCategory);
             }
 
             resultBox.innerHTML = htmlContent;
@@ -540,7 +538,20 @@
             btn.disabled = false;
         }
 
-        function generateStructuredContent(typeName, data, question) {
+        function generateStructuredContent(typeName, data, question, category) {
+            let categoryAdvice = '';
+            if (category === '工作') {
+                categoryAdvice = `從這支籤來看，您在工作職場上需要留意進退的時機。目前的狀態或許有阻礙，但這份籤詩提醒您不要輕言放棄，穩紮穩打將能漸入佳境。`;
+            } else if (category === '感情') {
+                categoryAdvice = `在感情方面，這份籤詩透露著緣分的奇妙。無論是單身尋覓或是有伴侶者，都應保持誠心溝通，順其自然，好的緣分終會水到渠成。`;
+            } else if (category === '金錢') {
+                categoryAdvice = `關於您的財運，籤詩暗示著取財有道，切忌貪求快利。守住目前的正財，避免不必要的風險投資，將為您帶來安穩的收穫。`;
+            } else if (category === '家庭') {
+                categoryAdvice = `家庭和睦是萬事興旺的基礎。籤意提醒您多花時間陪伴家人，以和為貴，家中的小摩擦都能透過互相體諒而化解。`;
+            } else {
+                categoryAdvice = `這份籤詩為您的疑惑帶來了正向的指引。面對眼前的挑戰，請保持心境的平和，您的善念與努力終將帶您走向光明的未來。`;
+            }
+
             return `
                 <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center gap-2">
                     <span>📜</span> 【${typeName} - ${data.no}】 解析
@@ -550,45 +561,57 @@
                     <div class="text-lg leading-relaxed text-yellow-100 whitespace-pre-line font-serif">${data.poem}</div>
                     ${data.ganzhi ? `<div class="text-xs text-gray-500 mt-2">干支：${data.ganzhi}</div>` : ''}
                 </div>
-                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 第一階段：大師總結</h3>
-                <blockquote>
-                    這支籤在資料庫中早有定數。它對應的是「${data.interpretation.slice(0, 10)}...」的意涵。針對您的問題，神明的指示已經非常明確。
-                </blockquote>
+                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 大師解籤</h3>
                 <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/50 mt-4">
-                    <strong class="text-yellow-500 block mb-2">【大師解曰】</strong>
-                    <p class="text-gray-300">${data.interpretation}</p>
-                    <p class="text-gray-400 mt-2 text-sm italic">典故：${data.story || '自古流傳'}</p>
+                    <p class="text-gray-300 leading-relaxed">${data.interpretation}</p>
+                    ${data.story && data.story !== '待補' ? `<p class="text-gray-400 mt-4 text-sm italic border-t border-yellow-900/50 pt-2">【典故故事】：${data.story}</p>` : ''}
                 </div>
-                <p class="text-gray-300 mt-6 leading-relaxed">
-                    <strong class="text-yellow-500">【針對性回答】</strong><br>
-                    關於您的${selectedCategory}問題：「${question}」<br>
-                    大師判斷：這份籤詩預示著您的困境即將迎刃而解（或持續穩定）。在接下來的三個月內，請保持正向思考，並留意身邊的貴人。
+                <h3 class="font-bold text-gray-300 mt-6 mb-2">✨ 針對您的「${category}」問題</h3>
+                <p class="text-gray-300 leading-relaxed bg-black/40 p-4 border-l-4 border-yellow-500">
+                    問題：「${question}」<br><br>
+                    ${categoryAdvice}
                 </p>
             `;
         }
 
-        function generateAIFallbackContent(typeName, id, question) {
+        function generateFallbackContent(typeName, id, question, category) {
+            let categoryAdvice = '';
+            if (category === '工作') {
+                categoryAdvice = `針對您的工作事業，大師從星象與時局為您推演：近期可能會面臨一些抉擇或壓力，保持冷靜的頭腦是關鍵。不要急於求成，蹲下是為了跳得更高。`;
+            } else if (category === '感情') {
+                categoryAdvice = `對於感情的發展，大師感受到您的用心與迷惘。感情之事最忌諱患得患失，給自己與對方一點空間，真正的緣分經得起時間的考驗。`;
+            } else if (category === '金錢') {
+                categoryAdvice = `在金錢理財方面，大師建議您目前宜採取保守穩健的策略。開源節流是根本，切勿聽信來路不明的投資訊息，守財即是聚財。`;
+            } else if (category === '家庭') {
+                categoryAdvice = `家和萬事興。大師看出您對家庭的牽掛，多用溫和的言語溝通，設身處地為家人著想，一切不順遂都會如過眼雲煙般消散。`;
+            } else {
+                categoryAdvice = `針對您的疑問，大師給您的建議是：順勢而為，保持內心的平靜。外在環境的變化我們難以掌控，但我們可以決定自己面對困難的態度。`;
+            }
+
             return `
-                <h2 class="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-                    <span>🤖</span> AI 即時檢索：【${typeName} 第 ${id} 籤】
+                <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center gap-2">
+                    <span>📜</span> 【${typeName} - 第${id}籤】 大師開示
                 </h2>
-                <div class="bg-blue-900/10 p-5 rounded-lg border border-blue-900/40 mb-6 italic text-blue-200">
-                    <p>「大師正在透過雲端智慧，為您精準定位此網上難尋的籤詩資訊...」</p>
+                <div class="bg-yellow-900/20 p-5 rounded-lg border border-yellow-900/40 mb-6 italic text-gray-300">
+                    <p class="leading-relaxed">此籤甚深，大師正為您推演卦象與古文流轉。雖然這支籤的古籍碑文正由大師積極考究補齊中，但其中蘊含的法理與指引，大師已為您參透。</p>
                 </div>
-                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 AI 檢索結果</h3>
-                <p class="text-gray-300 leading-relaxed text-justify">
-                    經由 AI 分析，【${typeName}】的第 ${id} 籤通常寓意著「守得雲開見月明」。雖然本機資料庫暫無此籤的完整詩文，但從法力流動來看，這代表著您的問題正處於關鍵轉折點。
+                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 引導與開釋</h3>
+                <p class="text-gray-300 leading-relaxed text-justify mb-4">
+                    這支籤象徵著「靜待時機」與「內在沉澱」。有時候，沒有立刻看見結果不代表沒有在前進。這代表您目前需要的不是盲目衝刺，而是好好檢視自己的步伐。
                 </p>
-                <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-900/50 mt-4">
-                    <strong class="text-blue-400 block mb-2">✨ AI 深度建議</strong>
-                    <p class="text-gray-300">針對您的問題：「${question}」，AI 認為您不應過於執著於目前的技術細節，而應從更高維度的視角來審視。這是一個適合「整合」而非「開發」的時機。</p>
-                </div>
+                <h3 class="font-bold text-yellow-500 mt-6 mb-2">✨ 針對您的「${category}」問題</h3>
+                <p class="text-gray-300 leading-relaxed bg-black/40 p-4 border-l-4 border-yellow-500">
+                    問題：「${question}」<br><br>
+                    ${categoryAdvice}
+                </p>
             `;
+        }
+        `;
         }
 
         function generateTarotContent(question) {
             // ... (Keep existing tarot logic or simplify)
-            return `<div class="p-4">塔羅解析開發中，請稍候...</div>`;
+            return `< div class="p-4" > 塔羅解析開發中，請稍候...</div >`;
         }
     </script>
 </body>
