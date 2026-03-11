@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "type": "guanyin100",
+    "no": "第1籤",
+    "level": "上上",
+    "poem": "天開地闢結良緣，日照臨臨滿大川，欲問前途成底事，幸得貴人引步前。",
+    "story": "鍾離權道引呂洞賓",
+    "interpretation": "大吉大利，貴人扶持。"
+  },
+  {
+    "id": 2,
+    "type": "guanyin100",
+    "no": "第2籤",
+    "level": "下下",
+    "poem": "鯨魚未變守江湖，末化為龍且待時，且宜守舊不宜進，直待風雲際會時。",
+    "story": "蘇秦不第",
+    "interpretation": "守舊待時，不宜進取。"
+  },
+  {
+    "id": 3,
+    "type": "guanyin100",
+    "no": "第3籤",
+    "level": "中平",
+    "poem": "揲前神數算得精，若問榮華總有名，一石水中山月影，且宜守舊免勞心。",
+    "story": "董永遇仙",
+    "interpretation": "守舊待時，免受勞心。"
+  },
+  {
+    "id": 4,
+    "type": "guanyin100",
+    "no": "第4籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 5,
+    "type": "guanyin100",
+    "no": "第5籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 6,
+    "type": "guanyin100",
+    "no": "第6籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 7,
+    "type": "guanyin100",
+    "no": "第7籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 8,
+    "type": "guanyin100",
+    "no": "第8籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 9,
+    "type": "guanyin100",
+    "no": "第9籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 10,
+    "type": "guanyin100",
+    "no": "第10籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 11,
+    "type": "guanyin100",
+    "no": "第11籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 12,
+    "type": "guanyin100",
+    "no": "第12籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 13,
+    "type": "guanyin100",
+    "no": "第13籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 14,
+    "type": "guanyin100",
+    "no": "第14籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 15,
+    "type": "guanyin100",
+    "no": "第15籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 16,
+    "type": "guanyin100",
+    "no": "第16籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 17,
+    "type": "guanyin100",
+    "no": "第17籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 18,
+    "type": "guanyin100",
+    "no": "第18籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 19,
+    "type": "guanyin100",
+    "no": "第19籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 20,
+    "type": "guanyin100",
+    "no": "第20籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 21,
+    "type": "guanyin100",
+    "no": "第21籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 22,
+    "type": "guanyin100",
+    "no": "第22籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 23,
+    "type": "guanyin100",
+    "no": "第23籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 24,
+    "type": "guanyin100",
+    "no": "第24籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 25,
+    "type": "guanyin100",
+    "no": "第25籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 26,
+    "type": "guanyin100",
+    "no": "第26籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 27,
+    "type": "guanyin100",
+    "no": "第27籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 28,
+    "type": "guanyin100",
+    "no": "第28籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 29,
+    "type": "guanyin100",
+    "no": "第29籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 30,
+    "type": "guanyin100",
+    "no": "第30籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 31,
+    "type": "guanyin100",
+    "no": "第31籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 32,
+    "type": "guanyin100",
+    "no": "第32籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 33,
+    "type": "guanyin100",
+    "no": "第33籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 34,
+    "type": "guanyin100",
+    "no": "第34籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 35,
+    "type": "guanyin100",
+    "no": "第35籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 36,
+    "type": "guanyin100",
+    "no": "第36籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 37,
+    "type": "guanyin100",
+    "no": "第37籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 38,
+    "type": "guanyin100",
+    "no": "第38籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 39,
+    "type": "guanyin100",
+    "no": "第39籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 40,
+    "type": "guanyin100",
+    "no": "第40籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 41,
+    "type": "guanyin100",
+    "no": "第41籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 42,
+    "type": "guanyin100",
+    "no": "第42籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 43,
+    "type": "guanyin100",
+    "no": "第43籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 44,
+    "type": "guanyin100",
+    "no": "第44籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 45,
+    "type": "guanyin100",
+    "no": "第45籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 46,
+    "type": "guanyin100",
+    "no": "第46籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 47,
+    "type": "guanyin100",
+    "no": "第47籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 48,
+    "type": "guanyin100",
+    "no": "第48籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 49,
+    "type": "guanyin100",
+    "no": "第49籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 50,
+    "type": "guanyin100",
+    "no": "第50籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 51,
+    "type": "guanyin100",
+    "no": "第51籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 52,
+    "type": "guanyin100",
+    "no": "第52籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 53,
+    "type": "guanyin100",
+    "no": "第53籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 54,
+    "type": "guanyin100",
+    "no": "第54籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 55,
+    "type": "guanyin100",
+    "no": "第55籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 56,
+    "type": "guanyin100",
+    "no": "第56籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 57,
+    "type": "guanyin100",
+    "no": "第57籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 58,
+    "type": "guanyin100",
+    "no": "第58籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 59,
+    "type": "guanyin100",
+    "no": "第59籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 60,
+    "type": "guanyin100",
+    "no": "第60籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 61,
+    "type": "guanyin100",
+    "no": "第61籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 62,
+    "type": "guanyin100",
+    "no": "第62籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 63,
+    "type": "guanyin100",
+    "no": "第63籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 64,
+    "type": "guanyin100",
+    "no": "第64籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 65,
+    "type": "guanyin100",
+    "no": "第65籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 66,
+    "type": "guanyin100",
+    "no": "第66籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 67,
+    "type": "guanyin100",
+    "no": "第67籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 68,
+    "type": "guanyin100",
+    "no": "第68籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 69,
+    "type": "guanyin100",
+    "no": "第69籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 70,
+    "type": "guanyin100",
+    "no": "第70籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 71,
+    "type": "guanyin100",
+    "no": "第71籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 72,
+    "type": "guanyin100",
+    "no": "第72籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 73,
+    "type": "guanyin100",
+    "no": "第73籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 74,
+    "type": "guanyin100",
+    "no": "第74籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 75,
+    "type": "guanyin100",
+    "no": "第75籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 76,
+    "type": "guanyin100",
+    "no": "第76籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 77,
+    "type": "guanyin100",
+    "no": "第77籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 78,
+    "type": "guanyin100",
+    "no": "第78籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 79,
+    "type": "guanyin100",
+    "no": "第79籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 80,
+    "type": "guanyin100",
+    "no": "第80籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 81,
+    "type": "guanyin100",
+    "no": "第81籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 82,
+    "type": "guanyin100",
+    "no": "第82籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 83,
+    "type": "guanyin100",
+    "no": "第83籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 84,
+    "type": "guanyin100",
+    "no": "第84籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 85,
+    "type": "guanyin100",
+    "no": "第85籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 86,
+    "type": "guanyin100",
+    "no": "第86籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 87,
+    "type": "guanyin100",
+    "no": "第87籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 88,
+    "type": "guanyin100",
+    "no": "第88籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 89,
+    "type": "guanyin100",
+    "no": "第89籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 90,
+    "type": "guanyin100",
+    "no": "第90籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 91,
+    "type": "guanyin100",
+    "no": "第91籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 92,
+    "type": "guanyin100",
+    "no": "第92籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 93,
+    "type": "guanyin100",
+    "no": "第93籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 94,
+    "type": "guanyin100",
+    "no": "第94籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 95,
+    "type": "guanyin100",
+    "no": "第95籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 96,
+    "type": "guanyin100",
+    "no": "第96籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 97,
+    "type": "guanyin100",
+    "no": "第97籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 98,
+    "type": "guanyin100",
+    "no": "第98籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 99,
+    "type": "guanyin100",
+    "no": "第99籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  },
+  {
+    "id": 100,
+    "type": "guanyin100",
+    "no": "第100籤",
+    "level": "待查",
+    "poem": "系統資料更新中...",
+    "story": "待補",
+    "interpretation": "請查看官網或等待更新。"
+  }
+]

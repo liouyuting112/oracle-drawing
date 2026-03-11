@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "type": "guandi100",
+    "no": "第1籤",
+    "level": "大吉",
+    "poem": "巍巍獨步向雲間，玉殿千官第一班，富貴慈悲天不老，更生福壽益人間。",
+    "story": "漢高祖入關",
+    "interpretation": "富貴雙全，福壽綿長。"
+  },
+  {
+    "id": 2,
+    "type": "guandi100",
+    "no": "第2籤",
+    "level": "上吉",
+    "poem": "盈虛消息總天時，自此君當百事宜，若問前程歸縮地，須知此際事如意。",
+    "story": "張子房尋師",
+    "interpretation": "事事如意，前程大好。"
+  },
+  {
+    "id": 3,
+    "type": "guandi100",
+    "no": "第3籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 4,
+    "type": "guandi100",
+    "no": "第4籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 5,
+    "type": "guandi100",
+    "no": "第5籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 6,
+    "type": "guandi100",
+    "no": "第6籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 7,
+    "type": "guandi100",
+    "no": "第7籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 8,
+    "type": "guandi100",
+    "no": "第8籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 9,
+    "type": "guandi100",
+    "no": "第9籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 10,
+    "type": "guandi100",
+    "no": "第10籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 11,
+    "type": "guandi100",
+    "no": "第11籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 12,
+    "type": "guandi100",
+    "no": "第12籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 13,
+    "type": "guandi100",
+    "no": "第13籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 14,
+    "type": "guandi100",
+    "no": "第14籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 15,
+    "type": "guandi100",
+    "no": "第15籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 16,
+    "type": "guandi100",
+    "no": "第16籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 17,
+    "type": "guandi100",
+    "no": "第17籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 18,
+    "type": "guandi100",
+    "no": "第18籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 19,
+    "type": "guandi100",
+    "no": "第19籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 20,
+    "type": "guandi100",
+    "no": "第20籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 21,
+    "type": "guandi100",
+    "no": "第21籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 22,
+    "type": "guandi100",
+    "no": "第22籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 23,
+    "type": "guandi100",
+    "no": "第23籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 24,
+    "type": "guandi100",
+    "no": "第24籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 25,
+    "type": "guandi100",
+    "no": "第25籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 26,
+    "type": "guandi100",
+    "no": "第26籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 27,
+    "type": "guandi100",
+    "no": "第27籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 28,
+    "type": "guandi100",
+    "no": "第28籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 29,
+    "type": "guandi100",
+    "no": "第29籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 30,
+    "type": "guandi100",
+    "no": "第30籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 31,
+    "type": "guandi100",
+    "no": "第31籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 32,
+    "type": "guandi100",
+    "no": "第32籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 33,
+    "type": "guandi100",
+    "no": "第33籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 34,
+    "type": "guandi100",
+    "no": "第34籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 35,
+    "type": "guandi100",
+    "no": "第35籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 36,
+    "type": "guandi100",
+    "no": "第36籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 37,
+    "type": "guandi100",
+    "no": "第37籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 38,
+    "type": "guandi100",
+    "no": "第38籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 39,
+    "type": "guandi100",
+    "no": "第39籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 40,
+    "type": "guandi100",
+    "no": "第40籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 41,
+    "type": "guandi100",
+    "no": "第41籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 42,
+    "type": "guandi100",
+    "no": "第42籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 43,
+    "type": "guandi100",
+    "no": "第43籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 44,
+    "type": "guandi100",
+    "no": "第44籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 45,
+    "type": "guandi100",
+    "no": "第45籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 46,
+    "type": "guandi100",
+    "no": "第46籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 47,
+    "type": "guandi100",
+    "no": "第47籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 48,
+    "type": "guandi100",
+    "no": "第48籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 49,
+    "type": "guandi100",
+    "no": "第49籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 50,
+    "type": "guandi100",
+    "no": "第50籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 51,
+    "type": "guandi100",
+    "no": "第51籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 52,
+    "type": "guandi100",
+    "no": "第52籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 53,
+    "type": "guandi100",
+    "no": "第53籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 54,
+    "type": "guandi100",
+    "no": "第54籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 55,
+    "type": "guandi100",
+    "no": "第55籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 56,
+    "type": "guandi100",
+    "no": "第56籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 57,
+    "type": "guandi100",
+    "no": "第57籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 58,
+    "type": "guandi100",
+    "no": "第58籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 59,
+    "type": "guandi100",
+    "no": "第59籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 60,
+    "type": "guandi100",
+    "no": "第60籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 61,
+    "type": "guandi100",
+    "no": "第61籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 62,
+    "type": "guandi100",
+    "no": "第62籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 63,
+    "type": "guandi100",
+    "no": "第63籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 64,
+    "type": "guandi100",
+    "no": "第64籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 65,
+    "type": "guandi100",
+    "no": "第65籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 66,
+    "type": "guandi100",
+    "no": "第66籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 67,
+    "type": "guandi100",
+    "no": "第67籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 68,
+    "type": "guandi100",
+    "no": "第68籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 69,
+    "type": "guandi100",
+    "no": "第69籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 70,
+    "type": "guandi100",
+    "no": "第70籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 71,
+    "type": "guandi100",
+    "no": "第71籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 72,
+    "type": "guandi100",
+    "no": "第72籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 73,
+    "type": "guandi100",
+    "no": "第73籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 74,
+    "type": "guandi100",
+    "no": "第74籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 75,
+    "type": "guandi100",
+    "no": "第75籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 76,
+    "type": "guandi100",
+    "no": "第76籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 77,
+    "type": "guandi100",
+    "no": "第77籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 78,
+    "type": "guandi100",
+    "no": "第78籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 79,
+    "type": "guandi100",
+    "no": "第79籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 80,
+    "type": "guandi100",
+    "no": "第80籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 81,
+    "type": "guandi100",
+    "no": "第81籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 82,
+    "type": "guandi100",
+    "no": "第82籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 83,
+    "type": "guandi100",
+    "no": "第83籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 84,
+    "type": "guandi100",
+    "no": "第84籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 85,
+    "type": "guandi100",
+    "no": "第85籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 86,
+    "type": "guandi100",
+    "no": "第86籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 87,
+    "type": "guandi100",
+    "no": "第87籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 88,
+    "type": "guandi100",
+    "no": "第88籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 89,
+    "type": "guandi100",
+    "no": "第89籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 90,
+    "type": "guandi100",
+    "no": "第90籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 91,
+    "type": "guandi100",
+    "no": "第91籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 92,
+    "type": "guandi100",
+    "no": "第92籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 93,
+    "type": "guandi100",
+    "no": "第93籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 94,
+    "type": "guandi100",
+    "no": "第94籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 95,
+    "type": "guandi100",
+    "no": "第95籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 96,
+    "type": "guandi100",
+    "no": "第96籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 97,
+    "type": "guandi100",
+    "no": "第97籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 98,
+    "type": "guandi100",
+    "no": "第98籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 99,
+    "type": "guandi100",
+    "no": "第99籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  },
+  {
+    "id": 100,
+    "type": "guandi100",
+    "no": "第100籤",
+    "level": "待查",
+    "poem": "資料準備中...",
+    "story": "待補",
+    "interpretation": "暫無解析。"
+  }
+]
