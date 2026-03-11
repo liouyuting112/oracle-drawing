@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>數位命理諮商大師</title>
+    <meta name="description" content="數位命理諮商大師 — 提供觀音靈籤、媽祖籤、關帝籤、塔羅牌等多種占卜工具，結合東方傳統籤詩與西方塔羅智慧，為您指點迷津。">
+    <meta name="keywords" content="抽籤,觀音靈籤,媽祖籤,塔羅牌,解籤,占卜,命理,籤詩">
+    <meta property="og:title" content="數位命理諮商大師">
+    <meta property="og:description" content="東方靈籤與西方塔羅，看透問題背後的本質">
+    <title>數位命理諮商大師 | 東方靈籤 ✦ 西方塔羅</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -31,6 +37,7 @@
         .gold-text {
             background: linear-gradient(to right, #fcd34d, #d4af37);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -276,6 +283,13 @@
                     </div>
                 </div>
 
+                <!-- Random Draw Button (Eastern only) -->
+                <button id="random-draw-btn"
+                    class="w-full py-2 rounded-lg font-bold text-sm mt-2 border border-yellow-700/50 text-yellow-500 hover:bg-yellow-900/20 transition-colors flex items-center justify-center gap-2"
+                    onclick="randomDraw()">
+                    🎲 隨機抽籤（不指定籤號）
+                </button>
+
                 <!-- Action Button -->
                 <button id="submit-btn"
                     class="generate-btn w-full py-4 rounded-lg font-bold text-lg mt-4 flex items-center justify-center gap-2"
@@ -300,8 +314,10 @@
         </div>
     </main>
 
-    <footer class="mt-12 text-gray-500 text-sm">
-        Designed for AI Integration • Digital Fortune-telling Master
+    <footer class="mt-12 mb-8 text-center text-gray-500 text-sm space-y-2">
+        <p class="text-gray-400">🔮 數位命理諮商大師 ✦ 通曉東西神諭</p>
+        <p>提供 27 種東方靈籤 ✦ 78 張塔羅牌解讀</p>
+        <p class="text-xs text-gray-600">本工具僅供娛樂參考，不構成任何專業建議</p>
     </footer>
 
     <!-- Load Utility Script (if any) -->
@@ -491,6 +507,16 @@
             }
         }
 
+        // --- Random Draw ---
+        async function randomDraw() {
+            const type = document.getElementById('oracle-type').value;
+            const config = ORACLE_CONFIG[type];
+            const randomId = Math.floor(Math.random() * config.count) + 1;
+            document.getElementById('oracle-number').value = randomId;
+            previewOracle();
+            handlePredict();
+        }
+
         // --- Prediction Logic ---
         async function handlePredict() {
             const btn = document.getElementById('submit-btn');
@@ -606,12 +632,146 @@
                 </p>
             `;
         }
-        `;
+
+        // --- Tarot Card Meanings Database ---
+        const TAROT_MEANINGS = {
+            // Major Arcana
+            "愚人": { up: "新開始、冒險、純真、自由、無限可能", rev: "魯莽、冒失、不計後果、猶豫不前", advice: { "工作": "適合嘗試新方向，但需要做好規劃再行動。", "感情": "一段新的戀情可能即將到來，保持開放的心態。", "金錢": "不宜大筆投資，但小額嘗試可帶來驚喜。", "家庭": "家中可能有新成員或新氣象，歡喜迎接。", "其他": "勇敢踏出第一步，宇宙會為你開路。" } },
+            "魔術師": { up: "創造力、行動力、意志力、技巧純熟", rev: "欺騙、缺乏自信、才華被埋沒", advice: { "工作": "你擁有所需的一切資源，現在就是行動的時機。", "感情": "主動表達心意將帶來好結果。", "金錢": "善用手中資源，財富自然流入。", "家庭": "用智慧化解家庭矛盾，你有這個能力。", "其他": "相信自己的能力，你比想像中更強大。" } },
+            "女祭司": { up: "直覺、智慧、內在知識、神秘", rev: "忽略直覺、表面功夫、秘密被揭露", advice: { "工作": "相信你的直覺判斷，答案就在內心深處。", "感情": "對方可能有未說出口的心事，耐心傾聽。", "金錢": "暫時觀望，等待更明確的訊號再做決定。", "家庭": "家人之間需要更深層的理解與溝通。", "其他": "靜下心來冥想，答案會自然浮現。" } },
+            "皇后": { up: "豐收、母性、富足、自然之美", rev: "過度依賴、創造力受阻、忽略自我", advice: { "工作": "付出的努力即將豐收，耐心等待成果。", "感情": "感情將進入甜蜜穩定的階段。", "金錢": "財運旺盛，適合理財規劃。", "家庭": "家庭幸福美滿，注重對家人的關愛。", "其他": "善待自己，享受生活中的美好事物。" } },
+            "皇帝": { up: "權威、秩序、領導力、穩定", rev: "專制、僵化、控制欲過強", advice: { "工作": "展現領導力，有紀律地推進目標。", "感情": "給予對方安全感，但避免過度控制。", "金錢": "制定嚴謹的財務計畫，穩步累積。", "家庭": "承擔家庭責任，成為家人的支柱。", "其他": "建立明確的規則與界限。" } },
+            "教皇": { up: "傳統、信仰、指導、精神追求", rev: "打破常規、叛逆、不必要的束縛", advice: { "工作": "向有經驗的前輩請教，遵循正道。", "感情": "以真誠和承諾對待感情。", "金錢": "穩健保守的理財方式最適合你。", "家庭": "重視家族傳統，維繫長輩關係。", "其他": "靜心修行，提升內在智慧。" } },
+            "戀人": { up: "愛情、選擇、結合、和諧", rev: "失衡、錯誤選擇、價值觀衝突", advice: { "工作": "與志同道合的人合作將事半功倍。", "感情": "真愛就在身邊，用心感受。", "金錢": "合夥投資可以考慮，但需慎選對象。", "家庭": "家庭關係和睦，充滿溫馨。", "其他": "遵從內心做出選擇，不會後悔。" } },
+            "戰車": { up: "勝利、意志力、決心、前進", rev: "失控、缺乏方向、衝動", advice: { "工作": "全力以赴，勝利在望。", "感情": "主動追求幸福，但別忘記尊重對方。", "金錢": "積極進取，財運隨努力而來。", "家庭": "帶領家人一起向好的方向發展。", "其他": "堅定信念，克服一切障礙。" } },
+            "力量": { up: "勇氣、內在力量、耐心、慈悲", rev: "自我懷疑、缺乏信心、軟弱", advice: { "工作": "以柔克剛，用智慧而非蠻力解決問題。", "感情": "用包容和耐心化解感情中的矛盾。", "金錢": "穩定心態，不被市場波動影響判斷。", "家庭": "以愛和耐心面對家庭挑戰。", "其他": "你比自己想像的更加強大。" } },
+            "隱者": { up: "獨處、反思、內省、尋找答案", rev: "孤立、過度封閉、逃避現實", advice: { "工作": "暫時退一步思考，會找到更好的方向。", "感情": "給自己和對方一些空間來思考。", "金錢": "不宜衝動消費，理性分析後再行動。", "家庭": "獨處靜思後再處理家庭問題。", "其他": "向內探索，答案不在外面而在心中。" } },
+            "命運之輪": { up: "轉運、機會、命運轉折、好運降臨", rev: "厄運、抗拒改變、錯失良機", advice: { "工作": "轉機即將到來，做好準備迎接新機會。", "感情": "緣分天注定，隨緣而行。", "金錢": "運勢轉好，可能有意外之財。", "家庭": "家運即將好轉，保持正面心態。", "其他": "命運之輪正在轉動，好事將至。" } },
+            "正義": { up: "公平、真相、因果、正直", rev: "不公、偏見、逃避責任", advice: { "工作": "公正處事，終會得到應有的回報。", "感情": "坦誠面對感情中的問題，尋求公平解決。", "金錢": "正當經營，財運自然亨通。", "家庭": "公平對待每位家人，化解紛爭。", "其他": "種善因得善果，問心無愧。" } },
+            "倒吊人": { up: "犧牲、等待、新視角、放下", rev: "無謂犧牲、拖延、固執己見", advice: { "工作": "換個角度看問題，會有意想不到的收穫。", "感情": "暫時的等待是值得的，不要操之過急。", "金錢": "目前不宜急進，靜待時機。", "家庭": "為家人付出是值得的，但也要照顧自己。", "其他": "放下執念，反而能看到更廣闊的天地。" } },
+            "死神": { up: "結束、轉變、重生、放下過去", rev: "抗拒改變、依戀過去、停滯不前", advice: { "工作": "舊的結束代表新的開始，勇敢轉型。", "感情": "放下不健康的關係，才能迎接新的愛情。", "金錢": "舊的財務模式需要改變，尋找新方向。", "家庭": "家庭模式可能需要調整，接受改變。", "其他": "鳳凰涅槃，浴火重生。" } },
+            "節制": { up: "平衡、耐心、調和、中庸之道", rev: "失衡、急躁、過度放縱", advice: { "工作": "保持節奏，不急不緩地推進。", "感情": "在付出與接受之間找到平衡。", "金錢": "收支平衡，量入為出。", "家庭": "在工作與家庭間取得平衡。", "其他": "凡事適可而止，過猶不及。" } },
+            "惡魔": { up: "誘惑、束縛、執著、物質主義", rev: "解脫、覺醒、擺脫束縛", advice: { "工作": "留意職場中的誘惑，堅守原則。", "感情": "檢視關係中是否存在不健康的依附。", "金錢": "控制慾望，避免過度消費和投機。", "家庭": "是否有某種模式在束縛著家庭？", "其他": "認清束縛你的是什麼，才能真正自由。" } },
+            "高塔": { up: "突變、崩塌、真相大白、覺醒", rev: "避免災難、恐懼改變、掙扎", advice: { "工作": "突如其來的變動可能是化禍為福的契機。", "感情": "感情中的假象被打破，面對真相。", "金錢": "可能面臨財務震盪，提前做好準備。", "家庭": "家中可能有突發狀況，冷靜應對。", "其他": "舊的結構倒塌後，才能建造更好的。" } },
+            "星星": { up: "希望、信心、靈感、美好前景", rev: "失望、缺乏信心、迷失方向", advice: { "工作": "充滿希望，美好的未來正在等著你。", "感情": "充滿浪漫與希望的時期，好好珍惜。", "金錢": "財運看好，保持樂觀的心態。", "家庭": "家庭生活充滿溫馨和希望。", "其他": "即使在最黑暗的夜晚，星星依然閃耀。" } },
+            "月亮": { up: "幻象、不安、潛意識、迷惘", rev: "走出迷霧、釋放恐懼、看清真相", advice: { "工作": "事情可能不如表面所見，多加留意。", "感情": "感情中存在不確定性，需要釐清。", "金錢": "避免在資訊不透明時做重大決策。", "家庭": "家人之間可能有誤解，需要溝通澄清。", "其他": "面對內心的恐懼，才能走出迷霧。" } },
+            "太陽": { up: "成功、喜悅、活力、光明燦爛", rev: "延遲的成功、短暫的低潮", advice: { "工作": "事業蒸蒸日上，光明前途。", "感情": "感情甜蜜幸福，如沐春風。", "金錢": "財運亨通，投資順利。", "家庭": "家庭充滿歡笑和陽光。", "其他": "你正走在正確的道路上，繼續前行。" } },
+            "審判": { up: "覺醒、重生、天命、重要決定", rev: "自我懷疑、拒絕召喚、猶豫不決", advice: { "工作": "重新評估職業方向，聆聽內心的召喚。", "感情": "是時候做出重要的感情決定了。", "金錢": "財務上需要做出明智的審視和調整。", "家庭": "家庭關係將迎來重要的轉捩點。", "其他": "聆聽靈魂的呼喚，做出改變人生的決定。" } },
+            "世界": { up: "圓滿、完成、成就、大功告成", rev: "未完成、缺少閉合、延遲圓滿", advice: { "工作": "目標即將達成，堅持到最後一步。", "感情": "感情圓滿幸福，可能迎來承諾。", "金錢": "財務目標達成，享受豐收的喜悅。", "家庭": "家庭幸福美滿，一切圓滿。", "其他": "一個圓滿的結局，預示著新旅程的開始。" } }
+        };
+        // Add minor arcana meanings in compact form
+        const MINOR_BASE = {
+            "王牌": { up: "新開始、潛力、機會", rev: "延遲、錯失機會" },
+            "二": { up: "選擇、平衡、合作", rev: "猶豫、失衡" },
+            "三": { up: "成長、創造、團隊", rev: "缺乏規劃、分散" },
+            "四": { up: "穩定、休息、根基", rev: "停滯、不安" },
+            "五": { up: "挑戰、衝突、學習", rev: "避免衝突、恢復" },
+            "六": { up: "和諧、給予、回憶", rev: "不平等、執著過去" },
+            "七": { up: "堅持、勇氣、自省", rev: "放棄、欺騙" },
+            "八": { up: "行動、速度、改變", rev: "延遲、抗拒變化" },
+            "九": { up: "圓滿、滿足、獨立", rev: "不滿足、貪心" },
+            "十": { up: "完成、結果、累積", rev: "負擔過重、未完成" },
+            "侍者": { up: "學習、好奇、新訊息", rev: "不成熟、缺乏方向" },
+            "騎士": { up: "行動、追求、熱情", rev: "衝動、方向不明" },
+            "王后": { up: "成熟、關懷、直覺", rev: "情緒化、封閉" },
+            "國王": { up: "權威、掌控、成就", rev: "專制、控制欲" }
+        };
+        const SUIT_THEMES = {
+            "權杖": { element: "火", theme: "行動、熱情、創業" },
+            "聖杯": { element: "水", theme: "情感、關係、直覺" },
+            "寶劍": { element: "風", theme: "思想、溝通、挑戰" },
+            "錢幣": { element: "土", theme: "物質、財富、務實" }
+        };
+
+        function generateTarotContent(question, category) {
+            const cardEls = document.querySelectorAll('.tarot-card-val');
+            const dirEls = document.querySelectorAll('.tarot-dir-select');
+            const noReverse = document.getElementById('tarot-no-reverse').checked;
+            const spreadVal = parseInt(document.getElementById('tarot-spread').value);
+            const posNames = spreadVal === 3 ? ["過去", "現在", "未來"] :
+                spreadVal === 4 ? ["你的現狀", "對方現狀", "關係阻礙", "未來發展"] : ["單張指引"];
+
+            let cards = [];
+            let allSelected = true;
+            for (let i = 0; i < cardEls.length; i++) {
+                const name = cardEls[i].value;
+                if (!name) { allSelected = false; break; }
+                const dir = noReverse ? "正位" : dirEls[i].value;
+                cards.push({ name, dir, pos: posNames[i] || `第${i + 1}張` });
+            }
+            if (!allSelected) {
+                return `<div class="text-center text-yellow-500 p-8"><p class="text-lg">⚠️ 請選擇所有位置的塔羅牌</p></div>`;
+            }
+
+            let html = `<h2 class="text-xl font-bold text-yellow-500 mb-4">🔮 塔羅牌陣解讀</h2>`;
+            html += `<p class="text-gray-400 text-sm mb-4">問題：「${question}」 ｜ 領域：${category}</p>`;
+
+            // Define suits for minor arcana parsing
+            const suits = ["權杖", "聖杯", "寶劍", "錢幣"];
+
+            cards.forEach((card, idx) => {
+                const isReversed = card.dir === "逆位";
+                const meaning = TAROT_MEANINGS[card.name];
+                let desc = '', adviceText = '';
+
+                if (meaning) {
+                    desc = isReversed ? meaning.rev : meaning.up;
+                    adviceText = meaning.advice[category] || meaning.advice["其他"];
+                } else {
+                    // Minor arcana
+                    const suitKey = suits.find(s => card.name.startsWith(s));
+                    const numKey = suitKey ? card.name.replace(suitKey, '') : '';
+                    const base = MINOR_BASE[numKey];
+                    const suitInfo = SUIT_THEMES[suitKey];
+                    if (base && suitInfo) {
+                        desc = `${suitInfo.theme} — ${isReversed ? base.rev : base.up}`;
+                        adviceText = `此牌屬於${suitInfo.element}元素，${isReversed ? '提醒您正視目前的困難，調整步伐。' : '指引您順勢而行，把握當下的能量。'}`;
+                    } else {
+                        desc = isReversed ? "需要重新審視方向" : "正面能量引導";
+                        adviceText = "順應本心，自有安排。";
+                    }
+                }
+
+                html += `
+                    <div class="mb-5 p-4 rounded-lg border ${isReversed ? 'border-purple-800 bg-purple-900/10' : 'border-yellow-900/40 bg-yellow-900/10'}">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded ${isReversed ? 'bg-purple-800 text-purple-200' : 'bg-yellow-800 text-yellow-200'}">${card.pos}</span>
+                            <span class="font-bold text-lg ${isReversed ? 'text-purple-300' : 'text-yellow-400'}">${card.name}</span>
+                            <span class="text-xs ${isReversed ? 'text-purple-400' : 'text-yellow-600'}">${card.dir}</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">✦ 牌義：${desc}</p>
+                        <p class="text-gray-400 text-sm italic">💡 ${adviceText}</p>
+                    </div>`;
+            });
+
+            // Overall summary
+            html += `
+                <div class="mt-6 p-4 bg-black/50 rounded-lg border border-yellow-700/30">
+                    <h3 class="font-bold text-yellow-500 mb-2">🌟 大師綜合解讀</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        ${generateTarotSummary(cards, category, question)}
+                    </p>
+                </div>`;
+            return html;
         }
 
-        function generateTarotContent(question) {
-            // ... (Keep existing tarot logic or simplify)
-            return `< div class="p-4" > 塔羅解析開發中，請稍候...</div >`;
+        function generateTarotSummary(cards, category, question) {
+            const reversedCount = cards.filter(c => c.dir === "逆位").length;
+            const ratio = reversedCount / cards.length;
+            let tone = '';
+            if (ratio === 0) tone = '整體牌陣非常正面，充滿希望與光的能量。';
+            else if (ratio <= 0.3) tone = '牌陣整體偏向正面，僅有小部分需要留意。';
+            else if (ratio <= 0.5) tone = '牌陣呈現陰陽交織，提醒您在機會中保持謹慎。';
+            else tone = '牌陣提示目前可能面臨一些挑戰，但每個挑戰都是成長的養分。';
+
+            const catMsg = {
+                "工作": "在職業道路上，現在是沉澱與重新定位的時刻。相信自己的專業能力，同時保持學習的心態。",
+                "感情": "感情的世界需要用心經營。無論現狀如何，真誠地面對自己的內心，才能找到真正的幸福。",
+                "金錢": "財運方面，穩健經營比冒險投機更能為您帶來長久的富足。腳踏實地，財富自然來。",
+                "家庭": "家庭是您最堅實的後盾。用愛與耐心灌溉家庭關係，您會收穫滿滿的幸福。",
+                "其他": "無論面對什麼樣的困惑，請記住：您擁有改變命運的力量。保持正念，一切都會好起來的。"
+            };
+            return `${tone}<br><br>${catMsg[category] || catMsg["其他"]}<br><br>大師寄語：每一張牌都是宇宙給您的啟示。重要的不是牌面上寫了什麼，而是它在您心中喚起了什麼感受。帶著這份感悟，勇敢地走下去吧。🙏`;
         }
     </script>
 </body>
