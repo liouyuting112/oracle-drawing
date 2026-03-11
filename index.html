@@ -203,24 +203,34 @@
                                 placeholder="關鍵字搜尋 (例如: 關公, 觀音, 384...)">
                             <select id="oracle-type" class="input-field w-full rounded p-2 text-sm"
                                 onchange="updateOracleNumbers()">
+                                <!-- Major Systems -->
                                 <option value="mazu60">媽祖六十甲子籤 (60)</option>
                                 <option value="guanyin100" selected>觀音一百籤 (100)</option>
-                                <option value="guandi100">關聖帝君一百籤 (100)</option>
+                                <option value="guandi100">雷雨師一百籤 (關公/城隍) (100)</option>
                                 <option value="tudigong28">烘爐地土地公廿八籤 (28)</option>
                                 <option value="yuelao">月老靈籤 (100)</option>
                                 <option value="sevenkings60">東港鎮海宮七王爺靈籤 (60)</option>
+
+                                <!-- Specialized & Rare -->
+                                <option value="zhuge384">諸葛神算 (384)</option>
                                 <option value="baosheng60">保生大帝六十籤 (60)</option>
                                 <option value="qingshui50">清水祖師五十籤 (50)</option>
                                 <option value="luzu100">呂祖靈籤一百籤 (100)</option>
+                                <option value="luzu60">呂仙祖六十籤 (指南宮) (60)</option>
                                 <option value="zhusheng30">註生娘娘三十籤 (30)</option>
-                                <option value="zhuge384">諸葛神算三百八十四籤 (384)</option>
-                                <option value="beidi100">北帝一百籤 (100)</option>
+                                <option value="beidi51">北帝靈籤 (51)</option>
                                 <option value="fourface30">四面佛三十籤 (30)</option>
-                                <option value="chenghuang28">城隍廿八籤 (28)</option>
                                 <option value="caishin100">五路財神一百籤 (100)</option>
                                 <option value="guanyin28">觀音廿八籤 (28)</option>
                                 <option value="guanyin24">觀音廿四籤 (24)</option>
-                                <option value="pienchu100">扁鵲神醫(藥籤)一百籤 (100)</option>
+                                <option value="zodiac28">二十八星宿籤 (28)</option>
+                                <option value="pienchu100">扁鵲神醫藥籤 (100)</option>
+                                <option value="yaoqian50">藥籤 (50)</option>
+                                <option value="yaoqian200">藥籤 (200)</option>
+                                <option value="lukang100">鹿港天后宮一百籤 (100)</option>
+                                <option value="penghu100">澎湖天后宮一百籤 (100)</option>
+                                <option value="zhuge64">諸葛孔明六十四籤 (金錢卦) (64)</option>
+                                <option value="zhuge32">諸葛孔明三十二籤 (金錢卦) (32)</option>
                             </select>
                         </div>
                         <div class="flex gap-3">
@@ -300,24 +310,37 @@
     <script>
         // --- Oracle Data Config ---
         const ORACLE_CONFIG = {
+            // -- Standard Major Systems --
             'mazu60': { name: '媽祖六十甲子籤', file: 'data/mazu60.json', count: 60 },
             'guanyin100': { name: '觀音一百籤', file: 'data/guanyin100.json', count: 100 },
-            'guandi100': { name: '關聖帝君一百籤', file: 'data/guandi100.json', count: 100 },
-            'tudigong28': { name: '土地公廿八籤', file: 'data/tudigong28.json', count: 28 },
-            'yuelao': { name: '月老靈籤', file: 'data/yuelao.json', count: 100 },
+            'guandi100': { name: '雷雨師一百籤 (關帝/城隍)', file: 'data/guandi100.json', count: 100 },
+            'tudigong28': { name: '土地公廿八籤 (烘爐地)', file: 'data/tudigong28.json', count: 28 },
+            'yuelao': { name: '月老靈籤 (100籤)', file: 'data/yuelao.json', count: 100 },
+
+            // -- Specialized Systems --
+            'zhuge384': { name: '諸葛神算 (384籤)', file: 'data/zhuge384.json', count: 384 },
             'sevenkings60': { name: '東港鎮海宮七王爺靈籤', file: 'data/sevenkings60.json', count: 60 },
             'baosheng60': { name: '保生大帝六十籤', file: 'data/baosheng60.json', count: 60 },
             'qingshui50': { name: '清水祖師五十籤', file: 'data/qingshui50.json', count: 50 },
             'luzu100': { name: '呂祖靈籤一百籤', file: 'data/luzu100.json', count: 100 },
+            'luzu60': { name: '呂仙祖六十籤 (指南宮)', file: 'data/luzu60.json', count: 60 },
             'zhusheng30': { name: '註生娘娘三十籤', file: 'data/zhusheng30.json', count: 30 },
-            'zhuge384': { name: '諸葛神算三百八十四籤', file: 'data/zhuge384.json', count: 384 },
-            'beidi100': { name: '北帝一百籤', file: 'data/beidi100.json', count: 100 },
+            'beidi51': { name: '北帝靈籤 (五十一籤)', file: 'data/beidi51.json', count: 51 },
             'fourface30': { name: '四面佛三十籤', file: 'data/fourface30.json', count: 30 },
-            'chenghuang28': { name: '城隍廿八籤', file: 'data/chenghuang28.json', count: 28 },
             'caishin100': { name: '五路財神一百籤', file: 'data/caishin100.json', count: 100 },
-            'guanyin28': { name: '觀音廿八籤', file: 'data/guanyin28.json', count: 28 },
-            'guanyin24': { name: '觀音廿四籤', file: 'data/guanyin24.json', count: 24 },
-            'pienchu100': { name: '扁鵲神醫(藥籤)一百籤', file: 'data/pienchu100.json', count: 100 }
+            'beidi100': { name: '北帝一百籤 (罕見版)', file: 'data/beidi100.json', count: 100 },
+
+            // -- Variations & Lesser Known --
+            'guanyin28': { name: '觀音廿八籤 (小型)', file: 'data/guanyin28.json', count: 28 },
+            'guanyin24': { name: '觀音廿四籤 (精簡)', file: 'data/guanyin24.json', count: 24 },
+            'zodiac28': { name: '二十八星宿籤', file: 'data/zodiac28.json', count: 28 },
+            'pienchu100': { name: '扁鵲神醫藥籤 (100籤)', file: 'data/pienchu100.json', count: 100 },
+            'yaoqian50': { name: '藥籤 (五十籤)', file: 'data/yaoqian50.json', count: 50 },
+            'yaoqian200': { name: '藥籤 (二百籤)', file: 'data/yaoqian200.json', count: 200 },
+            'lukang100': { name: '鹿港天后宮一百籤', file: 'data/lukang100.json', count: 100 },
+            'penghu100': { name: '澎湖天后宮一百籤', file: 'data/penghu100.json', count: 100 },
+            'zhuge64': { name: '諸葛孔明六十四籤 (金錢卦)', file: 'data/zhuge64.json', count: 64 },
+            'zhuge32': { name: '諸葛孔明三十二籤 (金錢卦)', file: 'data/zhuge32.json', count: 32 }
         };
 
         let loadedOracleData = {};

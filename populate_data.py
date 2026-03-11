@@ -67,17 +67,26 @@ if __name__ == "__main__":
         ("baosheng60", 60, "baosheng60.json"),
         ("qingshui50", 50, "qingshui50.json"),
         ("luzu100", 100, "luzu100.json"),
+        ("luzu60", 60, "luzu60.json"),
         ("zhusheng30", 30, "zhusheng30.json"),
         ("zhuge384", 384, "zhuge384.json"),
         ("tudigong28", 28, "tudigong28.json"),
         ("yuelao", 100, "yuelao.json"),
+        ("beidi51", 51, "beidi51.json"),
         ("beidi100", 100, "beidi100.json"),
         ("fourface30", 30, "fourface30.json"),
         ("chenghuang28", 28, "chenghuang28.json"),
-        ("caishin100", 100, "caishin100.json"), # Generic Fortune God
-        ("guanyin28", 28, "guanyin28.json"), # Small Guanyin
-        ("guanyin24", 24, "guanyin24.json"), # Smaller Guanyin
-        ("pienchu100", 100, "pienchu100.json"), # Pien Chu (Medicine)
+        ("caishin100", 100, "caishin100.json"),
+        ("guanyin28", 28, "guanyin28.json"),
+        ("guanyin24", 24, "guanyin24.json"),
+        ("zodiac28", 28, "zodiac28.json"),
+        ("pienchu100", 100, "pienchu100.json"),
+        ("yaoqian50", 50, "yaoqian50.json"),
+        ("yaoqian200", 200, "yaoqian200.json"),
+        ("lukang100", 100, "lukang100.json"),
+        ("penghu100", 100, "penghu100.json"),
+        ("zhuge64", 64, "zhuge64.json"),
+        ("zhuge32", 32, "zhuge32.json"),
     ]
     
     for prefix, count, filename in systems:
