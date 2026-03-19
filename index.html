@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>數位命理大師 2.0 | 萬世靈籤 ✦ 塔羅深諮</title>
+    <meta name="description" content="數位命理諮商大師 — 提供觀音靈籤、媽祖籤、關帝籤、塔羅牌等多種占卜工具，結合東方傳統籤詩與西方塔羅智慧，為您指點迷津。">
+    <meta name="keywords" content="抽籤,觀音靈籤,媽祖籤,塔羅牌,解籤,占卜,命理,籤詩">
+    <meta property="og:title" content="數位命理諮商大師">
+    <meta property="og:description" content="東方靈籤與西方塔羅，看透問題背後的本質">
+    <title>數位命理諮商大師 2.0 | 東方靈籤 ✦ 西方塔羅</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -43,6 +48,7 @@
         .gold-border { border: 1px solid var(--gold); box-shadow: var(--glow); }
         .gold-text {
             background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #b8860b 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -157,6 +163,9 @@
                     <p class="text-[10px] text-gray-500 mt-2">✨ 提示：若輸入具體細節問題，將啟動 H200 模型進行專屬解惑。</p>
                 </div>
 
+                <button id="random-draw-btn" onclick="randomDraw()" class="w-full py-3 mb-4 rounded-2xl border border-gold/50 text-gold hover:bg-gold/10 transition-colors flex items-center justify-center gap-2 text-sm">
+                    🎲 隨機抽籤（由神明為您決定）
+                </button>
                 <button onclick="handleConsult()" class="btn-mystic w-full py-6 rounded-3xl text-2xl tracking-widest shadow-2xl">
                     請大師冥想解惑 ✨
                 </button>
@@ -169,8 +178,10 @@
         </section>
     </main>
 
-    <footer class="text-center mt-20 py-10 text-gray-600 text-xs">
-        <p>© 2026 數位命理諮商大師 ✦ 台科大 H200 算力支援 ✦ 2167 支神諭收錄</p>
+    <footer class="mt-12 mb-8 text-center text-gray-500 text-sm space-y-2">
+        <p class="text-gray-400">🔮 數位命理諮商大師 ✦ 台科大 H200 算力支援</p>
+        <p>提供 26 種東方靈籤 ✦ 78 張塔羅牌解讀</p>
+        <p class="text-xs text-gray-600">本工具僅供娛樂參考，不構成任何專業建議</p>
     </footer>
 
     <script>
@@ -222,8 +233,21 @@
                 const opt = document.createElement('option');
                 opt.value = item.id;
                 opt.textContent = item.no || `第${item.id}籤`;
-                select.appendChild(opt);
             });
+        }
+
+        function randomDraw() {
+            if (currentSystem !== 'eastern') {
+                alert("隨機抽籤功能僅適用於東方靈籤");
+                return;
+            }
+            const select = document.getElementById('oracle-id');
+            const opts = select.options;
+            if(opts.length > 0) {
+                const randIdx = Math.floor(Math.random() * opts.length);
+                select.selectedIndex = randIdx;
+                handleConsult();
+            }
         }
 
         function changeSystem(sys) {
