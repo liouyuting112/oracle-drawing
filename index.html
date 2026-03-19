@@ -4,793 +4,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="數位命理諮商大師 — 提供觀音靈籤、媽祖籤、關帝籤、塔羅牌等多種占卜工具，結合東方傳統籤詩與西方塔羅智慧，為您指點迷津。">
-    <meta name="keywords" content="抽籤,觀音靈籤,媽祖籤,塔羅牌,解籤,占卜,命理,籤詩">
-    <meta property="og:title" content="數位命理諮商大師">
-    <meta property="og:description" content="東方靈籤與西方塔羅，看透問題背後的本質">
-    <title>數位命理諮商大師 | 東方靈籤 ✦ 西方塔羅</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>數位命理大師 2.0 | 萬世靈籤 ✦ 塔羅深諮</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --deep-indigo: #0f172a;
-            --mystic-violet: #1e1b4b;
-            --glass-bg: rgba(15, 23, 42, 0.75);
-            --glass-border: rgba(212, 175, 55, 0.2);
-            --gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+            --gold: #d4af37;
+            --deep-purple: #1e1b4b;
+            --void: #020617;
+            --glow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         body {
             font-family: 'Noto Serif TC', serif;
-            background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
-            color: #f1f5f9;
+            background: radial-gradient(circle at center, var(--deep-purple) 0%, var(--void) 100%);
+            color: #f8fafc;
             min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
         }
 
-        /* Mystic Particles Background */
-        body::before {
-            content: "";
+        /* Animated Background Particles */
+        .stars-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.15;
+            opacity: 0.2;
             pointer-events: none;
             z-index: -1;
         }
 
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 
-                        inset 0 1px 1px rgba(255, 255, 255, 0.05);
-            border-radius: 2rem;
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
+        .gold-border { border: 1px solid var(--gold); box-shadow: var(--glow); }
         .gold-text {
             background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #b8860b 100%);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: var(--gold-glow);
         }
 
-        .gold-border {
-            border-color: var(--primary-gold);
-            box-shadow: var(--gold-glow);
+        .btn-mystic {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            color: #020617;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-mystic:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
         }
 
-        .input-field {
-            background: rgba(15, 23, 42, 0.8);
+        .input-dark {
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border 0.3s;
         }
+        .input-dark:focus { border-color: var(--gold); outline: none; }
 
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-            background: rgba(15, 23, 42, 0.95);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
+        .float { animation: float 4s ease-in-out infinite; }
 
-        .generate-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-            color: #0f172a;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .generate-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
-        }
-
-        .generate-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-            pointer-events: none;
-        }
-
-        .generate-btn:hover::after {
-            left: 100%;
-        }
-
-        /* Step Animations */
-        .step-container {
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            width: 100%;
-        }
-
-        .step-hidden {
-            display: none !important;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .option-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            display: flex;
+        .ai-meditation {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            aspect-ratio: 4/3;
-        }
-
-        .option-card:hover {
-            background: rgba(212, 175, 55, 0.08);
-            border-color: var(--primary-gold);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.1);
-        }
-
-        .option-card .icon-wrapper {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-            transition: transform 0.3s ease;
-        }
-
-        .option-card:hover .icon-wrapper {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .back-btn {
-            color: #94a3b8;
-            transition: all 0.3s;
-            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            opacity: 0.7;
-        }
-
-        .back-btn:hover {
-            color: var(--primary-gold);
-            opacity: 1;
-            transform: translateX(-3px);
-        }
-
-        /* Loading Dots Animation */
-        .loader-dots span {
-            animation: bounce 0.6s infinite alternate;
-        }
-        .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
-            to { transform: translateY(-8px); opacity: 0.3; }
-        }
-
-        .wizard-card {
-            min-height: 550px;
-            display: flex;
-            flex-direction: column;
         }
     </style>
 </head>
 
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-10">
+    <div class="stars-bg"></div>
 
-    <!-- Header -->
-    <header class="text-center mb-8 mt-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3 gold-text tracking-widest">數位命理諮商大師</h1>
-        <p class="text-gray-400 text-sm md:text-base tracking-widest">通曉東西神諭，看透問題背後的本質</p>
+    <!-- AI Meditation Screen -->
+    <div id="loading" class="ai-meditation">
+        <div class="text-7xl mb-6 float">🌌</div>
+        <div class="text-2xl gold-text font-serif italic mb-2">大師正在與 H200 宇宙共鳴...</div>
+        <p class="text-gray-400 animate-pulse">正在讀取未來的軌跡，請在此靜候</p>
+    </div>
+
+    <header class="max-w-4xl mx-auto text-center mb-10">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 gold-text">數位命理大師 <span class="text-xl align-top text-white font-mono">2.0</span></h1>
+        <p class="text-gray-400 tracking-[0.3em] uppercase text-xs md:text-sm">通連台科大 H200 地端算力 ✦ 萬世神諭全集</p>
     </header>
 
-    <!-- Main Container -->
-    <main class="w-full max-w-4xl glass-panel p-6 md:p-12 wizard-card relative overflow-hidden">
-        
-        <!-- Step 1: System Selection (LANDING) -->
-        <div id="step-1" class="step-container flex-1 flex flex-col items-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-10 gold-text text-center font-serif">選擇命理之道</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                <div class="option-card p-10 rounded-3xl" onclick="selectSystem('eastern')">
-                    <div class="icon-wrapper">🏮</div>
-                    <h3 class="text-2xl font-bold text-yellow-500 mb-2">東方靈籤</h3>
-                    <p class="text-sm text-gray-400 max-w-[200px]">收錄 26 種古聖先賢靈籤<br>共 2100+ 支籤文指引</p>
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Sidebar: Oracle Selection -->
+        <aside class="lg:col-span-4 space-y-6">
+            <div class="glass p-6 rounded-3xl">
+                <h3 class="gold-text font-bold mb-4 flex items-center gap-2">🏮 選擇命理系統</h3>
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <button onclick="changeSystem('eastern')" id="sys-e" class="py-3 rounded-2xl glass hover:bg-gold/10 transition border-2 border-transparent">東方靈籤</button>
+                    <button onclick="changeSystem('western')" id="sys-w" class="py-3 rounded-2xl glass hover:bg-blue-500/10 transition border-2 border-transparent">西方塔羅</button>
                 </div>
-                <div class="option-card p-10 rounded-3xl" onclick="selectSystem('western')">
-                    <div class="icon-wrapper">🃏</div>
-                    <h3 class="text-2xl font-bold text-blue-400 mb-2">西方塔羅</h3>
-                    <p class="text-sm text-gray-400 max-w-[200px]">傳承神秘偉特體系<br>全 78 張牌陣深度解析</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Step 2: Action Mode -->
-        <div id="step-2" class="step-container step-hidden flex-1 flex flex-col">
-            <button onclick="prevStep(1)" class="back-btn mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg> 重新選擇系統
-            </button>
-            <h2 class="text-3xl font-bold mb-10 text-center gold-text font-serif">決定您的諮詢方式</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1">
-                <div class="option-card p-10 rounded-3xl" onclick="selectUsageMode('existing')">
-                    <div class="icon-wrapper">✍️</div>
-                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">我要解籤 / 解牌</h3>
-                    <p class="text-sm text-gray-400 max-w-[220px]">心中已有定數，請大師以此開示</p>
-                </div>
-                <div class="option-card p-10 rounded-3xl" onclick="selectUsageMode('random')">
-                    <div class="icon-wrapper">✨</div>
-                    <h3 class="text-2xl font-bold text-purple-400 mb-2">請大師隨機抽選</h3>
-                    <p class="text-sm text-gray-400 max-w-[220px]">至誠感應，交由上天與宇宙決定</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 3: Configuration -->
-        <div id="step-3" class="step-container step-hidden flex-1">
-            <button onclick="prevStep(2)" class="back-btn mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg> 返回上一步
-            </button>
-            
-            <div class="space-y-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <!-- Left: Common Context -->
-                    <div class="space-y-6">
-                        <section>
-                            <label class="block text-sm font-bold text-gray-400 mb-4 tracking-widest uppercase">解惑領域</label>
-                            <div class="flex flex-wrap gap-3" id="category-chips-wizard">
-                                <button class="px-5 py-2.5 rounded-xl border border-white/10 text-sm hover:border-primary-gold/50 transition-all" data-val="工作">💼 工作</button>
-                                <button class="px-5 py-2.5 rounded-xl border border-white/10 text-sm hover:border-primary-gold/50 transition-all" data-val="感情">❤️ 感情</button>
-                                <button class="px-5 py-2.5 rounded-xl border border-white/10 text-sm hover:border-primary-gold/50 transition-all" data-val="金錢">💰 金錢</button>
-                                <button class="px-5 py-2.5 rounded-xl border border-white/10 text-sm hover:border-primary-gold/50 transition-all" data-val="家庭">🏠 家庭</button>
-                                <button class="px-5 py-2.5 rounded-xl border border-primary-gold text-primary-gold text-sm shadow-[0_0_10px_rgba(212,175,55,0.2)]" data-val="其他">✨ 其他</button>
-                            </div>
-                        </section>
-                        
-                        <section>
-                            <label class="block text-sm font-bold text-gray-400 mb-4 tracking-widest uppercase">具體提問（選填，將更精準）</label>
-                            <textarea id="question-input-wizard" rows="4" class="input-field w-full rounded-2xl p-5 text-base placeholder-gray-600" placeholder="例如：我想在下個月換工作，大師有什麼建議？"></textarea>
-                        </section>
+                <!-- Eastern Config -->
+                <div id="config-eastern" class="space-y-4">
+                    <div>
+                        <label class="text-xs text-gray-500 block mb-1">搜尋籤種 (26 種)</label>
+                        <select id="oracle-type" onchange="loadOracleList()" class="input-dark w-full p-4 rounded-2xl text-sm"></select>
                     </div>
-
-                    <!-- Right: Specific Settings -->
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/5 shadow-inner">
-                        <!-- Eastern Config -->
-                        <div id="eastern-config" class="space-y-5">
-                            <h3 class="text-primary-gold font-bold text-lg flex items-center gap-3 mb-4">🏮 靈籤設定</h3>
-                            <div class="space-y-4">
-                                <div class="flex gap-2 mb-2">
-                                    <input type="text" id="oracle-search-wizard" oninput="filterOracleTypesWizard()" class="input-field flex-1 rounded-xl p-3 text-sm" placeholder="快速搜尋籤種...">
-                                    <button onclick="randomizeOracleType()" class="px-4 py-2 bg-primary-gold/10 border border-primary-gold/30 rounded-xl text-primary-gold text-xs hover:bg-primary-gold/20 transition-all" title="隨機切換籤筒">🎲</button>
-                                </div>
-                                <select id="oracle-type-wizard" class="input-field w-full rounded-xl p-4 text-base" onchange="wizardState.oracleType = this.value; updateOracleNumbersWizard()"></select>
-                                <select id="oracle-number-wizard" class="input-field w-full rounded-xl p-4 text-base" onchange="wizardState.oracleNumber = this.value; previewOracleWizard()"></select>
-                                
-                                <div id="oracle-preview-wizard" class="p-5 bg-black/40 rounded-2xl border border-primary-gold/20 hidden">
-                                    <div class="text-primary-gold font-bold text-sm mb-3" id="preview-story-wizard"></div>
-                                    <div class="text-gray-300 italic text-sm leading-relaxed font-serif" id="preview-poem-wizard"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Western Config -->
-                        <div id="western-config" class="space-y-5 hidden">
-                            <h3 class="text-blue-400 font-bold text-lg flex items-center gap-3 mb-4">🃏 塔羅牌陣</h3>
-                            <div class="space-y-4">
-                                <select id="tarot-spread-wizard" class="input-field w-full rounded-xl p-4 text-base" onchange="generateCardSelectorsWizard()">
-                                    <option value="1">單張牌 (簡易指引)</option>
-                                    <option value="3" selected>三張牌 (過去/現在/未來)</option>
-                                    <option value="4">關係牌陣 (雙方狀態與發展)</option>
-                                    <option value="5">十字牌陣 (現況/挑戰/建議)</option>
-                                    <option value="10">凱爾特十字 (深度分析)</option>
-                                </select>
-                                <div id="tarot-cards-container-wizard" class="space-y-3 max-h-[280px] overflow-y-auto pr-3 custom-scrollbar">
-                                    <!-- Populated in JS -->
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <label class="text-xs text-gray-500 block mb-1">選擇籤號</label>
+                        <select id="oracle-id" class="input-dark w-full p-4 rounded-2xl text-sm"></select>
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-5 pt-4">
-                    <button id="submit-btn-wizard" class="generate-btn w-full py-5 rounded-2xl text-xl flex items-center justify-center gap-3 shadow-lg" onclick="handlePredictWizard()">
-                        <span id="btn-text-wizard">✨ 請大師冥想解惑</span>
-                    </button>
+                <!-- Western Config -->
+                <div id="config-western" class="space-y-4 hidden">
+                    <div>
+                        <label class="text-xs text-gray-500 block mb-1">選擇牌陣</label>
+                        <select id="tarot-spread" onchange="genTarotSelectors()" class="input-dark w-full p-4 rounded-2xl text-sm">
+                            <option value="1">單張指引</option>
+                            <option value="3" selected>三張 (過去/現在/未來)</option>
+                            <option value="5">五張 (現況/挑戰/建議)</option>
+                        </select>
+                    </div>
+                    <div id="tarot-selectors" class="space-y-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar"></div>
                 </div>
             </div>
-        </div>
+        </aside>
 
-        <!-- Step 4: Result Display -->
-        <div id="step-4" class="step-container step-hidden flex-1 flex flex-col">
-            <div class="flex justify-between items-center mb-10">
-                <button onclick="prevStep(3)" class="back-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg> 調整輸入
-                </button>
-                <button onclick="goToStep(1)" class="text-primary-gold hover:text-white transition-colors text-sm font-bold tracking-widest">
-                    🧹 清空重來
+        <!-- Main Workspace -->
+        <section class="lg:col-span-8 space-y-6">
+            <div class="glass p-8 rounded-[2.5rem]">
+                <div class="mb-8">
+                    <label class="block text-primary-gold font-bold mb-4 tracking-widest uppercase text-sm">諮詢範疇</label>
+                    <div class="flex flex-wrap gap-2" id="category-box">
+                        <button class="cat-btn px-6 py-2 rounded-xl border border-white/10 hover:border-gold/50" data-val="工作">💼 工作</button>
+                        <button class="cat-btn px-6 py-2 rounded-xl border border-white/10 hover:border-gold/50" data-val="感情">❤️ 感情</button>
+                        <button class="cat-btn px-6 py-2 rounded-xl border border-white/10 hover:border-gold/50" data-val="金錢">💰 金錢</button>
+                        <button class="cat-btn px-6 py-2 rounded-xl border border-white/10 hover:border-gold/50" data-val="家庭">🏠 家庭</button>
+                        <button class="cat-btn px-6 py-2 rounded-xl border-gold text-gold shadow-[0_0_10px_rgba(212,175,55,0.2)]" data-val="其他">其他</button>
+                    </div>
+                </div>
+
+                <div class="mb-8 p-6 bg-gold/5 rounded-3xl border border-gold/20">
+                    <label class="block text-gold font-bold mb-3 text-sm">具體問題諮詢 (選填)</label>
+                    <textarea id="question" rows="3" class="w-full bg-transparent border-none focus:ring-0 text-lg placeholder-gray-600 italic" placeholder="例如：明年有沒有機會買房？這段婚姻是否該繼續堅持？"></textarea>
+                    <p class="text-[10px] text-gray-500 mt-2">✨ 提示：若輸入具體細節問題，將啟動 H200 模型進行專屬解惑。</p>
+                </div>
+
+                <button onclick="handleConsult()" class="btn-mystic w-full py-6 rounded-3xl text-2xl tracking-widest shadow-2xl">
+                    請大師冥想解惑 ✨
                 </button>
             </div>
-            
-            <div id="result-content-wizard" class="flex-1 glass-panel p-8 md:p-12 overflow-y-auto rounded-[2.5rem] border border-primary-gold/30 bg-black/40 shadow-inner min-h-[450px]">
-                <!-- Results go here -->
+
+            <!-- Result Box -->
+            <div id="result-box" class="hidden glass p-10 rounded-[2.5rem] border-2 border-gold/30 bg-black/40">
+                <div id="result-content"></div>
             </div>
-        </div>
-    </main>
+        </section>
     </main>
 
-    <footer class="mt-12 mb-8 text-center text-gray-500 text-sm space-y-2">
-        <p class="text-gray-400">🔮 數位命理諮商大師 ✦ 通曉東西神諭</p>
-        <p>提供 27 種東方靈籤 ✦ 78 張塔羅牌解讀</p>
-        <p class="text-xs text-gray-600">本工具僅供娛樂參考，不構成任何專業建議</p>
+    <footer class="text-center mt-20 py-10 text-gray-600 text-xs">
+        <p>© 2026 數位命理諮商大師 ✦ 台科大 H200 算力支援 ✦ 2167 支神諭收錄</p>
     </footer>
 
-    <!-- Load Utility Script (if any) -->
-    <!-- No more oracle-data.js -->
-
     <script>
-        // --- Mystic State ---
-        const wizardState = {
-            currentStep: 1,
-            system: '', // 'eastern', 'western'
-            usageMode: '', // 'existing', 'random'
-            category: '其他',
-            oracleType: 'mazu60',
-            oracleNumber: '',
-            tarotSpread: '3'
+        const API_BASE = "http://localhost:8000"; // 指向我們的 Python 後端
+        let currentSystem = 'eastern';
+        let currentCategory = '其他';
+        let masterDB = null;
+
+        async function init() {
+            try {
+                const res = await fetch('master_db.json');
+                masterDB = await res.json();
+                populateOracleTypes();
+                changeSystem('eastern');
+                genTarotSelectors();
+            } catch (e) { alert("無法載入資料庫，請確認 master_db.json 是否存在"); }
+        }
+
+        const ORACLE_TYPES = {
+            'mazu60': '媽祖六十甲子籤', 'guanyin100': '觀音一百籤', 'guandi100': '雷雨師一百籤',
+            'tudigong28': '土地公廿八籤', 'yuelao': '月老一百籤', 'zhuge384': '諸葛神算 384',
+            'sevenkings60': '七王爺靈籤', 'baosheng60': '保生大帝籤', 'qingshui50': '清水祖師籤',
+            'luzu100': '呂祖一百籤', 'luzu60': '呂仙祖六十籤', 'zhusheng30': '註生娘娘籤',
+            'beidi51': '北帝五十一籤', 'fourface30': '四面佛籤', 'caishin100': '財神一百籤',
+            'beidi100': '北帝一百籤', 'guanyin28': '觀音廿八籤', 'guanyin24': '觀音廿四籤',
+            'zodiac28': '二十八星宿籤', 'pienchu100': '藥籤一百籤', 'yaoqian50': '藥籤五十籤',
+            'yaoqian200': '藥籤二百籤', 'lukang100': '鹿港天后宮', 'penghu100': '澎湖天后宮',
+            'zhuge64': '諸葛六十四籤', 'zhuge32': '諸葛三十二籤'
         };
 
-        const ORACLE_CONFIG = {
-            'mazu60': { name: '媽祖六十甲子籤', count: 60 },
-            'guanyin100': { name: '觀音一百籤', count: 100 },
-            'guandi100': { name: '雷雨師一百籤 (關帝/城隍)', count: 100 },
-            'tudigong28': { name: '土地公廿八籤 (烘爐地)', count: 28 },
-            'yuelao': { name: '月老靈籤 (100籤)', count: 100 },
-            'zhuge384': { name: '諸葛神算 (384籤)', count: 384 },
-            'sevenkings60': { name: '東港鎮海宮七王爺靈籤', count: 60 },
-            'baosheng60': { name: '保生大帝六十籤', count: 60 },
-            'qingshui50': { name: '清水祖師五十籤', count: 50 },
-            'luzu100': { name: '呂祖靈籤一百籤', count: 100 },
-            'luzu60': { name: '呂仙祖六十籤 (指南宮)', count: 60 },
-            'zhusheng30': { name: '註生娘娘三十籤', count: 30 },
-            'beidi51': { name: '北帝靈籤 (五十一籤)', count: 51 },
-            'fourface30': { name: '四面佛三十籤', count: 30 },
-            'caishin100': { name: '五路財神一百籤', count: 100 },
-            'beidi100': { name: '北帝一百籤 (罕見版)', count: 100 },
-            'guanyin28': { name: '觀音廿八籤 (小型)', count: 28 },
-            'guanyin24': { name: '觀音廿四籤 (精簡)', count: 24 },
-            'zodiac28': { name: '二十八星宿籤', count: 28 },
-            'pienchu100': { name: '扁鵲神醫藥籤 (100籤)', count: 100 },
-            'yaoqian50': { name: '藥籤 (五十籤)', count: 50 },
-            'yaoqian200': { name: '藥籤 (二百籤)', count: 200 },
-            'lukang100': { name: '鹿港天后宮一百籤', count: 100 },
-            'penghu100': { name: '澎湖天后宮一百籤', count: 100 },
-            'zhuge64': { name: '諸葛孔明六十四籤 (金錢卦)', count: 64 },
-            'zhuge32': { name: '諸葛孔明三十二籤 (金錢卦)', count: 32 }
-        };
-
-        const loadedOracleData = {};
-        const loadedTarotData = [];
-        let allCards = [];
-
-        // --- Navigation ---
-        function goToStep(step) {
-            const currentEl = document.getElementById(`step-${wizardState.currentStep}`);
-            const nextEl = document.getElementById(`step-${step}`);
-            if (currentEl) currentEl.classList.add('step-hidden');
-            if (nextEl) {
-                nextEl.classList.remove('step-hidden');
-                nextEl.offsetHeight; // trigger animation
-            }
-            wizardState.currentStep = step;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function nextStep(step) { goToStep(step); }
-        function prevStep(step) { goToStep(step); }
-
-        function selectSystem(sys) {
-            wizardState.system = sys;
-            document.getElementById('eastern-config').classList.toggle('hidden', sys !== 'eastern');
-            document.getElementById('western-config').classList.toggle('hidden', sys !== 'western');
-            nextStep(2);
-        }
-
-        function selectUsageMode(mode) {
-            wizardState.usageMode = mode;
-            const isRandom = mode === 'random';
-            
-            // UI visibility based on mode
-            const oracleNumSelect = document.getElementById('oracle-number-wizard');
-            if (oracleNumSelect) oracleNumSelect.classList.toggle('hidden', isRandom);
-            
-            // Allow changing the oracle type even in random mode
-            // We'll keep the search and type select visible
-            
-            const tarotContainer = document.getElementById('tarot-cards-container-wizard');
-            if (tarotContainer) tarotContainer.classList.toggle('hidden', isRandom);
-
-            const btnText = document.getElementById('btn-text-wizard');
-            if (btnText) btnText.innerText = isRandom ? '✨ 請大師為我隨機抽選' : '✨ 請大師冥想解惑';
-            
-            if (wizardState.system === 'eastern') {
-                updateOracleNumbersWizard();
-            } else if (!isRandom) {
-                generateCardSelectorsWizard();
-            }
-            
-            nextStep(3);
-        }
-
-        // --- Initializers ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Category Chips
-            const chips = document.querySelectorAll('#category-chips-wizard button');
-            chips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    chips.forEach(c => {
-                        c.classList.remove('border-primary-gold', 'text-primary-gold', 'shadow-[0_0_10px_rgba(212,175,55,0.2)]');
-                        c.classList.add('border-white/10');
-                    });
-                    chip.classList.add('border-primary-gold', 'text-primary-gold', 'shadow-[0_0_10px_rgba(212,175,55,0.2)]');
-                    chip.classList.remove('border-white/10');
-                    wizardState.category = chip.getAttribute('data-val');
-                });
-            });
-
-            // Oracle Select Populate
-            const typeSelect = document.getElementById('oracle-type-wizard');
-            Object.keys(ORACLE_CONFIG).forEach(key => {
+        function populateOracleTypes() {
+            const select = document.getElementById('oracle-type');
+            select.innerHTML = '';
+            Object.keys(ORACLE_TYPES).forEach(key => {
                 const opt = document.createElement('option');
                 opt.value = key;
-                opt.textContent = ORACLE_CONFIG[key].name;
-                typeSelect.appendChild(opt);
+                opt.textContent = ORACLE_TYPES[key];
+                select.appendChild(opt);
             });
+            loadOracleList();
+        }
 
-            loadTarotData();
+        function loadOracleList() {
+            const type = document.getElementById('oracle-type').value;
+            const select = document.getElementById('oracle-id');
+            select.innerHTML = '';
+            const list = masterDB.oracles[type] || [];
+            list.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.id;
+                opt.textContent = item.no || `第${item.id}籤`;
+                select.appendChild(opt);
+            });
+        }
+
+        function changeSystem(sys) {
+            currentSystem = sys;
+            document.getElementById('config-eastern').classList.toggle('hidden', sys !== 'eastern');
+            document.getElementById('config-western').classList.toggle('hidden', sys !== 'western');
+            document.getElementById('sys-e').className = sys === 'eastern' ? 'py-3 rounded-2xl glass border-gold text-gold ring-2 ring-gold/20' : 'py-3 rounded-2xl glass text-gray-500 border-transparent';
+            document.getElementById('sys-w').className = sys === 'western' ? 'py-3 rounded-2xl glass border-gold text-gold ring-2 ring-gold/20' : 'py-3 rounded-2xl glass text-gray-500 border-transparent';
+        }
+
+        function genTarotSelectors() {
+            const count = parseInt(document.getElementById('tarot-spread').value);
+            const container = document.getElementById('tarot-selectors');
+            container.innerHTML = '';
+            const labels = ["位置一", "位置二", "位置三", "位置四", "位置五"];
+            const cardOptions = masterDB.tarot.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+            
+            for (let i = 0; i < count; i++) {
+                const div = document.createElement('div');
+                div.className = "p-3 bg-white/5 rounded-xl border border-white/5 mb-2";
+                div.innerHTML = `
+                    <div class="text-[10px] text-gold/60 font-bold mb-1">${labels[i]}</div>
+                    <div class="flex gap-2">
+                        <select class="tarot-card-name w-full bg-transparent border-none text-sm p-0 focus:ring-0">${cardOptions}</select>
+                        <select class="tarot-card-dir bg-transparent border-none text-xs p-0 focus:ring-0 text-gray-400">
+                            <option value="正位">正位</option>
+                            <option value="逆位">逆位</option>
+                        </select>
+                    </div>`;
+                container.appendChild(div);
+            }
+        }
+
+        // Category Buttons
+        document.getElementById('category-box').addEventListener('click', (e) => {
+            if (e.target.classList.contains('cat-btn')) {
+                document.querySelectorAll('.cat-btn').forEach(b => {
+                    b.classList.remove('border-gold', 'text-gold', 'shadow-[0_0_10px_rgba(212,175,55,0.2)]');
+                    b.classList.add('border-white/10');
+                });
+                e.target.classList.add('border-gold', 'text-gold', 'shadow-[0_0_10px_rgba(212,175,55,0.2)]');
+                e.target.classList.remove('border-white/10');
+                currentCategory = e.target.getAttribute('data-val');
+            }
         });
 
-        // --- Data Fetching ---
-        async function loadTarotData() {
-            try {
-                const res = await fetch('data/tarot.json');
-                const data = await res.json();
-                loadedTarotData.push(...data);
-                allCards = data.map(c => c.name);
-            } catch (e) { console.error("Tarot data load failed", e); }
-        }
-
-        function filterOracleTypesWizard() {
-            const search = document.getElementById('oracle-search-wizard').value.toLowerCase();
-            const select = document.getElementById('oracle-type-wizard');
-            Array.from(select.options).forEach(opt => {
-                opt.style.display = opt.text.toLowerCase().includes(search) ? '' : 'none';
-            });
-        }
-
-        function randomizeOracleType() {
-            const keys = Object.keys(ORACLE_CONFIG);
-            const randomKey = keys[Math.floor(Math.random() * keys.length)];
-            const select = document.getElementById('oracle-type-wizard');
-            select.value = randomKey;
-            wizardState.oracleType = randomKey;
-            updateOracleNumbersWizard();
+        async function handleConsult() {
+            const loading = document.getElementById('loading');
+            const resultBox = document.getElementById('result-box');
+            const resultContent = document.getElementById('result-content');
             
-            // Show a brief mystical toast or effect
-            const btn = event.currentTarget;
-            btn.classList.add('scale-125', 'rotate-180');
-            setTimeout(() => btn.classList.remove('scale-125', 'rotate-180'), 500);
-        }
-
-        async function updateOracleNumbersWizard() {
-            const selectType = document.getElementById('oracle-type-wizard');
-            const type = selectType ? selectType.value : wizardState.oracleType;
-            const select = document.getElementById('oracle-number-wizard');
-            if (!type) {
-                if (select) select.innerHTML = '<option value="">請先選擇籤種...</option>';
-                return;
-            }
-            wizardState.oracleType = type;
-
-            if (!loadedOracleData[type] || loadedOracleData[type].length === 0) {
-                try {
-                    const res = await fetch(`data/${type}.json`);
-                    loadedOracleData[type] = await res.json();
-                } catch (e) { 
-                    console.error(`Failed to load ${type}:`, e);
-                    loadedOracleData[type] = []; 
-                }
-            }
-
-            const data = loadedOracleData[type];
-            if (select) {
-                select.innerHTML = '<option value="">請選擇籤號...</option>';
-                if (data && data.length > 0) {
-                    data.forEach(item => {
-                        const label = item.no || `第${item.id}籤`;
-                        const ganzhi = item.ganzhi ? ` (${item.ganzhi})` : '';
-                        const opt = document.createElement('option');
-                        opt.value = item.id;
-                        opt.textContent = `${label}${ganzhi}`;
-                        select.appendChild(opt);
-                    });
-                } else {
-                    select.innerHTML = '<option value="">目前查無此籤資料</option>';
-                }
-            }
-            previewOracleWizard();
-        }
-
-        function previewOracleWizard() {
-            const type = document.getElementById('oracle-type-wizard').value;
-            const id = parseInt(document.getElementById('oracle-number-wizard').value);
-            const preview = document.getElementById('oracle-preview-wizard');
-            if (!id) { preview.classList.add('hidden'); return; }
-
-            const data = (loadedOracleData[type] || []).find(i => i.id === id);
-            if (data && data.poem) {
-                preview.classList.remove('hidden');
-                document.getElementById('preview-story-wizard').textContent = data.story ? `【典故：${data.story}】` : '【經典籤詩】';
-                document.getElementById('preview-poem-wizard').textContent = data.poem;
-            } else {
-                preview.classList.add('hidden');
-            }
-        }
-
-        function generateCardSelectorsWizard() {
-            const spreadVal = document.getElementById('tarot-spread-wizard').value;
-            const container = document.getElementById('tarot-cards-container-wizard');
-            container.innerHTML = '';
-
-            let posNames = ["精確指引"];
-            if (spreadVal === '3') posNames = ["過去", "現在", "未來"];
-            else if (spreadVal === '4') posNames = ["現狀", "阻礙", "心態", "結果"];
-            else if (spreadVal === '5') posNames = ["現況", "挑戰", "潛意識", "外部因素", "最終建議"];
-            else if (spreadVal === '10') posNames = ["核心", "橫礙", "基礎", "過去", "顯意識", "未來", "態度", "環境", "期待", "結論"];
-
-            const options = '<option value="">請選擇牌...</option>' + allCards.map(c => `<option value="${c}">${c}</option>`).join('');
-
-            posNames.forEach(pos => {
-                const div = document.createElement('div');
-                div.className = 'flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 shadow-sm';
-                div.innerHTML = `
-                    <span class="text-xs text-primary-gold/70 w-20 font-bold">${pos}</span>
-                    <select class="input-field flex-1 rounded-lg p-2 text-sm tarot-card-val-wizard">${options}</select>
-                    <select class="input-field w-24 rounded-lg p-2 text-sm tarot-dir-select-wizard">
-                        <option value="正位">正位</option>
-                        <option value="逆位">逆位</option>
-                    </select>`;
-                container.appendChild(div);
-            });
-        }
-
-        async function randomDrawWizard() {
-            if (wizardState.system === 'eastern') {
-                const type = document.getElementById('oracle-type-wizard').value;
-                if (!loadedOracleData[type] || loadedOracleData[type].length === 0) {
-                    await updateOracleNumbersWizard();
-                }
-                const data = loadedOracleData[type];
-                if (data && data.length > 0) {
-                    const idx = Math.floor(Math.random() * data.length);
-                    const item = data[idx];
-                    document.getElementById('oracle-number-wizard').value = item.id;
-                    previewOracleWizard();
-                    return item;
-                }
-            } else {
-                const cardSelects = document.querySelectorAll('.tarot-card-val-wizard');
-                const dirSelects = document.querySelectorAll('.tarot-dir-select-wizard');
-                let pool = [...allCards];
-                cardSelects.forEach((sel, i) => {
-                    if (pool.length === 0) return;
-                    const idx = Math.floor(Math.random() * pool.length);
-                    sel.value = pool[idx];
-                    pool.splice(idx, 1);
-                    dirSelects[i].value = Math.random() > 0.5 ? '正位' : '逆位';
-                });
-            }
-        }
-
-        async function handlePredictWizard() {
-            const btn = document.getElementById('submit-btn-wizard');
-            const btnText = document.getElementById('btn-text-wizard');
-            const resultBox = document.getElementById('result-content-wizard');
-            const qInput = document.getElementById('question-input-wizard');
-            const question = qInput.value.trim() || `關於我的「${wizardState.category}」未來`;
-
-            if (wizardState.usageMode === 'random') {
-                if (wizardState.system === 'eastern') {
-                    await randomDrawWizard();
-                }
-                else if (wizardState.system === 'western' && Array.from(document.querySelectorAll('.tarot-card-val-wizard')).some(s => !s.value)) {
-                    randomDrawWizard();
-                }
-            }
-
-            btn.disabled = true;
-            btnText.innerHTML = '<span class="loader-dots"><span>.</span><span>.</span><span>.</span></span> 冥想中';
-            goToStep(4);
-            resultBox.innerHTML = `
-                <div class="flex flex-col items-center justify-center min-h-[400px] space-y-6">
-                    <div class="text-6xl animate-pulse">🌌</div>
-                    <p class="text-primary-gold font-serif italic tracking-widest animate-pulse">大師正在與宇宙共鳴，讀取神諭...</p>
-                </div>`;
-
-            await new Promise(r => setTimeout(r, 2000));
-
-            let content = '';
-            if (wizardState.system === 'eastern') {
-                const type = document.getElementById('oracle-type-wizard').value;
-                const id = parseInt(document.getElementById('oracle-number-wizard').value);
-                const data = (loadedOracleData[type] || []).find(i => i.id === id);
-                content = generateStructuredContentWizard(ORACLE_CONFIG[type].name, data || {id, no:`第${id}籤`}, question, wizardState.category);
-            } else {
-                content = generateTarotContentWizard(question, wizardState.category);
-            }
-
-            resultBox.innerHTML = content;
-            btnText.innerText = '再次請益大師';
-            btn.disabled = false;
-        }
-
-        function generateStructuredContentWizard(typeName, data, question, category) {
-            const templates = {
-                '工作': [
-                    "職場如棋局，此籤預示目前是積蓄力量的階段。不宜操之過急，守住本心與誠信，轉機將在季末自然浮現。",
-                    "目前您的事業正處於『春耕』時期。雖然此時感到疲累、看不見明顯收穫，但只要土地肥沃（指專業底氣），秋收必然豐碩。",
-                    "針對事業，此籤建議『柔能克剛』。在職場糾紛或決策中，保持圓融的溝通將比強硬的立場更能為您贏得尊重與利益。"
-                ],
-                '感情': [
-                    "情愛之事，貴在坦率。此籤顯示目前的阻礙多半來自於猜疑。試著放下成見，誠實面對彼此，寒蟬亦能鳴春。",
-                    "緣分自有安排。目前不論是單身其或磨合期，皆宜保持平常心。您所追求的，往往在您不再執著時悄然而至。",
-                    "感情運勢呈現『和諧』之象。如果您正面臨選擇，請選擇那個能讓您感到寧靜而非焦慮的方向。真愛應如溫泉般滋養。"
-                ],
-                '金錢': [
-                    "財帛運勢宜『穩』。近期不宜參與高風險的投機活動。穩紮穩打，透過專業能力的變現，財庫將更顯牢固。",
-                    "小財可得，大財需待。目前的理財計畫應以長遠為重，短期的波動不足為慮，守住本金比什麼都重要。",
-                    "財務流動呈現『進大於出』的前兆。只要保持謹慎的開支，並在合宜的時機果斷投資，財運將逐步攀升。"
-                ],
-                '其他': [
-                    "人生萬事，皆有時序。目前的困局就像雲霧，雖然暫時遮擋視線，但太陽始終在那背後。保持正念，雲霧終將散去。",
-                    "此神諭提醒您『回歸內在』。外在環境的紛擾是為了考驗您的定力。安靜下來，最好的解答就在您的呼吸之間。",
-                    "生活如行舟，逆水行舟不進則退。雖然目前感到吃力，但這正是鍛鍊靈魂肌肉的時刻。撐過去，對岸就是繁花盛開。"
-                ]
+            const payload = {
+                system: currentSystem,
+                question: document.getElementById('question').value,
+                category: currentCategory
             };
 
-            const pool = templates[category] || templates['其他'];
-            const templateIdx = (data.id + (category === '工作' ? 1 : category === '感情' ? 2 : 0)) % pool.length;
-            let chosenAdvice = pool[templateIdx];
-
-            // Variety Injector for placeholder data
-            const masterInsights = [
-                "大師觀此籤象，意在提醒您：",
-                "此神喻背後隱含深意：",
-                "冥冥之中自有定數：",
-                "玄機妙算，大師開示：",
-                "靜心體悟此中智慧："
-            ];
-            const genericInterpretation = data.interpretation || '此籤神諭：順應天理，守正則大吉。';
-            const insightPrefix = masterInsights[data.id % masterInsights.length];
-            
-            // Add a dynamic suffix if the interpretation is too generic/short
-            let finalInterpretation = genericInterpretation;
-            if (genericInterpretation.length < 50) {
-                const suffixes = [
-                    " 凡事不宜急功近利，耐心等待時機。 ",
-                    " 守住本心，外在環境的變動終將歸於平靜。 ",
-                    " 貴人或許就在身邊，留意那些細微的指引。 ",
-                    " 此時不宜大動作變革，穩紮穩打為上策。 ",
-                    " 誠信待人，福報自然降臨門庭。 "
-                ];
-                finalInterpretation += suffixes[(data.id + category.length) % suffixes.length];
+            if (currentSystem === 'eastern') {
+                payload.type = document.getElementById('oracle-type').value;
+                payload.id = parseInt(document.getElementById('oracle-id').value);
+            } else {
+                payload.cards = Array.from(document.querySelectorAll('.tarot-card-name')).map((sel, i) => ({
+                    name: sel.value,
+                    dir: document.querySelectorAll('.tarot-card-dir')[i].value,
+                    pos: `位置${i + 1}`
+                }));
             }
 
-            return `
-                <div class="fade-in">
-                    <h2 class="text-2xl font-bold gold-text mb-6 text-center">📜 【${typeName} - ${data.no || `第${data.id}籤`}】</h2>
-                    <div class="bg-black/80 p-8 rounded-[2rem] border border-primary-gold/30 mb-8 text-center shadow-2xl">
-                        <div class="text-primary-gold/50 text-xs mb-4 tracking-[0.3em] font-bold uppercase">—— 宇宙神諭全文 ——</div>
-                        <div class="text-xl leading-relaxed text-yellow-100 whitespace-pre-line font-serif italic">${data.poem || '天機隱現，待您親自感應...'}</div>
-                        ${data.ganzhi ? `<div class="text-xs text-gray-500 mt-4 font-mono">${data.ganzhi}</div>` : ''}
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="bg-primary-gold/5 p-6 rounded-2xl border border-primary-gold/20">
-                            <p class="text-primary-gold font-bold mb-2">🌿 核心開示：</p>
-                            <p class="text-gray-300 text-sm leading-relaxed">${insightPrefix}${finalInterpretation}</p>
-                        </div>
-                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                            <p class="text-white font-bold mb-2">📖 典故影射：</p>
-                            <p class="text-gray-400 text-sm italic">${data.story || '流傳已久的古老智慧，指引當下迷途。'}</p>
-                        </div>
-                    </div>
-                    <div class="border-t border-primary-gold/20 pt-8 mt-8">
-                        <h3 class="font-bold text-primary-gold mb-4 text-center tracking-widest">✨ 針對「${category}」與提問的開示</h3>
-                        <div class="text-gray-100 leading-relaxed bg-primary-gold/10 p-6 rounded-3xl border-l-4 border-primary-gold italic relative">
-                            <span class="absolute -top-4 -left-2 text-4xl text-primary-gold/30">"</span>
-                            ${chosenAdvice}
-                            <br><br>
-                            關於您的提問：「<span class="text-primary-gold not-italic">${question}</span>」，大師建議：${data.level ? `此格局為 [${data.level}]，` : ''}不以物喜，不以己悲，堅定志向，終有迴響。
-                        </div>
-                    </div>
-                </div>`;
-        }
+            loading.style.display = 'flex';
+            resultBox.classList.add('hidden');
 
-        function generateTarotContentWizard(question, category) {
-            const cardSelects = document.querySelectorAll('.tarot-card-val-wizard');
-            const dirSelects = document.querySelectorAll('.tarot-dir-select-wizard');
-            let selections = [];
-            cardSelects.forEach((sel, i) => {
-                if (sel.value) {
-                    selections.push({
-                        name: sel.value,
-                        dir: dirSelects[i].value,
-                        pos: sel.previousElementSibling.innerText
-                    });
+            try {
+                const res = await fetch(`${API_BASE}/api/predict`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (res.status === 429) {
+                    alert("請求太頻繁！為了保護 H200 算力，請稍候再試。");
+                    return;
                 }
-            });
 
-            if (selections.length === 0) return `<div class="text-center text-gray-500 italic">未能感應到牌意，請確保已抽選牌卡。</div>`;
-
-            let html = `
-                <div class="fade-in">
-                    <h2 class="text-2xl font-bold text-blue-400 mb-2 text-center">🃏 塔羅神諭深層解析</h2>
-                    <p class="text-gray-500 text-xs text-center mb-10 tracking-[0.2em] uppercase font-mono">QUESTION: ${question}</p>
-                    <div class="space-y-6">`;
-
-            selections.forEach(sel => {
-                const card = loadedTarotData.find(c => c.name === sel.name) || { up: '解析中...', rev: '解析中...' };
-                const meaning = sel.dir === '正位' ? card.up : card.rev;
-                html += `
-                    <div class="p-6 rounded-3xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-all shadow-lg">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="px-3 py-1 rounded-full bg-blue-900/30 text-blue-400 text-[10px] font-bold tracking-tighter uppercase border border-blue-500/20">${sel.pos}</span>
-                            <span class="text-white font-bold text-lg">${sel.name} <span class="text-xs ${sel.dir==='正位'?'text-emerald-400':'text-rose-400'} ml-2 font-mono">[${sel.dir}]</span></span>
-                        </div>
-                        <p class="text-gray-300 text-sm leading-relaxed italic font-serif">"${meaning}"</p>
-                    </div>`;
-            });
-
-            html += `
-                    </div>
-                    <div class="mt-10 p-8 bg-blue-500/5 rounded-[2.5rem] border border-blue-500/20 text-center relative overflow-hidden shadow-2xl">
-                        <div class="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full scale-150"></div>
-                        <div class="relative z-10">
-                            <h3 class="text-blue-400 font-bold mb-4 tracking-[0.3em] uppercase text-sm">💫 靈魂指引</h3>
-                            <p class="text-gray-200 text-base font-serif italic leading-loose">
-                                在「${category}」的領域中，上述牌面顯示出強烈的能量軌跡。宇宙的神諭正透過這些象徵與您的靈魂共振。建議您放下過往的定見，以全然開放的心態去覺察當下的細微變化。命運的大門正為有準備的心靈緩緩開啟。
-                            </p>
-                        </div>
-                    </div>
-                </div>`;
-            return html;
+                const result = await res.json();
+                renderResult(result);
+                resultBox.classList.remove('hidden');
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+            } catch (e) {
+                alert("後端伺服器連線失敗，請確認 server.py 是否正在執行。");
+            } finally {
+                loading.style.display = 'none';
+            }
         }
 
+        function renderResult(res) {
+            const content = document.getElementById('result-content');
+            const isAI = res.mode === 'ai';
+            const data = res.data;
+
+            let html = `<div class="fade-in">`;
+            html += `<div class="flex justify-between items-center mb-6">
+                        <span class="px-4 py-1 rounded-full border border-gold/40 text-gold text-[10px] uppercase tracking-widest">${isAI ? '✦ AI 深度諮商' : '✦ 資料庫經典解讀'}</span>
+                        <span class="text-xs text-gray-500 font-mono">ID: ${res.mode.toUpperCase()}-${Date.now().toString().slice(-6)}</span>
+                     </div>`;
+
+            if (currentSystem === 'eastern') {
+                html += `<h2 class="text-3xl font-bold gold-text text-center mb-4">📜 【${ORACLE_TYPES[data.type]} - ${data.no || `第${data.id}籤`}】</h2>`;
+                html += `<div class="p-8 bg-black/60 rounded-3xl border border-gold/20 mb-8 text-center">
+                            <p class="text-2xl leading-relaxed text-yellow-100 italic mb-4 font-serif whitespace-pre-line">${data.poem}</p>
+                            <p class="text-sm text-gray-500 italic">典故：${data.story || '流傳神諭'}</p>
+                         </div>`;
+            } else {
+                html += `<h2 class="text-3xl font-bold gold-text text-center mb-8">🃏 塔羅神諭深層解析</h2>`;
+            }
+
+            html += `<div class="space-y-6">
+                        <div class="bg-gold/5 p-8 rounded-3xl border-l-4 border-gold">
+                            <h4 class="text-gold font-bold mb-4 tracking-widest">✨ 大師開示</h4>
+                            <div class="text-gray-200 leading-loose text-lg font-serif whitespace-pre-line">${res.interpretation}</div>
+                        </div>
+                     </div>`;
+            
+            html += `</div>`;
+            content.innerHTML = html;
+        }
+
+        init();
     </script>
 </body>
-
 </html>
