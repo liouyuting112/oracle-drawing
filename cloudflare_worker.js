@@ -12,28 +12,48 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // 1. Only allow POST requests to /api/generate
-    if (request.method !== "POST") {
-      return new Response("Method Not Allowed", { status: 405 });
+    // Handle CORS preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
     }
 
-    // 2. Simple Rate Limiting (Using CF IP as key)
-    // Note: For advanced rate limiting, use Cloudflare's built-in Rate Limiting features.
-    
-    // 3. Proxy to H200
-    const newRequest = new Request(H200_ORIGIN + "/api/generate", {
-      method: "POST",
-      headers: request.headers,
-      body: request.body,
-    });
+    if (request.method !== "POST") {
+      return new Response("請使用 POST 請求命理諮商", { status: 405 });
+    }
 
-    const response = await fetch(newRequest);
-    
-    // 4. Return the response with CORS headers
-    const newResponse = new Response(response.body, response);
-    newResponse.headers.set("Access-Control-Allow-Origin", "*");
-    newResponse.headers.set("X-Seal-Status", "Protected-by-Cloudflare");
-    
-    return newResponse;
+    try {
+      const body = await request.text();
+      const newRequest = new Request(H200_ORIGIN + "/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Seal-Key": API_KEY,
+        },
+        body: body,
+      });
+
+      const response = await fetch(newRequest);
+      
+      const newResponse = new Response(response.body, response);
+      newResponse.headers.set("Access-Control-Allow-Origin", "*");
+      newResponse.headers.set("X-Seal-Status", "Protected-by-Cloudflare-v2");
+      
+      return newResponse;
+    } catch (error) {
+      return new Response(JSON.stringify({
+        error: "Cloudflare 轉發失敗",
+        detail: error.message,
+        tip: "這是因為 Cloudflare 邊緣節點無法存取私有或未授權的 IP (140.118)，請改用 Cloudflare Tunnel (cloudflared) 建立安全通道。"
+      }), { 
+        status: 502,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
   },
 };
