@@ -518,7 +518,7 @@
         }
 
         // --- API Config ---
-        const API_BASE = "https://spring-mountain-810dmazu-ai-seal.love7053150.workers.dev"; // 指向 Cloudflare Worker 或您的後端
+        const API_BASE = "https://some-jars-admire.loca.lt"; // 直接使用 LocalTunnel 繞過 Cloudflare 限制
 
         // --- Prediction Logic ---
         async function handlePredict() {
@@ -552,7 +552,7 @@
 
                     // 呼叫 API
                     const res = await fetch(`${API_BASE}/api/predict`, {
-                        method: "POST", headers: { "Content-Type": "application/json" },
+                        method: "POST", headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
                         body: JSON.stringify({ system: 'eastern', type: typeVal, id: id, question: question, category: selectedCategory })
                     });
                     const responseData = await res.json();
@@ -586,7 +586,7 @@
 
                     let aiTarotSummary = null;
                     const res = await fetch(`${API_BASE}/api/predict`, {
-                        method: "POST", headers: { "Content-Type": "application/json" },
+                        method: "POST", headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
                         body: JSON.stringify({ system: 'western', cards: cards, question: question, category: selectedCategory })
                     });
                     const responseData = await res.json();
