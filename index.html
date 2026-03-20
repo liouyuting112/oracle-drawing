@@ -408,8 +408,11 @@
                 }
                 const interpretation = await callGemini(prompt);
                 display.innerHTML = `${localResHTML}<div class="glass p-8 rounded-2xl master-bubble"><div class="text-slate-300 leading-relaxed text-base whitespace-pre-line">${interpretation}</div></div>`;
-            } catch (e) { display.innerHTML = `<div class="glass p-8 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}</div>`; }
-            finally { document.getElementById('result-loading').classList.add('hidden'); }
+            } catch (e) {
+                // If message starts with <div>, it's our structured errorHtml
+                display.innerHTML = e.message.startsWith('<div') ? e.message : `<div class="glass p-8 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}</div>`;
+            } finally {
+ document.getElementById('result-loading').classList.add('hidden'); }
         }
         function resetWizard() { currentStep = 1; consultMode = 'ritual'; goToStep(1); }
     </script>
