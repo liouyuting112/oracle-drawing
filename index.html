@@ -239,7 +239,7 @@
     </main>
 
     <footer class="mt-12 pb-8 text-center text-slate-500 text-xs font-light tracking-widest opacity-60">
-        <p>© 2026 數位命理諮商大師 ✦ Ver. 2026.03.20.Soul</p>
+        <p>© 2026 數位命理諮商大師 ✦ Ver. 2026.03.20.Balanced</p>
     </footer>
 
     <script>
@@ -358,35 +358,26 @@
         async function callGemini(prompt) {
             const userKey = localStorage.getItem('user_gemini_key');
             const activeKey = userKey || GEMINI_API_KEY;
+            let lastError = "";
+            let lastStatus = 0;
             
-            // March 2026 Updated Model List (Prioritizing Gemini 3.1)
             const models = [
                 "gemini-3.1-flash",
-                "gemini-3.1-flash-lite",
                 "gemini-3.1-pro",
                 "gemini-2.5-flash",
-                "gemini-2.5-pro",
-                "gemini-1.5-flash-latest"
+                "gemini-1.5-flash-latest",
+                "gemini-pro"
             ];
             
-            let lastError = "";
             for (const model of models) {
                 try {
                     const res = await attemptCall(model, "v1beta", prompt, activeKey);
                     if (res) return res;
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
-                    const data = await response.json();
-                    if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                        return data.candidates[0].content.parts[0].text;
-                    }
-                    lastStatus = response.status;
-                    lastError = data.error?.message || response.statusText;
-                    console.warn(`Model ${model} failed (${response.status}): ${lastError}`);
-                } catch (e) { lastError = e.message; }
+                } catch (e) { 
+                    lastError = e.message; 
+                    lastStatus = e.status || 0;
+                    console.warn(`Model ${model} failed (${lastStatus}): ${lastError}`);
+                }
             }
 
             // Enhanced Error UI (from UX Master Module D)
