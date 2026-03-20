@@ -462,7 +462,7 @@
                     localResHTML += `</div>`;
                 }
                 const fullRes = await callGemini(prompt);
-                const [narrative, rawData] = fullRes.split('[DATA]');
+                const [narrative, rawData] = fullRes.includes('[DATA]') ? fullRes.split('[DATA]') : [fullRes, ""];
                 
                 // Parse Energy Data (Fallback to stars if AI is loose)
                 const stars = (label) => {
