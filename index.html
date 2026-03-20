@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* Mystical background effects */
         .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -36,7 +35,6 @@
             z-index: -1;
         }
 
-        /* Glassmorphism Classes */
         .glass {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -57,14 +55,12 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-mystic { animation: fadeIn 0.8s ease forwards; }
 
         .step-container { display: none; }
         .step-container.active { display: block; animation: fadeIn 0.6s ease forwards; }
 
-        /* Custom Cards for Selection */
         .choice-card {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
@@ -90,190 +86,159 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Wizard Progress Bar */
-        .progress-bar {
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-bottom: 3rem;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-gold);
-            width: 0%;
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px var(--primary-gold);
-        }
+        .progress-bar { height: 2px; background: rgba(255, 255, 255, 0.1); position: relative; margin-bottom: 3rem; }
+        .progress-fill { height: 100%; background: var(--primary-gold); width: 0%; transition: width 0.5s ease; box-shadow: 0 0 10px var(--primary-gold); }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none !important;
-            border-color: var(--primary-gold) !important;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
-        }
-
-        /* Interpretation UI */
-        .master-bubble {
-            border-left: 3px solid var(--primary-gold);
-            background: rgba(255, 255, 255, 0.02);
-        }
+        input:focus, textarea:focus, select:focus { outline: none !important; border-color: var(--primary-gold) !important; box-shadow: 0 0 8px rgba(212, 175, 55, 0.2); }
+        .master-bubble { border-left: 3px solid var(--primary-gold); background: rgba(255, 255, 255, 0.02); }
     </style>
 </head>
 
 <body class="flex flex-col items-center p-4">
     <div class="stars"></div>
 
-    <!-- Header Section -->
     <header class="w-full max-w-4xl text-center mb-12 mt-8 animate-mystic">
         <h1 class="text-5xl md:text-6xl font-bold mb-4 gold-text-gradient tracking-[0.2em]">數位命理諮商大師</h1>
         <p class="text-slate-400 tracking-widest text-sm uppercase">Divine Logic ✦ Mystical Insights</p>
     </header>
 
-    <!-- Main Wizard UI -->
     <main class="w-full max-w-2xl">
-        
-        <!-- Progress Indicator -->
         <div class="progress-bar rounded-full overflow-hidden">
             <div id="progress-fill" class="progress-fill"></div>
         </div>
 
-        <!-- Step 1: Selection -->
+        <!-- Step 1: Mode Selection -->
         <div id="step-1" class="step-container active">
-            <h2 class="text-2xl text-center mb-8 font-serif">第一步：感應您的能量方向</h2>
+            <h2 class="text-2xl text-center mb-8 font-serif">第一步：請選擇您今日的訴求</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('eastern')">
-                    <span class="text-5xl mb-4">🧧</span>
-                    <h3 class="text-xl font-bold mb-2 text-yellow-500">東方靈籤</h3>
-                    <p class="text-slate-400 text-sm">觀音、媽祖、關帝等百家籤詩，指引世俗迷航。</p>
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseMode('ritual')">
+                    <span class="text-5xl mb-4">🔮</span>
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">恭請聖示 (Ritual)</h3>
+                    <p class="text-slate-400 text-sm">手中的困惑尚無目標？讓大師為您線上隨機感應。</p>
                 </div>
-                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('western')">
-                    <span class="text-5xl mb-4">🃏</span>
-                    <h3 class="text-xl font-bold mb-2 text-purple-400">西方塔羅</h3>
-                    <p class="text-slate-400 text-sm">與潛意識共振，透過 78 張牌陣看透隱藏真相。</p>
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseMode('direct')">
+                    <span class="text-5xl mb-4">🖋️</span>
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">大師解籤 (Interpret)</h3>
+                    <p class="text-slate-400 text-sm">已有線下求得的籤號或牌面？直接請教大師深度解碼。</p>
                 </div>
             </div>
         </div>
 
-        <!-- Step 2: Intent -->
+        <!-- Step 2: System Selection -->
         <div id="step-2" class="step-container">
             <button class="mb-6 text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm" onclick="prevStep()">← 返回上一步</button>
-            <h2 class="text-2xl text-center mb-8 font-serif">第二步：凝聚您的求問心念</h2>
+            <h2 class="text-2xl text-center mb-8 font-serif">第二步：感應您的能量方向</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('eastern')">
+                    <span class="text-5xl mb-4">🧧</span>
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">東方靈籤</h3>
+                    <p class="text-slate-400 text-sm">觀音、媽祖、關帝等百家籤詩。</p>
+                </div>
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('western')">
+                    <span class="text-5xl mb-4">🃏</span>
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">西方塔羅</h3>
+                    <p class="text-slate-400 text-sm">透過 78 張牌陣看透隱藏真相。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Intent -->
+        <div id="step-3" class="step-container">
+            <button class="mb-6 text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm" onclick="prevStep()">← 返回上一步</button>
+            <h2 class="text-2xl text-center mb-8 font-serif">第三步：凝聚您的求問心念</h2>
             <div class="glass p-8 rounded-2xl space-y-6">
                 <div>
                     <label class="block text-sm text-slate-400 mb-4">請問想解惑的領域為何？</label>
-                    <div class="flex flex-wrap gap-3" id="category-chips">
-                        <!-- Chips generated by JS -->
-                    </div>
+                    <div class="flex flex-wrap gap-3" id="category-chips"></div>
                 </div>
                 <div>
                     <label class="block text-sm text-slate-400 mb-2">您心中的具體問題是什麼？</label>
                     <textarea id="question-input" rows="4" 
                         class="w-full bg-slate-900/60 border border-slate-700 rounded-xl p-4 text-sm placeholder-slate-600 focus:ring-0"
-                        placeholder="請詳細描述您的困擾，這能幫助大師提供更精確的指引..."></textarea>
+                        placeholder="請詳細描述您的困擾..."></textarea>
                 </div>
                 <button class="w-full py-4 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-xl font-bold text-slate-900 hover:brightness-110 active:scale-[0.98] transition-all" onclick="nextStep()">前往下一步</button>
             </div>
         </div>
 
-        <!-- Step 3: Drawing / Selection -->
-        <div id="step-3" class="step-container">
+        <!-- Step 4: Drawing / Selection -->
+        <div id="step-4" class="step-container">
             <button class="mb-6 text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm" onclick="prevStep()">← 返回上一步</button>
-            <h2 class="text-2xl text-center mb-8 font-serif">第三步：恭請天機顯現</h2>
+            <h2 class="text-2xl text-center mb-8 font-serif">第四步：恭請天機顯現</h2>
             
-            <!-- Eastern Logic -->
             <div id="eastern-logic" class="hidden glass p-8 rounded-2xl space-y-6">
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs text-slate-500 mb-2">選擇靈籤系統</label>
-                        <select id="oracle-type" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-yellow-500" onchange="updateOracleNumbers()">
-                            <!-- Populated by JS -->
-                        </select>
+                        <select id="oracle-type" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-yellow-500" onchange="updateOracleNumbers()"></select>
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-500 mb-2">手動挑選或隨機感應</label>
+                        <label class="block text-xs text-slate-500 mb-2">請選擇您得出的籤號</label>
                         <select id="oracle-number" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm"></select>
                     </div>
                 </div>
                 <div class="flex gap-4">
-                    <button class="flex-[2] py-4 bg-yellow-600 rounded-xl font-bold text-slate-900" onclick="handlePredict()">確定取籤 ✦ 解碼天機</button>
-                    <button class="flex-1 py-4 border border-yellow-600/30 rounded-xl text-yellow-500 hover:bg-yellow-900/20" onclick="randomAndGo()">🎲 隨機抽籤</button>
+                    <button class="flex-[3] py-4 bg-yellow-600 rounded-xl font-bold text-slate-900" onclick="handlePredict()">確定取籤 ✦ 解碼天機</button>
+                    <button id="btn-random-draw" class="flex-1 py-4 border border-yellow-600/30 rounded-xl text-yellow-500 hover:bg-yellow-900/20" onclick="randomAndGo()">🎲 隨機感應</button>
                 </div>
             </div>
 
-            <!-- Western Logic -->
             <div id="western-logic" class="hidden glass p-8 rounded-2xl space-y-6">
                 <div class="space-y-4">
                     <label class="block text-xs text-slate-500 mb-2">選擇您的能量牌陣</label>
                     <select id="tarot-spread" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-purple-400" onchange="generateCardSelectors()">
-                        <option value="1">單張牌 (簡易指引)</option>
                         <option value="3" selected>三張牌 (過去/現在/未來)</option>
+                        <option value="1">單張牌 (簡易指引)</option>
                         <option value="4">關係牌陣 (雙方狀態與發展)</option>
                     </select>
-                    <div id="tarot-cards-container" class="space-y-3 pt-4">
-                        <!-- Generated by JS -->
-                    </div>
+                    <div id="tarot-cards-container" class="space-y-3 pt-4"></div>
                 </div>
                 <button class="w-full py-4 bg-purple-700 rounded-xl font-bold hover:bg-purple-600 transition-colors" onclick="handlePredict()">恭請塔羅開示</button>
             </div>
         </div>
 
-        <!-- Result Step -->
         <div id="step-result" class="step-container">
             <h2 class="text-3xl text-center mb-8 gold-text-gradient font-serif tracking-widest">大師解惑結果</h2>
             <div id="result-loading" class="hidden flex flex-col items-center py-20">
                 <div class="loader mb-6"></div>
-                <p class="animate-pulse text-yellow-500 tracking-widest">大師正在冥想感應中，請靜候機緣...</p>
+                <p class="animate-pulse text-yellow-500 tracking-widest">大師正在冥想感應中...</p>
             </div>
-            <div id="result-display" class="animate-mystic">
-                <!-- Data injected here -->
-            </div>
+            <div id="result-display" class="animate-mystic"></div>
             <button class="mt-8 w-full py-3 text-slate-500 hover:text-yellow-500 border border-slate-800 rounded-xl transition-all" onclick="resetWizard()">重新諮商</button>
         </div>
-
     </main>
 
     <footer class="mt-20 mb-8 text-center text-slate-600 text-xs">
         <p>© 2026 數位命理諮商大師 ✦ Gemini 1.5 Flash 驅動</p>
     </footer>
 
-    <!-- Logic Scripts -->
     <script>
-        // --- API Config ---
         const GEMINI_API_KEY = "AIzaSyBZS2s6oxGMs_sLvgnYTS5spP4QyYvzS_E";
         const GEMINI_MODEL = "gemini-1.5-flash";
 
-        // --- Data ---
         const ORACLE_CONFIG = {
             'guanyin100': { name: '觀音一百籤', file: 'data/guanyin100.json', count: 100 },
             'mazu60': { name: '媽祖六十甲子籤', file: 'data/mazu60.json', count: 60 },
             'guandi100': { name: '雷雨師一百籤', file: 'data/guandi100.json', count: 100 },
-            'yuelao': { name: '月老靈籤', file: 'data/yuelao.json', count: 100 },
-            'tudigong28': { name: '烘爐地土地公廿八籤', file: 'data/tudigong28.json', count: 28 },
-            'zhuge384': { name: '諸葛神算', file: 'data/zhuge384.json', count: 384 }
+            'yuelao': { name: '月老靈籤', file: 'data/yuelao.json', count: 100 }
         };
 
-        const CATEGORIES = ["💼 工作", "❤️ 感情", "💰 金錢", "🏠 家庭", "🩺 健康", "✨ 其他"];
-        
-        // Tarot Data
+        const CATEGORIES = ["💼 工作", "❤️ 感情", "💰 金錢", "🏠 家庭", "✨ 其他"];
         const majorArcana = ["愚人", "魔術師", "女祭司", "皇后", "皇帝", "教皇", "戀人", "戰車", "力量", "隱者", "命運之輪", "正義", "倒吊人", "死神", "節制", "惡魔", "高塔", "星星", "月亮", "太陽", "審判", "世界"];
         const suits = ["權杖", "聖杯", "寶劍", "錢幣"];
         const numbers = ["王牌", "二", "三", "四", "五", "六", "七", "八", "九", "十", "侍者", "騎士", "王后", "國王"];
         let allCards = [...majorArcana];
         suits.forEach(s => numbers.forEach(n => allCards.push(`${s}${n}`)));
 
-        // --- State ---
         let currentStep = 1;
+        let consultMode = 'ritual'; // ritual or direct
         let selectedSystem = '';
         let selectedCategory = '其他';
         let loadedOracleData = {};
 
-        // --- Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            initInputs();
-            updateProgressBar();
-        });
+        document.addEventListener('DOMContentLoaded', () => { initInputs(); updateProgressBar(); });
 
         function initInputs() {
-            // Categories
             const chipContainer = document.getElementById('category-chips');
             CATEGORIES.forEach(cat => {
                 const plainText = cat.split(' ')[1];
@@ -288,119 +253,81 @@
                 };
                 chipContainer.appendChild(btn);
             });
-
-            // Oracle Types
             const typeSelect = document.getElementById('oracle-type');
             Object.entries(ORACLE_CONFIG).forEach(([key, cfg]) => {
                 const opt = document.createElement('option');
-                opt.value = key;
-                opt.innerText = `${cfg.name} (${cfg.count}籤)`;
+                opt.value = key; opt.innerText = `${cfg.name}`;
                 typeSelect.appendChild(opt);
             });
             updateOracleNumbers();
             generateCardSelectors();
         }
 
-        // --- Navigation ---
-        function nextStep() {
-            if (currentStep === 2 && !document.getElementById('question-input').value.trim()) {
-                if(!confirm("您未輸入具體問題，大師將僅根據領域為您推演，是否繼續？")) return;
-            }
-            goToStep(currentStep + 1);
-        }
-
-        function prevStep() {
-            goToStep(currentStep - 1);
-        }
-
-        function goToStep(s) {
-            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-            document.getElementById(`step-${s}`).classList.add('active');
-            currentStep = s;
-            updateProgressBar();
-        }
-
-        function updateProgressBar() {
-            const fill = document.getElementById('progress-fill');
-            const pct = ((currentStep - 1) / 3) * 100;
-            fill.style.width = pct + "%";
-        }
-
+        function chooseMode(m) { consultMode = m; nextStep(); }
         function chooseSystem(sys) {
             selectedSystem = sys;
             document.getElementById('eastern-logic').classList.toggle('hidden', sys !== 'eastern');
             document.getElementById('western-logic').classList.toggle('hidden', sys !== 'western');
+            
+            // If direct mode, hide random buttons in step 4
+            document.getElementById('btn-random-draw').classList.toggle('hidden', consultMode === 'direct');
             nextStep();
         }
 
-        function resetWizard() {
-            currentStep = 1;
-            selectedSystem = '';
-            document.getElementById('result-display').innerHTML = '';
-            goToStep(1);
+        function nextStep() { goToStep(currentStep + 1); }
+        function prevStep() { goToStep(currentStep - 1); }
+        function goToStep(s) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${s === 'result' ? 'result' : s}`).classList.add('active');
+            if(typeof s === 'number') currentStep = s;
+            updateProgressBar();
+        }
+        function updateProgressBar() {
+            const fill = document.getElementById('progress-fill');
+            const pct = ((currentStep - 1) / 4) * 100;
+            fill.style.width = pct + "%";
         }
 
-        // --- Oracle Logic ---
         async function updateOracleNumbers() {
             const type = document.getElementById('oracle-type').value;
             const select = document.getElementById('oracle-number');
-            const config = ORACLE_CONFIG[type];
-
             if (!loadedOracleData[type]) {
-                const res = await fetch(config.file);
+                const res = await fetch(ORACLE_CONFIG[type].file);
                 loadedOracleData[type] = await res.json();
             }
-
             const data = loadedOracleData[type];
             select.innerHTML = '';
-            for (let i = 1; i <= config.count; i++) {
-                const item = data.find(d => d.id === i);
-                const label = item ? item.no : `第 ${i} 籤`;
-                select.innerHTML += `<option value="${i}">${label}</option>`;
-            }
+            data.forEach(item => { select.innerHTML += `<option value="${item.id}">${item.no}</option>`; });
         }
 
         function randomAndGo() {
             const type = document.getElementById('oracle-type').value;
-            const cfg = ORACLE_CONFIG[type];
-            document.getElementById('oracle-number').value = Math.floor(Math.random() * cfg.count) + 1;
+            document.getElementById('oracle-number').value = Math.floor(Math.random() * ORACLE_CONFIG[type].count) + 1;
             handlePredict();
         }
 
-        // --- Tarot Logic ---
         function generateCardSelectors() {
             const count = parseInt(document.getElementById('tarot-spread').value);
             const container = document.getElementById('tarot-cards-container');
             container.innerHTML = '';
-            
-            const titles = count === 3 ? ["過去", "現在", "未來"] : 
-                          count === 4 ? ["現狀", "阻礙", "心念", "發展"] : ["指引"];
-            
-            let cardOptions = '<option value="">🔮 隨機感應一張牌...</option>';
+            const titles = count === 3 ? ["過去", "現在", "未來"] : count === 4 ? ["現狀", "阻礙", "心念", "發展"] : ["指引"];
+            let cardOptions = '<option value="">🔮 隨機感應...</option>';
             allCards.forEach(c => cardOptions += `<option value="${c}">${c}</option>`);
-
             for(let i=0; i<count; i++) {
                 container.innerHTML += `
                     <div class="flex gap-2 items-center">
                         <span class="text-xs text-slate-500 w-12">${titles[i]}</span>
                         <select class="flex-1 bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs tarot-card-val">${cardOptions}</select>
                         <select class="w-16 bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs tarot-dir-val">
-                            <option value="正位">正位</option>
-                            <option value="逆位">逆位</option>
+                            <option value="正位">正位</option><option value="逆位">逆位</option>
                         </select>
-                    </div>
-                `;
+                    </div>`;
             }
         }
 
-        // --- Prediction ---
         async function callGemini(prompt) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
+            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
             const data = await res.json();
             if (data.error) throw new Error(data.error.message);
             return data.candidates[0].content.parts[0].text;
@@ -411,78 +338,33 @@
             document.getElementById('result-loading').classList.remove('hidden');
             const display = document.getElementById('result-display');
             display.innerHTML = '';
-
             const question = document.getElementById('question-input').value.trim() || `關於您的「${selectedCategory}」運勢`;
-            
             try {
-                let prompt = "";
-                let localResHTML = "";
-
+                let prompt = "", localResHTML = "";
                 if (selectedSystem === 'eastern') {
                     const type = document.getElementById('oracle-type').value;
                     const id = parseInt(document.getElementById('oracle-number').value);
                     const data = loadedOracleData[type].find(d => d.id === id);
-                    
-                    prompt = `你是精通東西方命理的諮商大師。使用者抽取了【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n`;
-                    prompt += `籤詩內容：${data ? data.poem : '未知'}\n典故故事：${data ? data.story : '無'}\n`;
-                    prompt += `使用者提問領域：${selectedCategory}\n`;
-                    prompt += `使用者具體描述：${question}\n`;
-                    prompt += "請以專業、溫暖且富有智慧的口吻，針對問題提供深度解讀，並給出三個具體的行動指引。請使用繁體中文，格式排版清爽，避免生硬的說教。";
-
-                    localResHTML = `
-                        <div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6">
-                            <h3 class="text-yellow-600 text-sm font-bold mb-3">—— 已抽得 ${ORACLE_CONFIG[type].name} ——</h3>
-                            <div class="text-2xl font-serif text-yellow-100 mb-4 whitespace-pre-line">${data.no}\n${data.poem}</div>
-                            <div class="text-xs text-slate-500 italic">【典故：${data.story}】</div>
-                        </div>
-                    `;
+                    prompt = `你是精通東西方命理的諮商大師。使用者${consultMode === 'direct' ? '已得' : '抽得'}【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n籤詩：${data.poem}\n典故：${data.story}\n領域：${selectedCategory}\n問題：${question}\n請給出深度解讀與三項行動指引。繁體中文。`;
+                    localResHTML = `<div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6"><div class="text-2xl font-serif text-yellow-100 whitespace-pre-line">${data.no}\n${data.poem}</div></div>`;
                 } else {
                     const cards = Array.from(document.querySelectorAll('.tarot-card-val')).map((el, i) => {
-                        let name = el.value;
-                        if(!name) name = allCards[Math.floor(Math.random() * allCards.length)]; // Random if empty
-                        return { 
-                            name, 
-                            dir: document.querySelectorAll('.tarot-dir-val')[i].value,
-                            pos: i 
-                        };
+                        let name = el.value || allCards[Math.floor(Math.random() * allCards.length)];
+                        return { name, dir: document.querySelectorAll('.tarot-dir-val')[i].value, pos: i };
                     });
-                    
-                    prompt = `你是精通命理的塔羅諮商大師。使用者使用的牌陣如下：\n`;
-                    cards.forEach(c => prompt += `- 位置 ${c.pos}: ${c.name} (${c.dir})\n`);
-                    prompt += `使用者提問領域：${selectedCategory}\n`;
-                    prompt += `使用者具體描述：${question}\n`;
-                    prompt += "請分析牌面間的能量流動，整合出對核心問題的洞見，並給出三個具體的行動指引。請使用繁體中文回答。";
-
+                    prompt = `你是命理大師。使用者${consultMode === 'direct' ? '排列' : '抽得'}塔羅牌陣如下：\n`;
+                    cards.forEach(c => prompt += `- 位置 ${c.pos+1}: ${c.name} (${c.dir})\n`);
+                    prompt += `領域：${selectedCategory}\n問題：${question}\n請給出深度解讀。繁體中文。`;
                     localResHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">`;
-                    cards.forEach(c => {
-                        localResHTML += `
-                            <div class="glass p-3 rounded-xl text-center border-purple-900/40">
-                                <div class="text-[10px] text-slate-500 mb-1">位置 ${c.pos + 1}</div>
-                                <div class="font-bold text-sm text-purple-300">${c.name}</div>
-                                <div class="text-[10px] text-purple-600">${c.dir}</div>
-                            </div>
-                        `;
-                    });
+                    cards.forEach(c => localResHTML += `<div class="glass p-3 rounded-xl text-center border-purple-900/40"><div class="font-bold text-sm text-purple-300">${c.name}</div><div class="text-[10px] text-purple-600">${c.dir}</div></div>`);
                     localResHTML += `</div>`;
                 }
-
                 const interpretation = await callGemini(prompt);
-                
-                display.innerHTML = `
-                    ${localResHTML}
-                    <div class="glass p-8 rounded-2xl master-bubble">
-                        <h3 class="text-yellow-500 font-bold mb-4 flex items-center gap-2"><span>🔮</span> 大師的深度開示</h3>
-                        <div class="text-slate-300 leading-relaxed text-sm md:text-base whitespace-pre-line">${interpretation}</div>
-                    </div>
-                `;
-
-            } catch (e) {
-                display.innerHTML = `<div class="glass p-8 rounded-2xl border-red-900/30 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}。請確認網路環境或 API 狀態。</div>`;
-            } finally {
-                document.getElementById('result-loading').classList.add('hidden');
-            }
+                display.innerHTML = `${localResHTML}<div class="glass p-8 rounded-2xl master-bubble"><div class="text-slate-300 leading-relaxed text-base whitespace-pre-line">${interpretation}</div></div>`;
+            } catch (e) { display.innerHTML = `<div class="glass p-8 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}</div>`; }
+            finally { document.getElementById('result-loading').classList.add('hidden'); }
         }
+        function resetWizard() { currentStep = 1; consultMode = 'ritual'; goToStep(1); }
     </script>
 </body>
-
 </html>
