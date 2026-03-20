@@ -208,8 +208,8 @@
         </div>
     </main>
 
-    <footer class="mt-20 mb-8 text-center text-slate-600 text-xs">
-        <p>© 2026 數位命理諮商大師 ✦ Gemini 1.5 Flash 驅動</p>
+    <footer class="mt-12 pb-8 text-center text-slate-500 text-xs font-light tracking-widest opacity-60">
+        <p>© 2026 數位命理諮商大師 ✦ Ver. 2026.03.20.QC</p>
     </footer>
 
     <script>
@@ -344,20 +344,40 @@
                 try {
                     const res = await attemptCall(model, "v1beta", prompt, activeKey);
                     if (res) return res;
-                } catch (e) {
-                    lastError = e.message;
-                    console.warn(`Model ${model} failed: ${e.message}`);
-                }
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                        return data.candidates[0].content.parts[0].text;
+                    }
+                    lastStatus = response.status;
+                    lastError = data.error?.message || response.statusText;
+                    console.warn(`Model ${model} failed (${response.status}): ${lastError}`);
+                } catch (e) { lastError = e.message; }
             }
-            // If all failed, show a helpful message and allow key input
-            const errorHtml = `
-                <div class="text-red-400 mb-4 font-bold">⚠️ 所有大師模型感應失敗</div>
-                <div class="text-xs text-slate-500 mb-4">錯誤訊息：${lastError}</div>
-                <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-                    <p class="text-xs text-slate-400">大師可能正在閉關（API Key 失效或受限）。您可以嘗試輸入您自己的 Gemini API Key：</p>
-                    <input type="password" id="custom-api-key" placeholder="輸入 API Key (AIzaSy...)" 
-                        class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs">
-                    <button onclick="saveAndRetry()" class="w-full py-2 bg-yellow-900/40 text-yellow-500 rounded-lg text-xs font-bold hover:bg-yellow-900/60 transition-all">儲存並重試</button>
+
+            // Enhanced Error UI (from UX Master Module D)
+            let errorHtml = `
+                <div class="glass p-8 rounded-2xl text-center border border-red-500/30">
+                    <h3 class="text-xl font-bold text-red-500 mb-4">⚠️ 大師連線受阻：所有大師模型感應失敗</h3>
+                    <p class="text-slate-400 text-sm mb-6">${lastStatus === 403 ? '<b>[403 権限不足]</b> 您的 API Key 尚未在 Google AI Studio 中啟用 Generative Language API 服務。' : '錯誤訊息：' + lastError}</p>
+                    
+                    <div class="bg-slate-900/50 p-6 rounded-xl text-left border border-slate-700 mb-6">
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            大師可能正在閉關（API Key 非法、失效或受限）。${lastStatus === 403 ? '請確保已在 <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-yellow-500 underline">Google AI Studio</a> 建立 Key 且服務已啟用。' : '您可以嘗試輸入您自己的 Gemini API Key：'}
+                        </p>
+                        <input type="password" id="custom-api-key" placeholder="輸入 API Key (AIzaSyB...)" 
+                               class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-500 mb-4">
+                        <button onclick="saveApiKeyAndRetry()" 
+                                class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 rounded-lg transition-all duration-300">
+                            儲存並重試
+                        </button>
+                    </div>
+                    
+                    <button onclick="resetWizard()" class="text-slate-500 text-xs hover:text-white underline">重新諮商</button>
                 </div>
             `;
             throw new Error(errorHtml);
