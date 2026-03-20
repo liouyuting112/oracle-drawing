@@ -326,12 +326,58 @@
         }
 
         async function callGemini(prompt) {
-            // Using v1 instead of v1beta for better stability with 1.5-flash
-            const url = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
-            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
-            const data = await res.json();
+            const userKey = localStorage.getItem('user_gemini_key');
+            const activeKey = userKey || GEMINI_API_KEY;
+            
+            const models = [
+                "gemini-1.5-flash-latest",
+                "gemini-1.5-flash",
+                "gemini-1.5-flash-8b",
+                "gemini-pro"
+            ];
+            
+            let lastError = "";
+            for (const model of models) {
+                try {
+                    const res = await attemptCall(model, "v1beta", prompt, activeKey);
+                    if (res) return res;
+                } catch (e) {
+                    lastError = e.message;
+                    console.warn(`Model ${model} failed: ${e.message}`);
+                }
+            }
+            // If all failed, show a helpful message and allow key input
+            const errorHtml = `
+                <div class="text-red-400 mb-4 font-bold">⚠️ 所有大師模型感應失敗</div>
+                <div class="text-xs text-slate-500 mb-4">錯誤訊息：${lastError}</div>
+                <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">大師可能正在閉關（API Key 失效或受限）。您可以嘗試輸入您自己的 Gemini API Key：</p>
+                    <input type="password" id="custom-api-key" placeholder="輸入 API Key (AIzaSy...)" 
+                        class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs">
+                    <button onclick="saveAndRetry()" class="w-full py-2 bg-yellow-900/40 text-yellow-500 rounded-lg text-xs font-bold hover:bg-yellow-900/60 transition-all">儲存並重試</button>
+                </div>
+            `;
+            throw new Error(errorHtml);
+        }
+
+        async function attemptCall(model, version, prompt, apiKey) {
+            const url = `https://generativelanguage.googleapis.com/${version}/models/${model}:generateContent?key=${apiKey}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+            const data = await response.json();
             if (data.error) throw new Error(data.error.message);
             return data.candidates[0].content.parts[0].text;
+        }
+
+        function saveAndRetry() {
+            const key = document.getElementById('custom-api-key').value.trim();
+            if (key) {
+                localStorage.setItem('user_gemini_key', key);
+                location.reload();
+            }
         }
 
         async function handlePredict() {
