@@ -421,7 +421,11 @@
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
             });
             const data = await response.json();
-            if (data.error) throw new Error(data.error.message);
+            if (data.error) {
+                const error = new Error(data.error.message);
+                error.status = response.status; // Attach status for better error handling
+                throw error;
+            }
             return data.candidates[0].content.parts[0].text;
         }
 
@@ -445,22 +449,70 @@
                     const type = document.getElementById('oracle-type').value;
                     const id = parseInt(document.getElementById('oracle-number').value);
                     const data = loadedOracleData[type].find(d => d.id === id);
-                    prompt = `你是精通東西方命理的智慧長者。使用者${consultMode === 'direct' ? '已得' : '抽得'}【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n籤詩：${data.poem}\n典故：${data.story}\n領域：${selectedCategory}\n問題：${question}\n請以高度慈悲且富有洞見的「敘事語氣」進行解惑，撥雲見日。絕對禁止條列式或標籤式回答，請將解析融合在一段流暢、優美且有溫度的散文中。繁體中文。`;
+                    prompt = `你是精通東西方命理的智慧長者。使用者抽得【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n籤詩：${data.poem}\n典故：${data.story}\n領域：${selectedCategory}\n問題：${question}\n\n請以下列兩部分回覆，中間請用 [DATA] 分隔：\n1. [敘事解惑]：以慈悲、流暢的「智慧散文」語氣進行深度指引，撥雲見日。禁止條列式。\n2. [能量指標]：請提供以下精簡數據：\n事業：(1-5星)\n財運：(1-5星)\n感情：(1-5星)\n幸運色：(顏色)\n開運物：(物品)\n繁體中文。`;
                     localResHTML = `<div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6 fade-in-up"><div class="text-2xl font-serif text-yellow-100 whitespace-pre-line">${data.no}\n${data.poem}</div></div>`;
                 } else {
                     const cards = Array.from(document.querySelectorAll('.tarot-card-val')).map((el, i) => {
                         let name = el.value || allCards[Math.floor(Math.random() * allCards.length)];
                         return { name, dir: document.querySelectorAll('.tarot-dir-val')[i].value, pos: i };
                     });
-                    prompt = `你是智慧命理長者。使用者${consultMode === 'direct' ? '排列' : '抽得'}塔羅牌陣如下：\n`;
-                    cards.forEach(c => prompt += `- 位置 ${c.pos+1}: ${c.name} (${c.dir})\n`);
-                    prompt += `領域：${selectedCategory}\n問題：${question}\n請以慈悲的敘事語氣給予靈魂上的啟發與指引，轉化為一段具渲染力的散文，拒絕枯燥的條列。繁體中文。`;
+                    prompt = `你是智慧命理長者。使用者排列塔羅牌陣。領域：${selectedCategory}\n問題：${question}\n請以下列兩部分回覆，中間請用 [DATA] 分隔：\n1. [敘事解惑]：以長者敘事語氣給予靈魂啟發，轉化為優美散文，拒絕條列。\n2. [能量指標]：請提供：\n事業：(1-5星)\n財運：(1-5星)\n感情：(1-5星)\n幸運色：(顏色)\n開運物：(物品)\n繁體中文。`;
                     localResHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 fade-in-up">`;
                     cards.forEach(c => localResHTML += `<div class="glass p-3 rounded-xl text-center border-purple-900/40"><div class="font-bold text-sm text-purple-300">${c.name}</div><div class="text-[10px] text-purple-600">${c.dir}</div></div>`);
                     localResHTML += `</div>`;
                 }
-                const interpretation = await callGemini(prompt);
-                display.innerHTML = `${localResHTML}<div class="glass p-8 rounded-2xl master-bubble"><div class="text-slate-300 leading-relaxed text-base whitespace-pre-line">${interpretation}</div></div>`;
+                const fullRes = await callGemini(prompt);
+                const [narrative, rawData] = fullRes.split('[DATA]');
+                
+                // Parse Energy Data (Fallback to stars if AI is loose)
+                const stars = (label) => {
+                    const match = rawData?.match(new RegExp(`${label}：(.*?)(星|\\n|$)`));
+                    let val = match ? match[1] : '3';
+                    val = isNaN(val[0]) ? 3 : parseInt(val[0]);
+                    return '★'.repeat(val) + '☆'.repeat(5 - val);
+                };
+                const luckyColor = rawData?.match(/幸運色：(.*?)(\n|$)/)?.[1] || '金色';
+                const luckyItem = rawData?.match(/開運物：(.*?)(\n|$)/)?.[1] || '靈籤';
+
+                const energyPanel = `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="glass p-4 rounded-2xl border border-yellow-500/20 text-center">
+                            <div class="text-[10px] text-slate-500 mb-1">事業能量</div>
+                            <div class="text-yellow-500 font-bold text-sm tracking-widest">${stars('事業')}</div>
+                        </div>
+                        <div class="glass p-4 rounded-2xl border border-yellow-500/20 text-center">
+                            <div class="text-[10px] text-slate-500 mb-1">財運能量</div>
+                            <div class="text-yellow-500 font-bold text-sm tracking-widest">${stars('財運')}</div>
+                        </div>
+                        <div class="glass p-4 rounded-2xl border border-yellow-500/20 text-center">
+                            <div class="text-[10px] text-slate-500 mb-1">感情能量</div>
+                            <div class="text-yellow-500 font-bold text-sm tracking-widest">${stars('感情')}</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mb-6 fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="flex-1 glass p-4 rounded-2xl border border-blue-500/20 flex items-center justify-center gap-3">
+                            <span class="text-xl">🎨</span>
+                            <div class="text-left"><p class="text-[10px] text-slate-500">幸運色</p><p class="text-sm font-bold text-slate-200">${luckyColor}</p></div>
+                        </div>
+                        <div class="flex-1 glass p-4 rounded-2xl border border-green-500/20 flex items-center justify-center gap-3">
+                            <span class="text-xl">💎</span>
+                            <div class="text-left"><p class="text-[10px] text-slate-500">開運物</p><p class="text-sm font-bold text-slate-200">${luckyItem}</p></div>
+                        </div>
+                    </div>
+                `;
+
+                display.innerHTML = `
+                    ${localResHTML}
+                    ${energyPanel}
+                    <div class="glass p-10 rounded-3xl master-bubble fade-in-up" style="animation-delay: 0.6s;">
+                        <div class="text-center mb-8">
+                            <h2 class="oracle-header text-3xl font-bold mb-2">✦ 大師指點迷津 ✦</h2>
+                            <div class="h-px w-24 bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent mx-auto"></div>
+                        </div>
+                        <div class="text-slate-200 leading-relaxed text-lg font-serif italic opacity-90 whitespace-pre-line">
+                            ${narrative.trim()}
+                        </div>
+                    </div>`;
             } catch (e) {
                 // If message starts with <div>, it's our structured errorHtml
                 display.innerHTML = e.message.startsWith('<div') ? e.message : `<div class="glass p-8 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}</div>`;
