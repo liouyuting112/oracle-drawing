@@ -77,6 +77,36 @@
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
+        .master-bubble {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            box-shadow: 0 0 40px rgba(234, 179, 8, 0.1);
+            animation: spirit-glow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes spirit-glow {
+            from { box-shadow: 0 0 20px rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.1); }
+            to { box-shadow: 0 0 50px rgba(234, 179, 8, 0.2); border-color: rgba(234, 179, 8, 0.3); }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .oracle-header {
+            font-family: 'Noto Serif TC', serif;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, #fff7ed 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .loader {
             border: 2px solid rgba(212, 175, 55, 0.1);
             border-top: 2px solid var(--primary-gold);
@@ -209,7 +239,7 @@
     </main>
 
     <footer class="mt-12 pb-8 text-center text-slate-500 text-xs font-light tracking-widest opacity-60">
-        <p>© 2026 數位命理諮商大師 ✦ Ver. 2026.03.20.QC</p>
+        <p>© 2026 數位命理諮商大師 ✦ Ver. 2026.03.20.Soul</p>
     </footer>
 
     <script>
@@ -395,7 +425,7 @@
             return data.candidates[0].content.parts[0].text;
         }
 
-        function saveAndRetry() {
+        function saveApiKeyAndRetry() { // Renamed from saveAndRetry to match the button onclick
             const key = document.getElementById('custom-api-key').value.trim();
             if (key) {
                 localStorage.setItem('user_gemini_key', key);
@@ -415,17 +445,17 @@
                     const type = document.getElementById('oracle-type').value;
                     const id = parseInt(document.getElementById('oracle-number').value);
                     const data = loadedOracleData[type].find(d => d.id === id);
-                    prompt = `你是精通東西方命理的諮商大師。使用者${consultMode === 'direct' ? '已得' : '抽得'}【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n籤詩：${data.poem}\n典故：${data.story}\n領域：${selectedCategory}\n問題：${question}\n請給出深度解讀與三項行動指引。繁體中文。`;
-                    localResHTML = `<div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6"><div class="text-2xl font-serif text-yellow-100 whitespace-pre-line">${data.no}\n${data.poem}</div></div>`;
+                    prompt = `你是精通東西方命理的智慧長者。使用者${consultMode === 'direct' ? '已得' : '抽得'}【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n籤詩：${data.poem}\n典故：${data.story}\n領域：${selectedCategory}\n問題：${question}\n請以高度慈悲且富有洞見的「敘事語氣」進行解惑，撥雲見日。絕對禁止條列式或標籤式回答，請將解析融合在一段流暢、優美且有溫度的散文中。繁體中文。`;
+                    localResHTML = `<div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6 fade-in-up"><div class="text-2xl font-serif text-yellow-100 whitespace-pre-line">${data.no}\n${data.poem}</div></div>`;
                 } else {
                     const cards = Array.from(document.querySelectorAll('.tarot-card-val')).map((el, i) => {
                         let name = el.value || allCards[Math.floor(Math.random() * allCards.length)];
                         return { name, dir: document.querySelectorAll('.tarot-dir-val')[i].value, pos: i };
                     });
-                    prompt = `你是命理大師。使用者${consultMode === 'direct' ? '排列' : '抽得'}塔羅牌陣如下：\n`;
+                    prompt = `你是智慧命理長者。使用者${consultMode === 'direct' ? '排列' : '抽得'}塔羅牌陣如下：\n`;
                     cards.forEach(c => prompt += `- 位置 ${c.pos+1}: ${c.name} (${c.dir})\n`);
-                    prompt += `領域：${selectedCategory}\n問題：${question}\n請給出深度解讀。繁體中文。`;
-                    localResHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">`;
+                    prompt += `領域：${selectedCategory}\n問題：${question}\n請以慈悲的敘事語氣給予靈魂上的啟發與指引，轉化為一段具渲染力的散文，拒絕枯燥的條列。繁體中文。`;
+                    localResHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 fade-in-up">`;
                     cards.forEach(c => localResHTML += `<div class="glass p-3 rounded-xl text-center border-purple-900/40"><div class="font-bold text-sm text-purple-300">${c.name}</div><div class="text-[10px] text-purple-600">${c.dir}</div></div>`);
                     localResHTML += `</div>`;
                 }
