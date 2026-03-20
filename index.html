@@ -329,11 +329,14 @@
             const userKey = localStorage.getItem('user_gemini_key');
             const activeKey = userKey || GEMINI_API_KEY;
             
+            // March 2026 Updated Model List (Prioritizing Gemini 3.1)
             const models = [
-                "gemini-1.5-flash-latest",
-                "gemini-1.5-flash",
-                "gemini-1.5-flash-8b",
-                "gemini-pro"
+                "gemini-3.1-flash",
+                "gemini-3.1-flash-lite",
+                "gemini-3.1-pro",
+                "gemini-2.5-flash",
+                "gemini-2.5-pro",
+                "gemini-1.5-flash-latest"
             ];
             
             let lastError = "";
