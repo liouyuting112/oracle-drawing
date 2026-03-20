@@ -4,501 +4,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="數位命理諮商大師 — 提供觀音靈籤、媽祖籤、關帝籤、塔羅牌等多種占卜工具，結合東方傳統籤詩與西方塔羅智慧，為您指點迷津。">
-    <meta name="keywords" content="抽籤,觀音靈籤,媽祖籤,塔羅牌,解籤,占卜,命理,籤詩">
-    <meta property="og:title" content="數位命理諮商大師">
-    <meta property="og:description" content="東方靈籤與西方塔羅，看透問題背後的本質">
-    <title>數位命理諮商大師 | 東方靈籤 ✦ 西方塔羅</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>數位命理諮商大師 | 🔮 洞見天機</title>
+    <meta name="description" content="結合東方靈籤與西方塔羅，為您提供精準、溫暖的命理諮商服務。">
+    <!-- Google Fonts: Mystical & Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        :root {
+            --primary-gold: #d4af37;
+            --secondary-gold: #fcd34d;
+            --deep-bg: #0d0d1a;
+            --glass-bg: rgba(25, 25, 45, 0.65);
+            --mystic-purple: #4c1d95;
+        }
+
         body {
-            font-family: 'Noto Serif TC', serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
+            font-family: 'Outfit', 'Noto Serif TC', serif;
+            background: radial-gradient(circle at center, #1e1b4b 0%, #0d0d1a 100%);
+            color: #f1f5f9;
             min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
         }
 
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border-radius: 1rem;
+        /* Mystical background effects */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            z-index: -1;
         }
 
-        .gold-text {
-            background: linear-gradient(to right, #fcd34d, #d4af37);
+        /* Glassmorphism Classes */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .gold-border-glow {
+            border: 1px solid var(--primary-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+        }
+
+        .gold-text-gradient {
+            background: linear-gradient(to right, var(--secondary-gold), var(--primary-gold));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border {
-            border-color: #d4af37;
-        }
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-mystic { animation: fadeIn 0.8s ease forwards; }
 
-        .tab-btn {
-            transition: all 0.3s ease;
-        }
+        .step-container { display: none; }
+        .step-container.active { display: block; animation: fadeIn 0.6s ease forwards; }
 
-        .tab-btn.active {
-            background: rgba(212, 175, 55, 0.15);
-            border-bottom: 2px solid #d4af37;
-            color: #d4af37;
+        /* Custom Cards for Selection */
+        .choice-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .input-field {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
-
-        .generate-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-            color: #0f172a;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .generate-btn:active {
-            transform: translateY(0);
-        }
-
-        blockquote {
-            border-left: 4px solid #d4af37;
+        .choice-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-gold);
             background: rgba(212, 175, 55, 0.05);
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 0.5rem 0.5rem 0;
-            font-style: italic;
-            color: #cbd5e1;
+        }
+        .choice-card.selected {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
-        /* Loading Animation */
         .loader {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #d4af37;
+            border: 2px solid rgba(212, 175, 55, 0.1);
+            border-top: 2px solid var(--primary-gold);
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
+            width: 50px; height: 50px;
+            animation: spin 1.2s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Wizard Progress Bar */
+        .progress-bar {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gold);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--primary-gold);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        input:focus, textarea:focus, select:focus {
+            outline: none !important;
+            border-color: var(--primary-gold) !important;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         }
 
-        /* Hidden by default */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Custom Scrollbar for results */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.5);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(212, 175, 55, 0.8);
+        /* Interpretation UI */
+        .master-bubble {
+            border-left: 3px solid var(--primary-gold);
+            background: rgba(255, 255, 255, 0.02);
         }
     </style>
 </head>
 
-<body class="p-4 md:p-8">
+<body class="flex flex-col items-center p-4">
+    <div class="stars"></div>
 
-    <!-- Header -->
-    <header class="text-center mb-8 mt-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3 gold-text tracking-widest">數位命理諮商大師</h1>
-        <p class="text-gray-400 text-sm md:text-base tracking-widest">通曉東西神諭，看透問題背後的本質</p>
+    <!-- Header Section -->
+    <header class="w-full max-w-4xl text-center mb-12 mt-8 animate-mystic">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 gold-text-gradient tracking-[0.2em]">數位命理諮商大師</h1>
+        <p class="text-slate-400 tracking-widest text-sm uppercase">Divine Logic ✦ Mystical Insights</p>
     </header>
 
-    <!-- Main Container -->
-    <main class="w-full max-w-4xl glass-panel p-6 md:p-8">
-
-        <!-- Tabs -->
-        <div class="flex border-b border-gray-700 mb-6 font-bold text-lg">
-            <button id="tab-eastern" class="tab-btn active flex-1 py-3 text-center text-gray-400 hover:text-gray-200"
-                onclick="switchTab('eastern')">
-                東方靈籤
-            </button>
-            <button id="tab-western" class="tab-btn flex-1 py-3 text-center text-gray-400 hover:text-gray-200"
-                onclick="switchTab('western')">
-                西方塔羅
-            </button>
+    <!-- Main Wizard UI -->
+    <main class="w-full max-w-2xl">
+        
+        <!-- Progress Indicator -->
+        <div class="progress-bar rounded-full overflow-hidden">
+            <div id="progress-fill" class="progress-fill"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-            <!-- Left Column: Inputs -->
-            <div class="flex flex-col gap-5">
-
-                <!-- Category Section (Common) -->
-                <div>
-                    <label class="block text-sm text-gray-300 mb-2">請問想解惑的領域為何？</label>
-                    <div class="flex flex-wrap gap-2" id="category-chips">
-                        <button
-                            class="px-4 py-1.5 rounded-full border border-gray-600 text-sm hover:border-yellow-500 hover:text-yellow-500 transition-colors"
-                            data-val="工作">💼 工作</button>
-                        <button
-                            class="px-4 py-1.5 rounded-full border border-gray-600 text-sm hover:border-yellow-500 hover:text-yellow-500 transition-colors"
-                            data-val="感情">❤️ 感情</button>
-                        <button
-                            class="px-4 py-1.5 rounded-full border border-gray-600 text-sm hover:border-yellow-500 hover:text-yellow-500 transition-colors"
-                            data-val="金錢">💰 金錢</button>
-                        <button
-                            class="px-4 py-1.5 rounded-full border border-gray-600 text-sm hover:border-yellow-500 hover:text-yellow-500 transition-colors"
-                            data-val="家庭">🏠 家庭</button>
-                        <button
-                            class="px-4 py-1.5 rounded-full border border-yellow-500 text-yellow-500 text-sm transition-colors"
-                            data-val="其他">✨ 其他</button>
-                    </div>
+        <!-- Step 1: Selection -->
+        <div id="step-1" class="step-container active">
+            <h2 class="text-2xl text-center mb-8 font-serif">第一步：感應您的能量方向</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('eastern')">
+                    <span class="text-5xl mb-4">🧧</span>
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">東方靈籤</h3>
+                    <p class="text-slate-400 text-sm">觀音、媽祖、關帝等百家籤詩，指引世俗迷航。</p>
                 </div>
-
-                <!-- Specific Question -->
-                <div>
-                    <label class="block text-sm text-gray-300 mb-2">您心中的具體問題是什麼？</label>
-                    <textarea id="question-input" rows="3"
-                        class="input-field w-full rounded-lg p-3 text-sm placeholder-gray-500"
-                        placeholder="例如：這份工作做了三年很累，想辭職創業好嗎？"></textarea>
-                </div>
-
-                <!-- Eastern Specific Inputs -->
-                <div id="eastern-inputs" class="flex flex-col gap-5 mt-2">
-                    <div class="space-y-4 p-4 border border-gray-700 rounded-lg bg-black/20">
-                        <h3 class="text-yellow-500 font-bold mb-2">籤詩設定</h3>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">搜尋 / 選擇籤種</label>
-                            <input type="text" id="oracle-search" oninput="filterOracleTypes()"
-                                class="input-field w-full rounded p-2 text-xs mb-2"
-                                placeholder="關鍵字搜尋 (例如: 關公, 觀音, 384...)">
-                            <select id="oracle-type" class="input-field w-full rounded p-2 text-sm"
-                                onchange="updateOracleNumbers()">
-                                <!-- Major Systems -->
-                                <option value="mazu60">媽祖六十甲子籤 (60)</option>
-                                <option value="guanyin100" selected>觀音一百籤 (100)</option>
-                                <option value="guandi100">雷雨師一百籤 (關公/城隍) (100)</option>
-                                <option value="tudigong28">烘爐地土地公廿八籤 (28)</option>
-                                <option value="yuelao">月老靈籤 (100)</option>
-                                <option value="sevenkings60">東港鎮海宮七王爺靈籤 (60)</option>
-
-                                <!-- Specialized & Rare -->
-                                <option value="zhuge384">諸葛神算 (384)</option>
-                                <option value="baosheng60">保生大帝六十籤 (60)</option>
-                                <option value="qingshui50">清水祖師五十籤 (50)</option>
-                                <option value="luzu100">呂祖靈籤一百籤 (100)</option>
-                                <option value="luzu60">呂仙祖六十籤 (指南宮) (60)</option>
-                                <option value="zhusheng30">註生娘娘三十籤 (30)</option>
-                                <option value="beidi51">北帝靈籤 (51)</option>
-                                <option value="fourface30">四面佛三十籤 (30)</option>
-                                <option value="caishin100">五路財神一百籤 (100)</option>
-                                <option value="guanyin28">觀音廿八籤 (28)</option>
-                                <option value="guanyin24">觀音廿四籤 (24)</option>
-                                <option value="zodiac28">二十八星宿籤 (28)</option>
-                                <option value="pienchu100">扁鵲神醫藥籤 (100)</option>
-                                <option value="yaoqian50">藥籤 (50)</option>
-                                <option value="yaoqian200">藥籤 (200)</option>
-                                <option value="lukang100">鹿港天后宮一百籤 (100)</option>
-                                <option value="penghu100">澎湖天后宮一百籤 (100)</option>
-                                <option value="zhuge64">諸葛孔明六十四籤 (金錢卦) (64)</option>
-                                <option value="zhuge32">諸葛孔明三十二籤 (金錢卦) (32)</option>
-                            </select>
-                        </div>
-                        <div class="flex gap-3">
-                            <div class="flex-1">
-                                <label class="block text-sm text-gray-400 mb-1">籤號</label>
-                                <select id="oracle-number" class="input-field w-full rounded p-2 text-sm"
-                                    onchange="previewOracle()">
-                                    <!-- Populated by JS -->
-                                </select>
-                            </div>
-                        </div>
-                        <div id="oracle-preview" class="text-xs p-3 bg-white/5 rounded border border-gray-800 hidden">
-                            <div class="text-yellow-600 font-bold mb-1" id="preview-story"></div>
-                            <div class="text-gray-400 italic whitespace-pre-wrap" id="preview-poem"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Western Specific Inputs -->
-                <div id="western-inputs" class="flex flex-col gap-5 mt-2 hidden">
-                    <div class="space-y-4 p-4 border border-gray-700 rounded-lg bg-black/20">
-                        <h3 class="text-yellow-500 font-bold mb-2">塔羅牌陣設定</h3>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">選擇牌陣</label>
-                            <select id="tarot-spread" class="input-field w-full rounded p-2 text-sm"
-                                onchange="generateCardSelectors()">
-                                <option value="1">單張牌 (簡易指引)</option>
-                                <option value="3" selected>三張牌 (過去/現在/未來)</option>
-                                <option value="4">關係牌陣 (雙方狀態與發展)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2 flex items-center justify-between">
-                                設定抽出的牌
-                                <label class="flex items-center text-xs cursor-pointer">
-                                    <input type="checkbox" id="tarot-no-reverse" class="mr-1 accent-yellow-500"> 不分正逆位
-                                </label>
-                            </label>
-                            <div id="tarot-cards-container" class="space-y-3">
-                                <!-- Dynamically generated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Random Draw Button (Eastern only) -->
-                <button id="random-draw-btn"
-                    class="w-full py-2 rounded-lg font-bold text-sm mt-2 border border-yellow-700/50 text-yellow-500 hover:bg-yellow-900/20 transition-colors flex items-center justify-center gap-2"
-                    onclick="randomDraw()">
-                    🎲 隨機抽籤（不指定籤號）
-                </button>
-
-                <!-- Action Button -->
-                <button id="submit-btn"
-                    class="generate-btn w-full py-4 rounded-lg font-bold text-lg mt-4 flex items-center justify-center gap-2"
-                    onclick="handlePredict()">
-                    <span id="btn-text">請大師解惑</span>
-                </button>
-            </div>
-
-            <!-- Right Column: Results Area -->
-            <div class="h-full">
-                <div id="result-placeholder"
-                    class="h-full min-h-[400px] border border-gray-700/50 rounded-lg bg-black/30 flex flex-col items-center justify-center p-8 text-center text-gray-500">
-                    <div class="text-4xl mb-4">🔮</div>
-                    <p>輸入您的問題與籤牌資訊<br>大師將為您指點迷津</p>
-                </div>
-
-                <div id="result-content"
-                    class="h-full min-h-[400px] border gold-border rounded-lg bg-black/40 p-6 overflow-y-auto hidden">
-                    <!-- Results injected here -->
+                <div class="choice-card glass p-8 rounded-2xl flex flex-col items-center text-center" onclick="chooseSystem('western')">
+                    <span class="text-5xl mb-4">🃏</span>
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">西方塔羅</h3>
+                    <p class="text-slate-400 text-sm">與潛意識共振，透過 78 張牌陣看透隱藏真相。</p>
                 </div>
             </div>
         </div>
+
+        <!-- Step 2: Intent -->
+        <div id="step-2" class="step-container">
+            <button class="mb-6 text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm" onclick="prevStep()">← 返回上一步</button>
+            <h2 class="text-2xl text-center mb-8 font-serif">第二步：凝聚您的求問心念</h2>
+            <div class="glass p-8 rounded-2xl space-y-6">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-4">請問想解惑的領域為何？</label>
+                    <div class="flex flex-wrap gap-3" id="category-chips">
+                        <!-- Chips generated by JS -->
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">您心中的具體問題是什麼？</label>
+                    <textarea id="question-input" rows="4" 
+                        class="w-full bg-slate-900/60 border border-slate-700 rounded-xl p-4 text-sm placeholder-slate-600 focus:ring-0"
+                        placeholder="請詳細描述您的困擾，這能幫助大師提供更精確的指引..."></textarea>
+                </div>
+                <button class="w-full py-4 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-xl font-bold text-slate-900 hover:brightness-110 active:scale-[0.98] transition-all" onclick="nextStep()">前往下一步</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Drawing / Selection -->
+        <div id="step-3" class="step-container">
+            <button class="mb-6 text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm" onclick="prevStep()">← 返回上一步</button>
+            <h2 class="text-2xl text-center mb-8 font-serif">第三步：恭請天機顯現</h2>
+            
+            <!-- Eastern Logic -->
+            <div id="eastern-logic" class="hidden glass p-8 rounded-2xl space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-slate-500 mb-2">選擇靈籤系統</label>
+                        <select id="oracle-type" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-yellow-500" onchange="updateOracleNumbers()">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-500 mb-2">手動挑選或隨機感應</label>
+                        <select id="oracle-number" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm"></select>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <button class="flex-[2] py-4 bg-yellow-600 rounded-xl font-bold text-slate-900" onclick="handlePredict()">確定取籤 ✦ 解碼天機</button>
+                    <button class="flex-1 py-4 border border-yellow-600/30 rounded-xl text-yellow-500 hover:bg-yellow-900/20" onclick="randomAndGo()">🎲 隨機抽籤</button>
+                </div>
+            </div>
+
+            <!-- Western Logic -->
+            <div id="western-logic" class="hidden glass p-8 rounded-2xl space-y-6">
+                <div class="space-y-4">
+                    <label class="block text-xs text-slate-500 mb-2">選擇您的能量牌陣</label>
+                    <select id="tarot-spread" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-purple-400" onchange="generateCardSelectors()">
+                        <option value="1">單張牌 (簡易指引)</option>
+                        <option value="3" selected>三張牌 (過去/現在/未來)</option>
+                        <option value="4">關係牌陣 (雙方狀態與發展)</option>
+                    </select>
+                    <div id="tarot-cards-container" class="space-y-3 pt-4">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+                <button class="w-full py-4 bg-purple-700 rounded-xl font-bold hover:bg-purple-600 transition-colors" onclick="handlePredict()">恭請塔羅開示</button>
+            </div>
+        </div>
+
+        <!-- Result Step -->
+        <div id="step-result" class="step-container">
+            <h2 class="text-3xl text-center mb-8 gold-text-gradient font-serif tracking-widest">大師解惑結果</h2>
+            <div id="result-loading" class="hidden flex flex-col items-center py-20">
+                <div class="loader mb-6"></div>
+                <p class="animate-pulse text-yellow-500 tracking-widest">大師正在冥想感應中，請靜候機緣...</p>
+            </div>
+            <div id="result-display" class="animate-mystic">
+                <!-- Data injected here -->
+            </div>
+            <button class="mt-8 w-full py-3 text-slate-500 hover:text-yellow-500 border border-slate-800 rounded-xl transition-all" onclick="resetWizard()">重新諮商</button>
+        </div>
+
     </main>
 
-    <footer class="mt-12 mb-8 text-center text-gray-500 text-sm space-y-2">
-        <p class="text-gray-400">🔮 數位命理諮商大師 ✦ 通曉東西神諭</p>
-        <p>提供 27 種東方靈籤 ✦ 78 張塔羅牌解讀</p>
-        <p class="text-xs text-gray-600">本工具僅供娛樂參考，不構成任何專業建議</p>
+    <footer class="mt-20 mb-8 text-center text-slate-600 text-xs">
+        <p>© 2026 數位命理諮商大師 ✦ Gemini 1.5 Flash 驅動</p>
     </footer>
 
-    <!-- Load Utility Script (if any) -->
-    <!-- No more oracle-data.js -->
-
+    <!-- Logic Scripts -->
     <script>
-        // --- Oracle Data Config ---
+        // --- API Config ---
+        const GEMINI_API_KEY = "AIzaSyBZS2s6oxGMs_sLvgnYTS5spP4QyYvzS_E";
+        const GEMINI_MODEL = "gemini-1.5-flash";
+
+        // --- Data ---
         const ORACLE_CONFIG = {
-            // -- Standard Major Systems --
-            'mazu60': { name: '媽祖六十甲子籤', file: 'data/mazu60.json', count: 60 },
             'guanyin100': { name: '觀音一百籤', file: 'data/guanyin100.json', count: 100 },
-            'guandi100': { name: '雷雨師一百籤 (關帝/城隍)', file: 'data/guandi100.json', count: 100 },
-            'tudigong28': { name: '土地公廿八籤 (烘爐地)', file: 'data/tudigong28.json', count: 28 },
-            'yuelao': { name: '月老靈籤 (100籤)', file: 'data/yuelao.json', count: 100 },
-
-            // -- Specialized Systems --
-            'zhuge384': { name: '諸葛神算 (384籤)', file: 'data/zhuge384.json', count: 384 },
-            'sevenkings60': { name: '東港鎮海宮七王爺靈籤', file: 'data/sevenkings60.json', count: 60 },
-            'baosheng60': { name: '保生大帝六十籤', file: 'data/baosheng60.json', count: 60 },
-            'qingshui50': { name: '清水祖師五十籤', file: 'data/qingshui50.json', count: 50 },
-            'luzu100': { name: '呂祖靈籤一百籤', file: 'data/luzu100.json', count: 100 },
-            'luzu60': { name: '呂仙祖六十籤 (指南宮)', file: 'data/luzu60.json', count: 60 },
-            'zhusheng30': { name: '註生娘娘三十籤', file: 'data/zhusheng30.json', count: 30 },
-            'beidi51': { name: '北帝靈籤 (五十一籤)', file: 'data/beidi51.json', count: 51 },
-            'fourface30': { name: '四面佛三十籤', file: 'data/fourface30.json', count: 30 },
-            'caishin100': { name: '五路財神一百籤', file: 'data/caishin100.json', count: 100 },
-            'beidi100': { name: '北帝一百籤 (罕見版)', file: 'data/beidi100.json', count: 100 },
-
-            // -- Variations & Lesser Known --
-            'guanyin28': { name: '觀音廿八籤 (小型)', file: 'data/guanyin28.json', count: 28 },
-            'guanyin24': { name: '觀音廿四籤 (精簡)', file: 'data/guanyin24.json', count: 24 },
-            'zodiac28': { name: '二十八星宿籤', file: 'data/zodiac28.json', count: 28 },
-            'pienchu100': { name: '扁鵲神醫藥籤 (100籤)', file: 'data/pienchu100.json', count: 100 },
-            'yaoqian50': { name: '藥籤 (五十籤)', file: 'data/yaoqian50.json', count: 50 },
-            'yaoqian200': { name: '藥籤 (二百籤)', file: 'data/yaoqian200.json', count: 200 },
-            'lukang100': { name: '鹿港天后宮一百籤', file: 'data/lukang100.json', count: 100 },
-            'penghu100': { name: '澎湖天后宮一百籤', file: 'data/penghu100.json', count: 100 },
-            'zhuge64': { name: '諸葛孔明六十四籤 (金錢卦)', file: 'data/zhuge64.json', count: 64 },
-            'zhuge32': { name: '諸葛孔明三十二籤 (金錢卦)', file: 'data/zhuge32.json', count: 32 }
+            'mazu60': { name: '媽祖六十甲子籤', file: 'data/mazu60.json', count: 60 },
+            'guandi100': { name: '雷雨師一百籤', file: 'data/guandi100.json', count: 100 },
+            'yuelao': { name: '月老靈籤', file: 'data/yuelao.json', count: 100 },
+            'tudigong28': { name: '烘爐地土地公廿八籤', file: 'data/tudigong28.json', count: 28 },
+            'zhuge384': { name: '諸葛神算', file: 'data/zhuge384.json', count: 384 }
         };
 
-        let loadedOracleData = {};
-
-        // --- Search/Filter Logic ---
-        function filterOracleTypes() {
-            const search = document.getElementById('oracle-search').value.toLowerCase();
-            const select = document.getElementById('oracle-type');
-            const options = select.options;
-
-            for (let i = 0; i < options.length; i++) {
-                const text = options[i].text.toLowerCase();
-                const matches = text.includes(search);
-                options[i].style.display = matches ? '' : 'none';
-            }
-        }
-
-        // --- Tarot Data ---
+        const CATEGORIES = ["💼 工作", "❤️ 感情", "💰 金錢", "🏠 家庭", "🩺 健康", "✨ 其他"];
+        
+        // Tarot Data
         const majorArcana = ["愚人", "魔術師", "女祭司", "皇后", "皇帝", "教皇", "戀人", "戰車", "力量", "隱者", "命運之輪", "正義", "倒吊人", "死神", "節制", "惡魔", "高塔", "星星", "月亮", "太陽", "審判", "世界"];
         const suits = ["權杖", "聖杯", "寶劍", "錢幣"];
         const numbers = ["王牌", "二", "三", "四", "五", "六", "七", "八", "九", "十", "侍者", "騎士", "王后", "國王"];
         let allCards = [...majorArcana];
-        suits.forEach(suit => {
-            numbers.forEach(num => allCards.push(`${suit}${num}`));
-        });
+        suits.forEach(s => numbers.forEach(n => allCards.push(`${s}${n}`)));
 
         // --- State ---
-        let currentMode = 'eastern';
+        let currentStep = 1;
+        let selectedSystem = '';
         let selectedCategory = '其他';
+        let loadedOracleData = {};
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            const chips = document.querySelectorAll('#category-chips button');
-            chips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    chips.forEach(c => {
-                        c.classList.remove('border-yellow-500', 'text-yellow-500');
-                        c.classList.add('border-gray-600');
-                    });
-                    chip.classList.add('border-yellow-500', 'text-yellow-500');
-                    chip.classList.remove('border-gray-600');
-                    selectedCategory = chip.getAttribute('data-val');
-                });
-            });
-
-            updateOracleNumbers();
-            generateCardSelectors();
-
-            document.getElementById('tarot-no-reverse').addEventListener('change', () => {
-                const selects = document.querySelectorAll('.tarot-dir-select');
-                selects.forEach(s => s.disabled = document.getElementById('tarot-no-reverse').checked);
-            });
+            initInputs();
+            updateProgressBar();
         });
 
-        // --- Eastern Data Logic ---
+        function initInputs() {
+            // Categories
+            const chipContainer = document.getElementById('category-chips');
+            CATEGORIES.forEach(cat => {
+                const plainText = cat.split(' ')[1];
+                const btn = document.createElement('button');
+                btn.className = "px-4 py-2 rounded-xl glass border border-slate-700 text-sm hover:border-yellow-500 hover:text-yellow-500 transition-all";
+                if (plainText === '其他') btn.classList.add('selected', 'gold-border-glow');
+                btn.innerText = cat;
+                btn.onclick = () => {
+                    document.querySelectorAll('#category-chips button').forEach(b => b.classList.remove('selected', 'gold-border-glow'));
+                    btn.classList.add('selected', 'gold-border-glow');
+                    selectedCategory = plainText;
+                };
+                chipContainer.appendChild(btn);
+            });
+
+            // Oracle Types
+            const typeSelect = document.getElementById('oracle-type');
+            Object.entries(ORACLE_CONFIG).forEach(([key, cfg]) => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.innerText = `${cfg.name} (${cfg.count}籤)`;
+                typeSelect.appendChild(opt);
+            });
+            updateOracleNumbers();
+            generateCardSelectors();
+        }
+
+        // --- Navigation ---
+        function nextStep() {
+            if (currentStep === 2 && !document.getElementById('question-input').value.trim()) {
+                if(!confirm("您未輸入具體問題，大師將僅根據領域為您推演，是否繼續？")) return;
+            }
+            goToStep(currentStep + 1);
+        }
+
+        function prevStep() {
+            goToStep(currentStep - 1);
+        }
+
+        function goToStep(s) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${s}`).classList.add('active');
+            currentStep = s;
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const fill = document.getElementById('progress-fill');
+            const pct = ((currentStep - 1) / 3) * 100;
+            fill.style.width = pct + "%";
+        }
+
+        function chooseSystem(sys) {
+            selectedSystem = sys;
+            document.getElementById('eastern-logic').classList.toggle('hidden', sys !== 'eastern');
+            document.getElementById('western-logic').classList.toggle('hidden', sys !== 'western');
+            nextStep();
+        }
+
+        function resetWizard() {
+            currentStep = 1;
+            selectedSystem = '';
+            document.getElementById('result-display').innerHTML = '';
+            goToStep(1);
+        }
+
+        // --- Oracle Logic ---
         async function updateOracleNumbers() {
             const type = document.getElementById('oracle-type').value;
             const select = document.getElementById('oracle-number');
             const config = ORACLE_CONFIG[type];
 
-            // Load data if not already loaded
             if (!loadedOracleData[type]) {
-                try {
-                    const response = await fetch(config.file);
-                    if (response.ok) {
-                        loadedOracleData[type] = await response.json();
-                    } else {
-                        console.error("Failed to load oracle data:", config.file);
-                        loadedOracleData[type] = [];
-                    }
-                } catch (e) {
-                    console.error("Error fetching data:", e);
-                    loadedOracleData[type] = [];
-                }
+                const res = await fetch(config.file);
+                loadedOracleData[type] = await res.json();
             }
 
             const data = loadedOracleData[type];
-            select.innerHTML = '<option value="">請選擇籤號...</option>';
-
-            // If data is empty but we know the count, generate empty options
-            const count = data.length > 0 ? data.length : config.count;
-            for (let i = 1; i <= count; i++) {
-                const found = data.find(item => item.id === i);
-                const label = found ? found.no : `第${i}籤`;
-                const ganzhi = found && found.ganzhi ? ` (${found.ganzhi})` : '';
-                select.innerHTML += `<option value="${i}">${label}${ganzhi}</option>`;
+            select.innerHTML = '';
+            for (let i = 1; i <= config.count; i++) {
+                const item = data.find(d => d.id === i);
+                const label = item ? item.no : `第 ${i} 籤`;
+                select.innerHTML += `<option value="${i}">${label}</option>`;
             }
-            previewOracle();
         }
 
-        function previewOracle() {
+        function randomAndGo() {
             const type = document.getElementById('oracle-type').value;
-            const id = parseInt(document.getElementById('oracle-number').value);
-            const preview = document.getElementById('oracle-preview');
-
-            if (!id) {
-                preview.classList.add('hidden');
-                return;
-            }
-
-            const data = (loadedOracleData[type] || []).find(i => i.id === id);
-            if (data && data.poem !== "資料準備中..." && data.poem !== "系統資料更新中...") {
-                preview.classList.remove('hidden');
-                document.getElementById('preview-story').innerText = data.story ? `【典故：${data.story}】` : '【經典籤詩】';
-                document.getElementById('preview-poem').innerText = data.poem;
-            } else {
-                preview.classList.add('hidden');
-            }
+            const cfg = ORACLE_CONFIG[type];
+            document.getElementById('oracle-number').value = Math.floor(Math.random() * cfg.count) + 1;
+            handlePredict();
         }
 
-        // --- UI Interactions ---
-        function switchTab(mode) {
-            currentMode = mode;
-            document.getElementById('tab-eastern').classList.toggle('active', mode === 'eastern');
-            document.getElementById('tab-western').classList.toggle('active', mode === 'western');
-
-            document.getElementById('eastern-inputs').classList.toggle('hidden', mode !== 'eastern');
-            document.getElementById('western-inputs').classList.toggle('hidden', mode !== 'western');
-        }
-
+        // --- Tarot Logic ---
         function generateCardSelectors() {
-            const spreadCount = parseInt(document.getElementById('tarot-spread').value);
+            const count = parseInt(document.getElementById('tarot-spread').value);
             const container = document.getElementById('tarot-cards-container');
             container.innerHTML = '';
+            
+            const titles = count === 3 ? ["過去", "現在", "未來"] : 
+                          count === 4 ? ["現狀", "阻礙", "心念", "發展"] : ["指引"];
+            
+            let cardOptions = '<option value="">🔮 隨機感應一張牌...</option>';
+            allCards.forEach(c => cardOptions += `<option value="${c}">${c}</option>`);
 
-            const positionNames = spreadCount === 3 ? ["過去", "現在", "未來"] :
-                spreadCount === 4 ? ["你的現狀", "對方現狀", "關係阻礙", "未來發展"] : ["單張指引"];
-
-            let optionsHTML = '<option value="">請選擇牌...</option>';
-            allCards.forEach(card => {
-                optionsHTML += `<option value="${card}">${card}</option>`;
-            });
-
-            for (let i = 0; i < spreadCount; i++) {
-                const isNoReverse = document.getElementById('tarot-no-reverse').checked;
+            for(let i=0; i<count; i++) {
                 container.innerHTML += `
-                    <div class="flex items-center gap-2 bg-black/40 p-2 rounded border border-gray-700">
-                        <span class="text-xs text-gray-400 w-12 text-right">${positionNames[i]}</span>
-                        <select class="input-field flex-1 rounded p-1 text-sm tarot-card-val" required>
-                            ${optionsHTML}
-                        </select>
-                        <select class="input-field w-20 rounded p-1 text-sm tarot-dir-select" ${isNoReverse ? 'disabled' : ''}>
+                    <div class="flex gap-2 items-center">
+                        <span class="text-xs text-slate-500 w-12">${titles[i]}</span>
+                        <select class="flex-1 bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs tarot-card-val">${cardOptions}</select>
+                        <select class="w-16 bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs tarot-dir-val">
                             <option value="正位">正位</option>
                             <option value="逆位">逆位</option>
                         </select>
@@ -507,313 +393,94 @@
             }
         }
 
-        // --- Random Draw ---
-        async function randomDraw() {
-            const type = document.getElementById('oracle-type').value;
-            const config = ORACLE_CONFIG[type];
-            const randomId = Math.floor(Math.random() * config.count) + 1;
-            document.getElementById('oracle-number').value = randomId;
-            previewOracle();
-            handlePredict();
-        }
-
-        // --- API Config ---
-        const API_BASE = "https://some-jars-admire.loca.lt"; // 直接使用 LocalTunnel 繞過 Cloudflare 限制
-
-        // --- Prediction Logic ---
-        async function handlePredict() {
-            const btn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const resultBox = document.getElementById('result-content');
-            const placeholderBox = document.getElementById('result-placeholder');
-            const questionInput = document.getElementById('question-input').value.trim();
-            const question = questionInput || `關於您的「${selectedCategory}」運勢`;
-
-            btn.disabled = true;
-            btnText.innerHTML = '<div class="loader"></div> 大師正在為您解惑...';
-            placeholderBox.classList.add('hidden');
-            resultBox.classList.remove('hidden');
-            resultBox.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-full text-yellow-500 opacity-70">
-                    <div class="loader mb-4" style="width:40px;height:40px;border-width:4px;"></div>
-                    <p class="animate-pulse">大師正在冥想，請靜候機緣...</p>
-                </div>
-            `;
-
-            let htmlContent = '';
-
-            try {
-                if (currentMode === 'eastern') {
-                    const typeVal = document.getElementById('oracle-type').value;
-                    const id = parseInt(document.getElementById('oracle-number').value);
-                    const config = ORACLE_CONFIG[typeVal];
-                    
-                    let localData = (loadedOracleData[typeVal] || []).find(i => i.id === id);
-
-                    // 呼叫 API
-                    const res = await fetch(`${API_BASE}/api/predict`, {
-                        method: "POST", headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
-                        body: JSON.stringify({ system: 'eastern', type: typeVal, id: id, question: question, category: selectedCategory })
-                    });
-                    const responseData = await res.json();
-                    
-                    // 從後端拿回正確的資料與 AI 解讀
-                    if(responseData.data) {
-                        localData = responseData.data;
-                        localData.interpretation = responseData.interpretation;
-                    }
-
-                    if (!localData || localData.poem === "資料準備中..." || localData.poem === "系統資料更新中..." || localData.poem.includes("擴充中") || (localData.interpretation && localData.interpretation.includes("AI"))) {
-                        htmlContent = generateFallbackContent(config.name, id, question, selectedCategory);
-                    } else {
-                        htmlContent = generateStructuredContent(config.name, localData, question, selectedCategory);
-                    }
-                } else {
-                    const spreadVal = parseInt(document.getElementById('tarot-spread').value);
-                    const posNames = spreadVal === 3 ? ["過去", "現在", "未來"] :
-                        spreadVal === 4 ? ["你的現狀", "對方現狀", "關係阻礙", "未來發展"] : ["單張指引"];
-                    
-                    const cardEls = document.querySelectorAll('.tarot-card-val');
-                    const dirEls = document.querySelectorAll('.tarot-dir-select');
-                    const noReverse = document.getElementById('tarot-no-reverse').checked;
-                    let cards = [];
-                    for (let i = 0; i < cardEls.length; i++) {
-                        const name = cardEls[i].value;
-                        if(name) {
-                            cards.push({ name: name, dir: noReverse ? "正位" : dirEls[i].value, pos: posNames[i] || `第${i + 1}張` });
-                        }
-                    }
-
-                    let aiTarotSummary = null;
-                    const res = await fetch(`${API_BASE}/api/predict`, {
-                        method: "POST", headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
-                        body: JSON.stringify({ system: 'western', cards: cards, question: question, category: selectedCategory })
-                    });
-                    const responseData = await res.json();
-                    if(responseData.interpretation) {
-                        aiTarotSummary = responseData.interpretation;
-                    }
-
-                    htmlContent = generateTarotContent(question, selectedCategory, aiTarotSummary);
-                }
-            } catch (e) {
-                console.error("API error", e);
-                htmlContent = `<div class="text-center text-red-500 p-8">⚠️ 後端伺服器連線失敗或資料解讀超時。請確認 server.py 是否正在執行，或是您的網路連線。</div>`;
-            }
-
-            resultBox.innerHTML = htmlContent;
-            btnText.innerHTML = '重新請大師解惑';
-            btn.disabled = false;
-        }
-
-        function generateStructuredContent(typeName, data, question, category) {
-            let categoryAdvice = '';
-            if (category === '工作') {
-                categoryAdvice = `從這支籤來看，您在工作職場上需要留意進退的時機。目前的狀態或許有阻礙，但這份籤詩提醒您不要輕言放棄，穩紮穩打將能漸入佳境。`;
-            } else if (category === '感情') {
-                categoryAdvice = `在感情方面，這份籤詩透露著緣分的奇妙。無論是單身尋覓或是有伴侶者，都應保持誠心溝通，順其自然，好的緣分終會水到渠成。`;
-            } else if (category === '金錢') {
-                categoryAdvice = `關於您的財運，籤詩暗示著取財有道，切忌貪求快利。守住目前的正財，避免不必要的風險投資，將為您帶來安穩的收穫。`;
-            } else if (category === '家庭') {
-                categoryAdvice = `家庭和睦是萬事興旺的基礎。籤意提醒您多花時間陪伴家人，以和為貴，家中的小摩擦都能透過互相體諒而化解。`;
-            } else {
-                categoryAdvice = `這份籤詩為您的疑惑帶來了正向的指引。面對眼前的挑戰，請保持心境的平和，您的善念與努力終將帶您走向光明的未來。`;
-            }
-
-            return `
-                <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center gap-2">
-                    <span>📜</span> 【${typeName} - ${data.no}】 解析
-                </h2>
-                <div class="bg-black/60 p-5 rounded-lg border border-yellow-900/40 mb-6 text-center">
-                    <div class="text-yellow-600 text-sm mb-2 font-bold tracking-widest">—— 籤詩全文 ——</div>
-                    <div class="text-lg leading-relaxed text-yellow-100 whitespace-pre-line font-serif">${data.poem}</div>
-                    ${data.ganzhi ? `<div class="text-xs text-gray-500 mt-2">干支：${data.ganzhi}</div>` : ''}
-                </div>
-                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 大師解籤</h3>
-                <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/50 mt-4">
-                    <p class="text-gray-300 leading-relaxed">${data.interpretation}</p>
-                    ${data.story && data.story !== '待補' ? `<p class="text-gray-400 mt-4 text-sm italic border-t border-yellow-900/50 pt-2">【典故故事】：${data.story}</p>` : ''}
-                </div>
-                <h3 class="font-bold text-gray-300 mt-6 mb-2">✨ 針對您的「${category}」問題</h3>
-                <p class="text-gray-300 leading-relaxed bg-black/40 p-4 border-l-4 border-yellow-500">
-                    問題：「${question}」<br><br>
-                    ${categoryAdvice}
-                </p>
-            `;
-        }
-
-        function generateFallbackContent(typeName, id, question, category) {
-            let categoryAdvice = '';
-            if (category === '工作') {
-                categoryAdvice = `針對您的工作事業，大師從星象與時局為您推演：近期可能會面臨一些抉擇或壓力，保持冷靜的頭腦是關鍵。不要急於求成，蹲下是為了跳得更高。`;
-            } else if (category === '感情') {
-                categoryAdvice = `對於感情的發展，大師感受到您的用心與迷惘。感情之事最忌諱患得患失，給自己與對方一點空間，真正的緣分經得起時間的考驗。`;
-            } else if (category === '金錢') {
-                categoryAdvice = `在金錢理財方面，大師建議您目前宜採取保守穩健的策略。開源節流是根本，切勿聽信來路不明的投資訊息，守財即是聚財。`;
-            } else if (category === '家庭') {
-                categoryAdvice = `家和萬事興。大師看出您對家庭的牽掛，多用溫和的言語溝通，設身處地為家人著想，一切不順遂都會如過眼雲煙般消散。`;
-            } else {
-                categoryAdvice = `針對您的疑問，大師給您的建議是：順勢而為，保持內心的平靜。外在環境的變化我們難以掌控，但我們可以決定自己面對困難的態度。`;
-            }
-
-            return `
-                <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center gap-2">
-                    <span>📜</span> 【${typeName} - 第${id}籤】 大師開示
-                </h2>
-                <div class="bg-yellow-900/20 p-5 rounded-lg border border-yellow-900/40 mb-6 italic text-gray-300">
-                    <p class="leading-relaxed">此籤甚深，大師正為您推演卦象與古文流轉。雖然這支籤的古籍碑文正由大師積極考究補齊中，但其中蘊含的法理與指引，大師已為您參透。</p>
-                </div>
-                <h3 class="font-bold text-gray-300 mt-6 mb-2">🌿 引導與開釋</h3>
-                <p class="text-gray-300 leading-relaxed text-justify mb-4">
-                    這支籤象徵著「靜待時機」與「內在沉澱」。有時候，沒有立刻看見結果不代表沒有在前進。這代表您目前需要的不是盲目衝刺，而是好好檢視自己的步伐。
-                </p>
-                <h3 class="font-bold text-yellow-500 mt-6 mb-2">✨ 針對您的「${category}」問題</h3>
-                <p class="text-gray-300 leading-relaxed bg-black/40 p-4 border-l-4 border-yellow-500">
-                    問題：「${question}」<br><br>
-                    ${categoryAdvice}
-                </p>
-            `;
-        }
-
-        // --- Tarot Card Meanings Database ---
-        const TAROT_MEANINGS = {
-            // Major Arcana
-            "愚人": { up: "新開始、冒險、純真、自由、無限可能", rev: "魯莽、冒失、不計後果、猶豫不前", advice: { "工作": "適合嘗試新方向，但需要做好規劃再行動。", "感情": "一段新的戀情可能即將到來，保持開放的心態。", "金錢": "不宜大筆投資，但小額嘗試可帶來驚喜。", "家庭": "家中可能有新成員或新氣象，歡喜迎接。", "其他": "勇敢踏出第一步，宇宙會為你開路。" } },
-            "魔術師": { up: "創造力、行動力、意志力、技巧純熟", rev: "欺騙、缺乏自信、才華被埋沒", advice: { "工作": "你擁有所需的一切資源，現在就是行動的時機。", "感情": "主動表達心意將帶來好結果。", "金錢": "善用手中資源，財富自然流入。", "家庭": "用智慧化解家庭矛盾，你有這個能力。", "其他": "相信自己的能力，你比想像中更強大。" } },
-            "女祭司": { up: "直覺、智慧、內在知識、神秘", rev: "忽略直覺、表面功夫、秘密被揭露", advice: { "工作": "相信你的直覺判斷，答案就在內心深處。", "感情": "對方可能有未說出口的心事，耐心傾聽。", "金錢": "暫時觀望，等待更明確的訊號再做決定。", "家庭": "家人之間需要更深層的理解與溝通。", "其他": "靜下心來冥想，答案會自然浮現。" } },
-            "皇后": { up: "豐收、母性、富足、自然之美", rev: "過度依賴、創造力受阻、忽略自我", advice: { "工作": "付出的努力即將豐收，耐心等待成果。", "感情": "感情將進入甜蜜穩定的階段。", "金錢": "財運旺盛，適合理財規劃。", "家庭": "家庭幸福美滿，注重對家人的關愛。", "其他": "善待自己，享受生活中的美好事物。" } },
-            "皇帝": { up: "權威、秩序、領導力、穩定", rev: "專制、僵化、控制欲過強", advice: { "工作": "展現領導力，有紀律地推進目標。", "感情": "給予對方安全感，但避免過度控制。", "金錢": "制定嚴謹的財務計畫，穩步累積。", "家庭": "承擔家庭責任，成為家人的支柱。", "其他": "建立明確的規則與界限。" } },
-            "教皇": { up: "傳統、信仰、指導、精神追求", rev: "打破常規、叛逆、不必要的束縛", advice: { "工作": "向有經驗的前輩請教，遵循正道。", "感情": "以真誠和承諾對待感情。", "金錢": "穩健保守的理財方式最適合你。", "家庭": "重視家族傳統，維繫長輩關係。", "其他": "靜心修行，提升內在智慧。" } },
-            "戀人": { up: "愛情、選擇、結合、和諧", rev: "失衡、錯誤選擇、價值觀衝突", advice: { "工作": "與志同道合的人合作將事半功倍。", "感情": "真愛就在身邊，用心感受。", "金錢": "合夥投資可以考慮，但需慎選對象。", "家庭": "家庭關係和睦，充滿溫馨。", "其他": "遵從內心做出選擇，不會後悔。" } },
-            "戰車": { up: "勝利、意志力、決心、前進", rev: "失控、缺乏方向、衝動", advice: { "工作": "全力以赴，勝利在望。", "感情": "主動追求幸福，但別忘記尊重對方。", "金錢": "積極進取，財運隨努力而來。", "家庭": "帶領家人一起向好的方向發展。", "其他": "堅定信念，克服一切障礙。" } },
-            "力量": { up: "勇氣、內在力量、耐心、慈悲", rev: "自我懷疑、缺乏信心、軟弱", advice: { "工作": "以柔克剛，用智慧而非蠻力解決問題。", "感情": "用包容和耐心化解感情中的矛盾。", "金錢": "穩定心態，不被市場波動影響判斷。", "家庭": "以愛和耐心面對家庭挑戰。", "其他": "你比自己想像的更加強大。" } },
-            "隱者": { up: "獨處、反思、內省、尋找答案", rev: "孤立、過度封閉、逃避現實", advice: { "工作": "暫時退一步思考，會找到更好的方向。", "感情": "給自己和對方一些空間來思考。", "金錢": "不宜衝動消費，理性分析後再行動。", "家庭": "獨處靜思後再處理家庭問題。", "其他": "向內探索，答案不在外面而在心中。" } },
-            "命運之輪": { up: "轉運、機會、命運轉折、好運降臨", rev: "厄運、抗拒改變、錯失良機", advice: { "工作": "轉機即將到來，做好準備迎接新機會。", "感情": "緣分天注定，隨緣而行。", "金錢": "運勢轉好，可能有意外之財。", "家庭": "家運即將好轉，保持正面心態。", "其他": "命運之輪正在轉動，好事將至。" } },
-            "正義": { up: "公平、真相、因果、正直", rev: "不公、偏見、逃避責任", advice: { "工作": "公正處事，終會得到應有的回報。", "感情": "坦誠面對感情中的問題，尋求公平解決。", "金錢": "正當經營，財運自然亨通。", "家庭": "公平對待每位家人，化解紛爭。", "其他": "種善因得善果，問心無愧。" } },
-            "倒吊人": { up: "犧牲、等待、新視角、放下", rev: "無謂犧牲、拖延、固執己見", advice: { "工作": "換個角度看問題，會有意想不到的收穫。", "感情": "暫時的等待是值得的，不要操之過急。", "金錢": "目前不宜急進，靜待時機。", "家庭": "為家人付出是值得的，但也要照顧自己。", "其他": "放下執念，反而能看到更廣闊的天地。" } },
-            "死神": { up: "結束、轉變、重生、放下過去", rev: "抗拒改變、依戀過去、停滯不前", advice: { "工作": "舊的結束代表新的開始，勇敢轉型。", "感情": "放下不健康的關係，才能迎接新的愛情。", "金錢": "舊的財務模式需要改變，尋找新方向。", "家庭": "家庭模式可能需要調整，接受改變。", "其他": "鳳凰涅槃，浴火重生。" } },
-            "節制": { up: "平衡、耐心、調和、中庸之道", rev: "失衡、急躁、過度放縱", advice: { "工作": "保持節奏，不急不緩地推進。", "感情": "在付出與接受之間找到平衡。", "金錢": "收支平衡，量入為出。", "家庭": "在工作與家庭間取得平衡。", "其他": "凡事適可而止，過猶不及。" } },
-            "惡魔": { up: "誘惑、束縛、執著、物質主義", rev: "解脫、覺醒、擺脫束縛", advice: { "工作": "留意職場中的誘惑，堅守原則。", "感情": "檢視關係中是否存在不健康的依附。", "金錢": "控制慾望，避免過度消費和投機。", "家庭": "是否有某種模式在束縛著家庭？", "其他": "認清束縛你的是什麼，才能真正自由。" } },
-            "高塔": { up: "突變、崩塌、真相大白、覺醒", rev: "避免災難、恐懼改變、掙扎", advice: { "工作": "突如其來的變動可能是化禍為福的契機。", "感情": "感情中的假象被打破，面對真相。", "金錢": "可能面臨財務震盪，提前做好準備。", "家庭": "家中可能有突發狀況，冷靜應對。", "其他": "舊的結構倒塌後，才能建造更好的。" } },
-            "星星": { up: "希望、信心、靈感、美好前景", rev: "失望、缺乏信心、迷失方向", advice: { "工作": "充滿希望，美好的未來正在等著你。", "感情": "充滿浪漫與希望的時期，好好珍惜。", "金錢": "財運看好，保持樂觀的心態。", "家庭": "家庭生活充滿溫馨和希望。", "其他": "即使在最黑暗的夜晚，星星依然閃耀。" } },
-            "月亮": { up: "幻象、不安、潛意識、迷惘", rev: "走出迷霧、釋放恐懼、看清真相", advice: { "工作": "事情可能不如表面所見，多加留意。", "感情": "感情中存在不確定性，需要釐清。", "金錢": "避免在資訊不透明時做重大決策。", "家庭": "家人之間可能有誤解，需要溝通澄清。", "其他": "面對內心的恐懼，才能走出迷霧。" } },
-            "太陽": { up: "成功、喜悅、活力、光明燦爛", rev: "延遲的成功、短暫的低潮", advice: { "工作": "事業蒸蒸日上，光明前途。", "感情": "感情甜蜜幸福，如沐春風。", "金錢": "財運亨通，投資順利。", "家庭": "家庭充滿歡笑和陽光。", "其他": "你正走在正確的道路上，繼續前行。" } },
-            "審判": { up: "覺醒、重生、天命、重要決定", rev: "自我懷疑、拒絕召喚、猶豫不決", advice: { "工作": "重新評估職業方向，聆聽內心的召喚。", "感情": "是時候做出重要的感情決定了。", "金錢": "財務上需要做出明智的審視和調整。", "家庭": "家庭關係將迎來重要的轉捩點。", "其他": "聆聽靈魂的呼喚，做出改變人生的決定。" } },
-            "世界": { up: "圓滿、完成、成就、大功告成", rev: "未完成、缺少閉合、延遲圓滿", advice: { "工作": "目標即將達成，堅持到最後一步。", "感情": "感情圓滿幸福，可能迎來承諾。", "金錢": "財務目標達成，享受豐收的喜悅。", "家庭": "家庭幸福美滿，一切圓滿。", "其他": "一個圓滿的結局，預示著新旅程的開始。" } }
-        };
-        // Add minor arcana meanings in compact form
-        const MINOR_BASE = {
-            "王牌": { up: "新開始、潛力、機會", rev: "延遲、錯失機會" },
-            "二": { up: "選擇、平衡、合作", rev: "猶豫、失衡" },
-            "三": { up: "成長、創造、團隊", rev: "缺乏規劃、分散" },
-            "四": { up: "穩定、休息、根基", rev: "停滯、不安" },
-            "五": { up: "挑戰、衝突、學習", rev: "避免衝突、恢復" },
-            "六": { up: "和諧、給予、回憶", rev: "不平等、執著過去" },
-            "七": { up: "堅持、勇氣、自省", rev: "放棄、欺騙" },
-            "八": { up: "行動、速度、改變", rev: "延遲、抗拒變化" },
-            "九": { up: "圓滿、滿足、獨立", rev: "不滿足、貪心" },
-            "十": { up: "完成、結果、累積", rev: "負擔過重、未完成" },
-            "侍者": { up: "學習、好奇、新訊息", rev: "不成熟、缺乏方向" },
-            "騎士": { up: "行動、追求、熱情", rev: "衝動、方向不明" },
-            "王后": { up: "成熟、關懷、直覺", rev: "情緒化、封閉" },
-            "國王": { up: "權威、掌控、成就", rev: "專制、控制欲" }
-        };
-        const SUIT_THEMES = {
-            "權杖": { element: "火", theme: "行動、熱情、創業" },
-            "聖杯": { element: "水", theme: "情感、關係、直覺" },
-            "寶劍": { element: "風", theme: "思想、溝通、挑戰" },
-            "錢幣": { element: "土", theme: "物質、財富、務實" }
-        };
-
-        function generateTarotContent(question, category, aiTarotSummary = null) {
-            const cardEls = document.querySelectorAll('.tarot-card-val');
-            const dirEls = document.querySelectorAll('.tarot-dir-select');
-            const noReverse = document.getElementById('tarot-no-reverse').checked;
-            const spreadVal = parseInt(document.getElementById('tarot-spread').value);
-            const posNames = spreadVal === 3 ? ["過去", "現在", "未來"] :
-                spreadVal === 4 ? ["你的現狀", "對方現狀", "關係阻礙", "未來發展"] : ["單張指引"];
-
-            let cards = [];
-            let allSelected = true;
-            for (let i = 0; i < cardEls.length; i++) {
-                const name = cardEls[i].value;
-                if (!name) { allSelected = false; break; }
-                const dir = noReverse ? "正位" : dirEls[i].value;
-                cards.push({ name, dir, pos: posNames[i] || `第${i + 1}張` });
-            }
-            if (!allSelected) {
-                return `<div class="text-center text-yellow-500 p-8"><p class="text-lg">⚠️ 請選擇所有位置的塔羅牌</p></div>`;
-            }
-
-            let html = `<h2 class="text-xl font-bold text-yellow-500 mb-4">🔮 塔羅牌陣解讀</h2>`;
-            html += `<p class="text-gray-400 text-sm mb-4">問題：「${question}」 ｜ 領域：${category}</p>`;
-
-            // Define suits for minor arcana parsing
-            const suits = ["權杖", "聖杯", "寶劍", "錢幣"];
-
-            cards.forEach((card, idx) => {
-                const isReversed = card.dir === "逆位";
-                const meaning = TAROT_MEANINGS[card.name];
-                let desc = '', adviceText = '';
-
-                if (meaning) {
-                    desc = isReversed ? meaning.rev : meaning.up;
-                    adviceText = meaning.advice[category] || meaning.advice["其他"];
-                } else {
-                    // Minor arcana
-                    const suitKey = suits.find(s => card.name.startsWith(s));
-                    const numKey = suitKey ? card.name.replace(suitKey, '') : '';
-                    const base = MINOR_BASE[numKey];
-                    const suitInfo = SUIT_THEMES[suitKey];
-                    if (base && suitInfo) {
-                        desc = `${suitInfo.theme} — ${isReversed ? base.rev : base.up}`;
-                        adviceText = `此牌屬於${suitInfo.element}元素，${isReversed ? '提醒您正視目前的困難，調整步伐。' : '指引您順勢而行，把握當下的能量。'}`;
-                    } else {
-                        desc = isReversed ? "需要重新審視方向" : "正面能量引導";
-                        adviceText = "順應本心，自有安排。";
-                    }
-                }
-
-                html += `
-                    <div class="mb-5 p-4 rounded-lg border ${isReversed ? 'border-purple-800 bg-purple-900/10' : 'border-yellow-900/40 bg-yellow-900/10'}">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xs px-2 py-0.5 rounded ${isReversed ? 'bg-purple-800 text-purple-200' : 'bg-yellow-800 text-yellow-200'}">${card.pos}</span>
-                            <span class="font-bold text-lg ${isReversed ? 'text-purple-300' : 'text-yellow-400'}">${card.name}</span>
-                            <span class="text-xs ${isReversed ? 'text-purple-400' : 'text-yellow-600'}">${card.dir}</span>
-                        </div>
-                        <p class="text-gray-300 text-sm mb-2">✦ 牌義：${desc}</p>
-                        <p class="text-gray-400 text-sm italic">💡 ${adviceText}</p>
-                    </div>`;
+        // --- Prediction ---
+        async function callGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
             });
-
-            // Overall summary
-            html += `
-                <div class="mt-6 p-4 bg-black/50 rounded-lg border border-yellow-700/30">
-                    <h3 class="font-bold text-yellow-500 mb-2">🌟 大師綜合解讀</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        ${aiTarotSummary ? aiTarotSummary : generateTarotSummary(cards, category, question)}
-                    </p>
-                </div>`;
-            return html;
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.candidates[0].content.parts[0].text;
         }
 
-        function generateTarotSummary(cards, category, question) {
-            const reversedCount = cards.filter(c => c.dir === "逆位").length;
-            const ratio = reversedCount / cards.length;
-            let tone = '';
-            if (ratio === 0) tone = '整體牌陣非常正面，充滿希望與光的能量。';
-            else if (ratio <= 0.3) tone = '牌陣整體偏向正面，僅有小部分需要留意。';
-            else if (ratio <= 0.5) tone = '牌陣呈現陰陽交織，提醒您在機會中保持謹慎。';
-            else tone = '牌陣提示目前可能面臨一些挑戰，但每個挑戰都是成長的養分。';
+        async function handlePredict() {
+            goToStep('result');
+            document.getElementById('result-loading').classList.remove('hidden');
+            const display = document.getElementById('result-display');
+            display.innerHTML = '';
 
-            const catMsg = {
-                "工作": "在職業道路上，現在是沉澱與重新定位的時刻。相信自己的專業能力，同時保持學習的心態。",
-                "感情": "感情的世界需要用心經營。無論現狀如何，真誠地面對自己的內心，才能找到真正的幸福。",
-                "金錢": "財運方面，穩健經營比冒險投機更能為您帶來長久的富足。腳踏實地，財富自然來。",
-                "家庭": "家庭是您最堅實的後盾。用愛與耐心灌溉家庭關係，您會收穫滿滿的幸福。",
-                "其他": "無論面對什麼樣的困惑，請記住：您擁有改變命運的力量。保持正念，一切都會好起來的。"
-            };
-            return `${tone}<br><br>${catMsg[category] || catMsg["其他"]}<br><br>大師寄語：每一張牌都是宇宙給您的啟示。重要的不是牌面上寫了什麼，而是它在您心中喚起了什麼感受。帶著這份感悟，勇敢地走下去吧。🙏`;
+            const question = document.getElementById('question-input').value.trim() || `關於您的「${selectedCategory}」運勢`;
+            
+            try {
+                let prompt = "";
+                let localResHTML = "";
+
+                if (selectedSystem === 'eastern') {
+                    const type = document.getElementById('oracle-type').value;
+                    const id = parseInt(document.getElementById('oracle-number').value);
+                    const data = loadedOracleData[type].find(d => d.id === id);
+                    
+                    prompt = `你是精通東西方命理的諮商大師。使用者抽取了【${ORACLE_CONFIG[type].name}】第 ${id} 籤。\n`;
+                    prompt += `籤詩內容：${data ? data.poem : '未知'}\n典故故事：${data ? data.story : '無'}\n`;
+                    prompt += `使用者提問領域：${selectedCategory}\n`;
+                    prompt += `使用者具體描述：${question}\n`;
+                    prompt += "請以專業、溫暖且富有智慧的口吻，針對問題提供深度解讀，並給出三個具體的行動指引。請使用繁體中文，格式排版清爽，避免生硬的說教。";
+
+                    localResHTML = `
+                        <div class="glass p-6 rounded-2xl gold-border-glow text-center mb-6">
+                            <h3 class="text-yellow-600 text-sm font-bold mb-3">—— 已抽得 ${ORACLE_CONFIG[type].name} ——</h3>
+                            <div class="text-2xl font-serif text-yellow-100 mb-4 whitespace-pre-line">${data.no}\n${data.poem}</div>
+                            <div class="text-xs text-slate-500 italic">【典故：${data.story}】</div>
+                        </div>
+                    `;
+                } else {
+                    const cards = Array.from(document.querySelectorAll('.tarot-card-val')).map((el, i) => {
+                        let name = el.value;
+                        if(!name) name = allCards[Math.floor(Math.random() * allCards.length)]; // Random if empty
+                        return { 
+                            name, 
+                            dir: document.querySelectorAll('.tarot-dir-val')[i].value,
+                            pos: i 
+                        };
+                    });
+                    
+                    prompt = `你是精通命理的塔羅諮商大師。使用者使用的牌陣如下：\n`;
+                    cards.forEach(c => prompt += `- 位置 ${c.pos}: ${c.name} (${c.dir})\n`);
+                    prompt += `使用者提問領域：${selectedCategory}\n`;
+                    prompt += `使用者具體描述：${question}\n`;
+                    prompt += "請分析牌面間的能量流動，整合出對核心問題的洞見，並給出三個具體的行動指引。請使用繁體中文回答。";
+
+                    localResHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">`;
+                    cards.forEach(c => {
+                        localResHTML += `
+                            <div class="glass p-3 rounded-xl text-center border-purple-900/40">
+                                <div class="text-[10px] text-slate-500 mb-1">位置 ${c.pos + 1}</div>
+                                <div class="font-bold text-sm text-purple-300">${c.name}</div>
+                                <div class="text-[10px] text-purple-600">${c.dir}</div>
+                            </div>
+                        `;
+                    });
+                    localResHTML += `</div>`;
+                }
+
+                const interpretation = await callGemini(prompt);
+                
+                display.innerHTML = `
+                    ${localResHTML}
+                    <div class="glass p-8 rounded-2xl master-bubble">
+                        <h3 class="text-yellow-500 font-bold mb-4 flex items-center gap-2"><span>🔮</span> 大師的深度開示</h3>
+                        <div class="text-slate-300 leading-relaxed text-sm md:text-base whitespace-pre-line">${interpretation}</div>
+                    </div>
+                `;
+
+            } catch (e) {
+                display.innerHTML = `<div class="glass p-8 rounded-2xl border-red-900/30 text-red-500 text-center">⚠️ 大師連線受阻：${e.message}。請確認網路環境或 API 狀態。</div>`;
+            } finally {
+                document.getElementById('result-loading').classList.add('hidden');
+            }
         }
     </script>
 </body>

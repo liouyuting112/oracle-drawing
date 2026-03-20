@@ -15,8 +15,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # --- Configuration ---
-H200_API_URL = os.getenv("H200_API_URL", "http://140.118.157.225:11434/api/generate")
-MODEL_NAME = os.getenv("MODEL_NAME", "qwen3-coder:30b")
+GEMINI_API_KEY = "AIzaSyBZS2s6oxGMs_sLvgnYTS5spP4QyYvzS_E"
+MODEL_NAME = "gemini-1.5-flash"
+GENERATE_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent?key={GEMINI_API_KEY}"
 MASTER_DB_PATH = "master_db.json"
 
 # --- Initialization ---
@@ -58,19 +59,18 @@ def is_complex_question(question: str) -> bool:
         return True
     return len(question) > 10
 
-def get_h200_response(prompt: str):
+def get_gemini_response(prompt: str):
     try:
         payload = {
-            "model": MODEL_NAME,
-            "prompt": prompt,
-            "stream": False
+            "contents": [{"parts": [{"text": prompt}]}]
         }
-        res = requests.post(H200_API_URL, json=payload, timeout=30)
+        res = requests.post(GENERATE_URL, json=payload, timeout=30)
         if res.status_code == 200:
-            return res.json().get("response", "")
-        return f"H200 API Error: {res.status_code}"
+            data = res.json()
+            return data["candidates"][0]["content"]["parts"][0]["text"]
+        return f"Gemini API Error: {res.status_code} - {res.text}"
     except Exception as e:
-        return f"Connection to H200 failed: {str(e)}"
+        return f"Connection to Gemini failed: {str(e)}"
 
 # --- API Endpoints ---
 
@@ -118,7 +118,7 @@ async def predict(req: PredictRequest, request: Request):
             prompt += f"使用者提問：{req.question}\n"
             prompt += "請根據牌面能量與關聯性，深度解答使用者的疑惑。用繁體中文回答。"
         
-        ai_response = get_h200_response(prompt)
+        ai_response = get_gemini_response(prompt)
         return {
             "mode": "ai",
             "data": oracle_data,
